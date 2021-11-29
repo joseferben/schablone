@@ -1,0 +1,48 @@
+{% raw %}
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.9
+      - image: circleci/postgres:10.8
+        environment:
+          POSTGRES_USER: admin
+          POSTGRES_PASSOWRD: password
+          POSTGRES_DB: test
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          command: |
+            python3 -m venv .venv
+            . .venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - ".venv"
+      - run:
+          name: Install psycopg2 deps
+          command: sudo apt-get install libpq-dev
+      - run:
+          name: Lint with flake8
+          command: |
+            make setupdev
+            make lint
+      - run:
+          name: System check
+          command: |
+            . .venv/bin/activate
+            python manage.py check
+      - run:
+          name: Run migrations
+          command: |
+            . .venv/bin/activate
+            python manage.py migrate
+      - run:
+          name: Running core tests
+          command: |
+            . .venv/bin/activate
+            make test
+{%- endraw %}

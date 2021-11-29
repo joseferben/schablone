@@ -1,0 +1,119 @@
+{% raw %}{% load static utils i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock title %}</title>
+      <meta name="title" content="{% endraw %}{{ cookiecutter.project_name }}{% raw %}"</meta>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="{% endraw %}{{ cookiecutter.description }}{% raw %}">
+      <meta name="author" content="{% endraw %}{{ cookiecutter.author_name }}{% raw %}">
+      <meta name="robots" content="index, follow">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="language" content="English">
+      <meta name="revisit-after" content="7 days">
+      {% block css %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.1/font/bootstrap-icons.min.css" integrity="sha512-WYaDo1TDjuW+MPatvDarHSfuhFAflHxD87U9RoB4/CSFh24/jzUHfirvuvwGmJq0U7S9ohBXy4Tfmk2UKkp2gA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo">
+        <link rel="apple-touch-icon" sizes="180x180" href={% static 'images/apple-touch-icon.png' %}>
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'site.webmanifest' %}">
+        <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+      {% endblock css %}
+      {% block css_extra %}{% endblock css_extra %}
+      {% block js %}
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script defer src="https://unpkg.com/htmx.org@1.5.0" integrity="sha384-oGA+prIp5Vchu6we2YkI51UtVzN9Jpx2Z7PnR1I78PnZlN8LkrCT4lqqqmDkyrvI" crossorigin="anonymous"></script>
+        <script defer src="{% static 'js/global.js' %}"></script>
+      {% endblock js %}
+      {% block js_extra %}{% endblock js_extra %}
+  </head>
+
+  <body>
+    <div class="mb-1">
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'home' %}">{% endraw %}{{ cookiecutter.project_name }}{% raw %}</a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                    {# URL provided by django-allauth/account/urls.py #}
+                    <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    {# URL provided by django-allauth/account/urls.py #}
+                    <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
+                  </li>
+                  <li class="nav-item">
+                    {# URL provided by django-allauth/account/urls.py #}
+                    <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% block content %}
+        <p>Override the "content" block of the base template.</p>
+      {% endblock content %}
+    </div>
+
+    {% block modal %}{% endblock modal %}
+
+    {% block js_inline %}
+      <script>
+       document.body.addEventListener('htmx:configRequest', (event) => {
+         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+       })
+      </script>
+      {% if debug %}
+        <script>
+         document.addEventListener("DOMContentLoaded", function(event) {
+           htmx.logger = function(elt, event, data) {
+             if(console) {
+               console.debug(event, elt, data);
+             }
+           }
+         });
+        </script>
+      {% endif %}
+      <!-- Google Analytics -->
+      <script>
+       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+       ga('create', '{{'GOOGLE_ANALYTICS_KEY'|env}}', 'auto');
+       ga('send', 'pageview');
+      </script>
+      <script async src='https://www.google-analytics.com/analytics.js'></script>
+      <!-- End Google Analytics -->
+    {% endblock js_inline %}
+    {% block js_inline_extra %}{% endblock js_inline_extra %}
+  </body>
+</html>
+{%- endraw %}

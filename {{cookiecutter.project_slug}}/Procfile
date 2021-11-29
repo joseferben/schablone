@@ -1,0 +1,3 @@
+web: gunicorn --workers=5 config.wsgi:application
+release: python manage.py migrate --noinput
+worker: python manage.py qcluster

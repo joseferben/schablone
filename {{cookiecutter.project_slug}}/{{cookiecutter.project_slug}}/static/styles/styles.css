@@ -1,0 +1,54 @@
+:root {
+    --bs-primary: #673AB7;
+    --bs-secondary: #FFFF00;
+    --bs-danger: #FF009D;
+}
+
+input {
+    border-color: white !important;
+    color: white !important;
+}
+
+select {
+    border-color: white !important;
+    color: white !important;
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+.text-secondary {
+    color: var(--bs-secondary) !important;
+}
+
+.text-danger {
+    color: var(--bs-danger) !important;
+}
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--bs-secondary) !important;
+}
+
+.bg-danger {
+    background-color: var(--bs-danger) !important;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+.btn-danger {
+    background-color: var(--bs-danger) !important;
+    border-color: var(--bs-danger) !important;
+}
+
+.btn-outline-secondary {
+    border-color: var(--bs-secondary) !important;
+    color: var(--bs-secondary) !important;
+}
