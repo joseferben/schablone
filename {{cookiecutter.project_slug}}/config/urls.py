@@ -26,6 +26,11 @@ urlpatterns = [
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
+    path(
+        "privacy/",
+        TemplateView.as_view(template_name="pages/privacy.html"),
+        name="privacy",
+    ),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("ht/", include("health_check.urls")),

@@ -1,25 +1,7 @@
 {% raw %}{% extends "base.html" %}
+{% block title %}About{% endblock title %}
 {% block content %}
 <h3>About</h3>
 This is the about page.
-
-<h3>Privacy Policy</h3>
-<p>When you visit {{cookiecutter.domain_name}}, some information about you is logged. Below you will find a detailed explanation of all the information that is kept, and how to keep your information private.</p>
-
-<h5>Web server log</h5>
-<p>The web server logs every request made to the website. This information includes ip-address, browser user-agent and the requested url.</p>
-
-<p>Purpose: Logging and debugging. Identifying malicious users, bots etc.</p>
-<p>Prevent: It is possible to hide your ip-address by using a VPN. All internet traffic is routed through a remote computer, and the ip-address visible to everyone will be the address of the remote computer, not your own.</p>
-
-<h5>Google Analytics</h5>
-<p>Google Analytics is a third party analytics tool that is included on the website. It collects and reports information about user behaviour like how long you spend on the site, how many pages you visit etc. Googles privacy policy.</p>
-
-<p>Purpose: Provide user insight to improve the website.</p>
-
-<p>Prevent: The analytics software runs in your browser, and it's possible to disable by installing browser extensions. Ad-blockers or other privacy related plugins will disable the software, and no information will be sent to Google.</p>
-
-<h5>Contact</h5>
-<p>You are more than welcome to send an email to <a href="mailto:{{cookiecutter.email}}">{{cookiecutter.email}}</a>.</p>
 {% endblock content %}
 {%- endraw %}
