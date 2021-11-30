@@ -4,16 +4,6 @@
     --bs-danger: #FF009D;
 }
 
-input {
-    border-color: white !important;
-    color: white !important;
-}
-
-select {
-    border-color: white !important;
-    color: white !important;
-}
-
 .text-primary {
     color: var(--bs-primary) !important;
 }
