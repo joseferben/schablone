@@ -26,23 +26,38 @@ jobs:
           name: Install psycopg2 deps
           command: sudo apt-get install libpq-dev
       - run:
+          name: Install dev tools
+          command: |
+            . .venv/bin/activate
+            pip install flake8 black mypy django-stubs
+      - run:
           name: Lint with flake8
           command: |
             make setupdev
-            make lint
+            make check.lint
+      - run:
+          name: Check types with mypy
+          command: |
+            . .venv/bin/activate
+            make check.types
       - run:
           name: System check
           command: |
             . .venv/bin/activate
-            python manage.py check
+            DJANGO_SETTINGS_MODULE=config.settings.test python manage.py check
       - run:
           name: Run migrations
           command: |
             . .venv/bin/activate
-            python manage.py migrate
+            DJANGO_SETTINGS_MODULE=config.settings.test make migrate
       - run:
-          name: Running core tests
+          name: Running tests
           command: |
             . .venv/bin/activate
-            make test
+            make test.all
+      - run:
+          name: Create development data
+          command: |
+            . .venv/bin/activate
+            DJANGO_SETTINGS_MODULE=config.settings.test make data
 {%- endraw %}

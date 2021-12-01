@@ -31,12 +31,11 @@ All you need to generate a project is Python 3 and `pip`.
 
 ## Design goals
 
-Schablone is heavily inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). However, it aims to be more minimal.
-
+Schablone is heavily inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). The project layout, templates, Bootstrap 5 forms and configuration handling are the same. However, Schablone aims to be more minimal.
 
 The template itself does not have that many configuration options, which makes it easier to maintain.
 
-The components and dependencies of Schablone have been picked to be "good enough" for a specific use case.
+The components and dependencies have been picked to be "good enough" for a specific use case.
 
 ### Assumptions
 These are the assumptions of that use case.

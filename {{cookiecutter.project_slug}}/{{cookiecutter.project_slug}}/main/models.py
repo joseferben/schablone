@@ -2,7 +2,7 @@ import logging
 
 from django.db import models
 
-from contrib.mixins import EntityMixin
+from {{cookiecutter.project_slug}}.contrib.mixins import EntityMixin
 
 logger = logging.getLogger(__name__)
 

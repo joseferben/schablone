@@ -32,6 +32,7 @@ init:
 		pip install -r requirements.txt; \
 		pip install flake8 black mypy django-stubs; \
 		cp -u .env.sample .env; \
+		git init .; \
 		echo "Local environment ready, run 'source .venv/bin/activate' to start"; \
 	)
 
