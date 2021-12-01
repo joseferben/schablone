@@ -7,7 +7,7 @@ ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-MEDIA_ROOT = BASE_DIR / "{{cookiecutter.project_slug}}/media"
+MEDIA_ROOT = str(BASE_DIR / "{{cookiecutter.project_slug}}/media")
 
 INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS + ["debug_toolbar"]
 
