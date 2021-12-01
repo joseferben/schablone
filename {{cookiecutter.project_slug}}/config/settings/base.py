@@ -58,7 +58,10 @@ THIRD_PARTY_APPS = [
     "django_extensions",
 ]
 
-LOCAL_APPS = ["{{cookiecutter.project_slug}}.contrib"]
+LOCAL_APPS = [
+    "{{cookiecutter.project_slug}}.contrib",
+    "{{cookiecutter.project_slug}}.main",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
