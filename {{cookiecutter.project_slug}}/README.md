@@ -21,7 +21,10 @@ In order to develop locally you need following packages.
 5. `make workers`
 6. `make run`
 
-Just run `make` to get a list of all supported commands.
+or run `make` to get a list of all possible commands.
+
+## Architecture and design
+TODO
 
 ## Running in production
 
