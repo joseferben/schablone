@@ -55,6 +55,7 @@ THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_q",
+    'django_extensions',
 ]
 
 LOCAL_APPS = ["{{cookiecutter.project_slug}}.contrib"]
