@@ -60,4 +60,4 @@ Based on the listed assumption, some parts have been replaced by simpler alterna
 
 ## Documentation
 
-Refer to the [README.md](/joseferben/schablone/tree/master/%7B%7Bcookiecutter.project_slug%7D%7D/README.md) of the generated project.
+Refer to the [README.md](/joseferben/schablone/blob/main/%7B%7Bcookiecutter.project_slug%7D%7D/README.md) of the generated project.
