@@ -7,7 +7,7 @@ help:
 	@echo ""
 	@echo "- init                Prepares local dev environment for development"
 	@echo "- check               Runs linter and type checker"
-	@echo "- format              Runs format on all Python files"
+	@echo "- fix                 Formats and fixes imports in all Python files"
 	@echo "- migrate             Runs migrations"
 	@echo "- env                 Starts environment and seeds examples data, destroys current environment!"
 	@echo "- test                Runs all tests, requires a database"
@@ -30,7 +30,7 @@ init:
 		python3 -m venv .venv; \
 		source .venv/bin/activate; \
 		pip install -r requirements.txt; \
-		pip install flake8 black mypy django-stubs; \
+		pip install flake8 black mypy django-stubs autoflake; \
 		cp -u .env.sample .env; \
 		git init .; \
 		echo "Local environment ready, run 'source .venv/bin/activate' to start"; \
@@ -47,9 +47,10 @@ check.types:
 .PHONY: check
 check: check.lint check.types
 
-.PHONY: format
-format:
+.PHONY: fix
+fix:
 	black .
+	autoflake --in-place --remove-unused-variables --remove-all-unused-imports --remove-duplicate-keys .
 
 .PHONY: test.all
 test.all:
