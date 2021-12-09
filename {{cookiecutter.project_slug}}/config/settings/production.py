@@ -73,6 +73,9 @@ LOGGING = {
     },
 }
 
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
 SENTRY_DSN = env("SENTRY_DSN")
 
 sentry_sdk.init(
