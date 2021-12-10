@@ -73,9 +73,15 @@ LOGGING = {
     },
 }
 
+# email
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("EMAIL_HOST", default="in-v3.mailjet.com")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
+# sentry
 SENTRY_DSN = env("SENTRY_DSN")
 
 sentry_sdk.init(
