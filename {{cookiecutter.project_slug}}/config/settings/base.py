@@ -56,6 +56,7 @@ THIRD_PARTY_APPS = [
     "crispy_bootstrap5",
     "django_q",
     "django_extensions",
+    "defender",
 ]
 
 LOCAL_APPS = [
@@ -74,6 +75,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "defender.middleware.FailedLoginMiddleware",
 ]
 
 SITE_ID = 1
