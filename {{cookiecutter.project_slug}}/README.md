@@ -28,6 +28,18 @@ or run `make` to get a list of all possible commands.
 ### Dokku installation
 1. Install Dokku according to the [guide](https://dokku.com/docs/getting-started/installation/).
 2. Set `alias dokku='ssh -t dokku@<host>` on you machine for better ergonomics
+3. Make sure the file `/etc/nginx/sites-available/default` has following content:
+```
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server;
+
+  server_name _;
+  return 410;
+  log_not_found off;
+}
+```
+This makes sure that if the requested host is not valid it will be ignored. By default, Dokku just uses the first app by name which causes a lot of `DisallowedHost` noise if it is a Django app.
 
 ### Create services
 Create a {{cookiecutter.project_slug}} app, a PostgreSQL instance and a Redis instance.
