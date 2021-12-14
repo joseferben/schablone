@@ -7,8 +7,12 @@ Schablone is a highly opinionated Django starter kit based on [cookiecutter-djan
 All you need to generate a project is Python 3 and `pip`.
 
 1. `pip install cookiecutter`
-2. `cookiecutter gh:cookiecutter/cookiecutter-django`
+2. `cookiecutter gh:joseferben/schablone`
 3. `Answer the wizard`
+
+## Usage
+
+Refer to the [README.md](%7B%7Bcookiecutter.project_slug%7D%7D/README.md) of the generated project.
 
 ## Features
 
@@ -56,7 +60,3 @@ Based on the listed assumption, some parts have been replaced by simpler alterna
 - Replace Celery with Django Q as lightweight (and less capable) alternative
 - Replace Cloud media file hosting with built-in NGINX of Dokku
 - Replace custom CSS build process with vanilla CSS
-
-## Documentation
-
-Refer to the [README.md](%7B%7Bcookiecutter.project_slug%7D%7D/README.md) of the generated project.
