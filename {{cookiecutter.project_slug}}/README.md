@@ -69,7 +69,7 @@ dokku config:set --no-restart {{cookiecutter.project_slug}} \
 1. `dokku letsencrypt:enable {{cookiecutter.project_slug}}`
 
 ### Creating initial admin
-1. `dokku run movinmalta "python loaddata homes/fixtures/default/*`
+1. `dokku run {{cookiecutter.project_slug}} "python loaddata homes/fixtures/default/*`
 2. Change the admin password `admin:password`
 
 ### Scheduling database backups
@@ -92,7 +92,7 @@ Based on this blog post: https://codelv.com/blog/2018/10/serving-static-and-medi
 With following content:
 ```nginx
 location /media {
-    alias /var/lib/dokku/data/storage/movinmalta;
+    alias /var/lib/dokku/data/storage/{{cookiecutter.project_slug}};
 }
 ```
 6. `chown -R dokku:dokku /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf`
