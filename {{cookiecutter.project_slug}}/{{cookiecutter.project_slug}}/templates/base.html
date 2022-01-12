@@ -85,26 +85,9 @@
         <p>Override the "content" block of the base template.</p>
       {% endblock content %}
     </div>
-
     {% block modal %}{% endblock modal %}
 
-    {% block js_inline %}
-      <script>
-       document.body.addEventListener('htmx:configRequest', (event) => {
-         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-       })
-      </script>
-      {% if debug %}
-        <script>
-         document.addEventListener("DOMContentLoaded", function(event) {
-           htmx.logger = function(elt, event, data) {
-             if(console) {
-               console.debug(event, elt, data);
-             }
-           }
-         });
-        </script>
-      {% endif %}
+    {% block js_footer %}
       <!-- Google Analytics -->
       <script>
        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -113,8 +96,8 @@
       </script>
       <script async src='https://www.google-analytics.com/analytics.js'></script>
       <!-- End Google Analytics -->
-    {% endblock js_inline %}
-    {% block js_inline_extra %}{% endblock js_inline_extra %}
+    {% endblock js_footer %}
+    {% block js_footer_extra %}{% endblock js_footer_extra %}
   </body>
 </html>
 {%- endraw %}
