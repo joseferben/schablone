@@ -9,6 +9,7 @@ All you need to generate a project is Python 3 and `pip`.
 1. `pip install cookiecutter`
 2. `cookiecutter gh:joseferben/schablone`
 3. `Answer the wizard`
+4. `cp .env.sample .env`
 
 ## Usage
 

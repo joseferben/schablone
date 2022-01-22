@@ -157,15 +157,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 MEDIA_ROOT = str(APPS_DIR / "media")
 MEDIA_URL = "/media/"
 
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "filters": {
-        "require_debug_false": {
-            "()": "django.utils.log.RequireDebugFalse"
-        }
-    },
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s "

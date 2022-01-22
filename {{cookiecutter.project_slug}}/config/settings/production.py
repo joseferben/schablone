@@ -42,7 +42,6 @@ LOGGING = {
             "level": "ERROR",
             "filters": ["require_debug_false"],
             "class": "django.utils.log.AdminEmailHandler",
-            "formatter": "verbose",
         },
         "console": {
             "level": "DEBUG",
@@ -61,10 +60,6 @@ LOGGING = {
             "level": "ERROR",
             "handlers": ["console", "mail_admins"],
             "propagate": True,
-        },
-        "{{cookiecutter.project_slug}}": {
-            "handlers": ["console", "mail_admins"],
-            "level": env("DJANGO_LOG_LEVEL", default="INFO"),
         },
     },
 }
