@@ -60,3 +60,34 @@ Based on the listed assumption, some parts have been replaced by simpler alterna
 - Replace Celery with Django Q as lightweight (and less capable) alternative
 - Replace Cloud media file hosting with built-in NGINX of Dokku
 - Replace custom CSS build process with vanilla CSS
+
+## Initial setup
+These steps need to be taken initially after provisioning the machine.
+
+### Automatic updates
+If you use Ubuntu or Debian you can enable automated security updated.
+
+```sh
+sudo apt install unattended-upgrades
+sudo unattended-upgrade
+```
+
+### Dokku
+
+1. Install Dokku according to the [guide](https://dokku.com/docs/getting-started/installation/).
+2. Set `alias dokku='ssh -t dokku@<host>` on you machine for better ergonomics
+3. Make sure the file `/etc/nginx/sites-available/default` has following content:
+```
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server;
+
+  server_name _;
+  return 410;
+  log_not_found off;
+}
+```
+This makes sure that if the requested host is not valid it will be ignored. By default, Dokku just uses the first app by name which causes a lot of `DisallowedHost` noise if it is a Django app.
+
+### Backups
+Create a AWS S3 bucket with two folder `daily` and `monthly`. Using lifecycle rules it is possible to easily remove backups older than a certain amount of days. You can remove the daily backups after 60 days and the monthly ones after 720 days for instance.

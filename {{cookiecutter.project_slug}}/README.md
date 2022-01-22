@@ -23,32 +23,16 @@ In order to develop locally you need following packages.
 
 or run `make` to get a list of all possible commands.
 
-## Running in production
-
-### Dokku installation
-1. Install Dokku according to the [guide](https://dokku.com/docs/getting-started/installation/).
-2. Set `alias dokku='ssh -t dokku@<host>` on you machine for better ergonomics
-3. Make sure the file `/etc/nginx/sites-available/default` has following content:
-```
-server {
-  listen 80 default_server;
-  listen [::]:80 default_server;
-
-  server_name _;
-  return 410;
-  log_not_found off;
-}
-```
-This makes sure that if the requested host is not valid it will be ignored. By default, Dokku just uses the first app by name which causes a lot of `DisallowedHost` noise if it is a Django app.
+## Deployment
 
 ### Create services
 Create a {{cookiecutter.project_slug}} app, a PostgreSQL instance and a Redis instance.
 1. `dokku apps:create {{cookiecutter.project_slug}}`
 2. `dokku domains:add {{cookiecutter.project_slug}} {{cookiecutter.domain}} www.{{cookiecutter.domain_name}}`
-3. `dokku postgres:create {{cookiecutter.project_slug}}database`
-4. `dokku postgres:link {{cookiecutter.project_slug}}database {{cookiecutter.project_slug}}`
-5. `dokku redis:create {{cookiecutter.project_slug}}redis`
-6. `dokku postgres:link {{cookiecutter.project_slug}}redis {{cookiecutter.project_slug}}`
+3. `dokku postgres:create {{cookiecutter.project_slug}}-database`
+4. `dokku postgres:link {{cookiecutter.project_slug}}-database {{cookiecutter.project_slug}}`
+5. `dokku redis:create {{cookiecutter.project_slug}}-redis`
+6. `dokku postgres:link {{cookiecutter.project_slug}}-redis {{cookiecutter.project_slug}}`
 
 ### Configuration
 ```sh
@@ -75,10 +59,11 @@ dokku config:set --no-restart {{cookiecutter.project_slug}} \
 ### Scheduling database backups
 Create an S3 bucket on AWS for automated periodic backups.
 
-1. `dokku postgres:backup-auth {{cookiecutter.project_slug}}database <aws-access-key-id> <aws-secret-access-key>`
-2. `dokku postgres:backup-set-encryption {{cookiecutter.project_slug}}database <encryption-key>`
-3. `dokku postgres:backup {{cookiecutter.project_slug}}database <s3-bucket>` and verify that the backup worked
-4. `dokku postgres:backup-schedule {{cookiecutter.project_slug}}database @daily <s3-bucket>`
+1. `dokku postgres:backup-auth {{cookiecutter.project_slug}}-database <aws-access-key-id> <aws-secret-access-key>`
+2. `dokku postgres:backup-set-encryption {{cookiecutter.project_slug}}-database <encryption-key>`
+3. `dokku postgres:backup {{cookiecutter.project_slug}}-database <s3-bucket>` and verify that the backup worked
+4. `dokku postgres:backup-schedule {{cookiecutter.project_slug}}-database @daily <s3-bucket>/daily`
+5. `dokku postgres:backup-schedule {{cookiecutter.project_slug}}-database @monthly <s3-bucket>/monthly`
 
 ### Serving media files using NGINX
 We are using whitenoise + CDN to host static files. They don't change frequently and can be cached easily. Media files, which are uploaded by users, are served by the NGINX instance that Dokku is using.
