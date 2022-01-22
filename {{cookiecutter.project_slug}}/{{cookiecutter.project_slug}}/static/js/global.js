@@ -1,3 +1,4 @@
+{% raw %}
 function loadTooltips() {
   const tooltipTriggerList = [].slice.call(
     document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -26,3 +27,4 @@ function loadHtmx() {
 
 loadTooltips();
 loadHtmx();
+{%- endraw %}
