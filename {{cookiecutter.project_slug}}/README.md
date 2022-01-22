@@ -62,8 +62,7 @@ Create an S3 bucket on AWS for automated periodic backups.
 1. `dokku postgres:backup-auth {{cookiecutter.project_slug}}-database <aws-access-key-id> <aws-secret-access-key>`
 2. `dokku postgres:backup-set-encryption {{cookiecutter.project_slug}}-database <encryption-key>`
 3. `dokku postgres:backup {{cookiecutter.project_slug}}-database <s3-bucket>` and verify that the backup worked
-4. `dokku postgres:backup-schedule {{cookiecutter.project_slug}}-database @daily <s3-bucket>/daily`
-5. `dokku postgres:backup-schedule {{cookiecutter.project_slug}}-database @monthly <s3-bucket>/monthly`
+4. `dokku postgres:backup-schedule {{cookiecutter.project_slug}}-database @weekly <s3-bucket>/weekly`
 
 ### Serving media files using NGINX
 We are using whitenoise + CDN to host static files. They don't change frequently and can be cached easily. Media files, which are uploaded by users, are served by the NGINX instance that Dokku is using.

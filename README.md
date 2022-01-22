@@ -90,4 +90,4 @@ server {
 This makes sure that if the requested host is not valid it will be ignored. By default, Dokku just uses the first app by name which causes a lot of `DisallowedHost` noise if it is a Django app.
 
 ### Backups
-Create a AWS S3 bucket with two folder `daily` and `monthly`. Using lifecycle rules it is possible to easily remove backups older than a certain amount of days. You can remove the daily backups after 60 days and the monthly ones after 720 days for instance.
+Create a AWS S3 bucket with a folder `weekly`. Using lifecycle rules it is possible to easily remove backups older than a certain amount of days. You can remove the weekly backups after a year or so.
