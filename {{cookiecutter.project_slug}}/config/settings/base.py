@@ -176,7 +176,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "{{cookiecutter.project_slug}}": {
-            "handlers": ["console", "mail_admins"],
+            "handlers": ["console"],
             "level": env("DJANGO_LOG_LEVEL", default="INFO"),
         },
     },
