@@ -28,7 +28,7 @@ or run `make` to get a list of all possible commands.
 ### Create services
 Create a {{cookiecutter.project_slug}} app, a PostgreSQL instance and a Redis instance.
 1. `dokku apps:create {{cookiecutter.project_slug}}`
-2. `dokku domains:add {{cookiecutter.project_slug}} {{cookiecutter.domain}} www.{{cookiecutter.domain_name}}`
+2. `dokku domains:add {{cookiecutter.project_slug}} {{cookiecutter.domain_name}} www.{{cookiecutter.domain_name}}`
 3. `dokku postgres:create {{cookiecutter.project_slug}}-database`
 4. `dokku postgres:link {{cookiecutter.project_slug}}-database {{cookiecutter.project_slug}}`
 5. `dokku redis:create {{cookiecutter.project_slug}}-redis`
