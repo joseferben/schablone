@@ -8,6 +8,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 ALLOWED_HOSTS.append(getaddrinfo(gethostname(), "http")[0][4][0])
 
+MEDIA_ROOT = "/storage"
+
 Q_CLUSTER = {
     "name": "{{cookiecutter.project_slug}}",
     "sync": False,

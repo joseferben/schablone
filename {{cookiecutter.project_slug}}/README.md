@@ -70,7 +70,7 @@ Based on this blog post: https://codelv.com/blog/2018/10/serving-static-and-medi
 
 1. `mkdir /var/lib/dokku/data/storage/{{cookiecutter.project_slug}}/`
 2. `chown -R dokku:dokku /var/lib/dokku/data/storage/{{cookiecutter.project_slug}}/`
-3. `dokku storage:mount {{cookiecutter.project_slug}} /var/lib/dokku/data/storage/{{cookiecutter.project_slug}}/:/app/media/`
+3. `dokku storage:mount {{cookiecutter.project_slug}} /var/lib/dokku/data/storage/{{cookiecutter.project_slug}}/:/storage`
 4. `mkdir -p /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d`
 5. `vim /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf`
 With following content:
