@@ -29,13 +29,13 @@ Q_CLUSTER = {
     "max_attempts": 3,
     "cpu_affinity": 1,
     "label": "Django Q",
-    "redis": env("REDIS_URL") + "/0",
+    "redis": REDIS_URL + "/0",
 }
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": env("REDIS_URL") + "/1",
+        "LOCATION": REDIS_URL + "/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },

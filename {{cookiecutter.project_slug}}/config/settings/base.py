@@ -113,6 +113,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
+# Redis
+REDIS_URL = env("REDIS_URL")
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
