@@ -15,6 +15,7 @@ help:
 	@echo "- run                 Starts the development web server on localhost:8000"
 	@echo "- migrations          Creates migrations based on models.py change"
 	@echo "- migrations.delete   Deletes all migrations from {{cookiecutter.project_slug}}/*"
+	@echo "- graph               Renders a graph with all models in graph.png"
 	@echo ""
 	@echo "Here are some of the low-level convenient commands:"
 	@echo ""
@@ -30,7 +31,7 @@ init:
 		python3 -m venv .venv; \
 		source .venv/bin/activate; \
 		pip install -r requirements.txt; \
-		pip install flake8 black mypy django-stubs autoflake; \
+		pip install flake8 black mypy django-stubs types-redis autoflake psycopg2-binary; \
 		cp -u .env.sample .env; \
 		git init .; \
 		echo "Local environment ready, run 'source .venv/bin/activate' to start"; \
@@ -49,7 +50,7 @@ check: check.lint check.types
 
 .PHONY: fix
 fix:
-	black .
+	black . --experimental-string-processing
 	autoflake --in-place --remove-unused-variables --remove-all-unused-imports --remove-duplicate-keys .
 
 .PHONY: test.all
@@ -75,9 +76,13 @@ env: docker data
 run:
 	python manage.py runserver
 
-.PHONY: worker
-worker:
+.PHONY: workers
+workers:
 	python manage.py qcluster
+
+.PHONY: graph
+graph:
+	python manage.py graph_models -a --pygraphviz --output models.png
 
 .PHONY: docker
 docker:
