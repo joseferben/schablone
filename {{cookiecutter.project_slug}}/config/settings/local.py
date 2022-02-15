@@ -9,9 +9,16 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 MEDIA_ROOT = str(BASE_DIR / "{{cookiecutter.project_slug}}/media")
 
-INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS + ["debug_toolbar"]
+INSTALLED_APPS = (
+    ["whitenoise.runserver_nostatic"]
+    + INSTALLED_APPS
+    + ["debug_toolbar", "django_browser_reload"]
+)
 
-MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+MIDDLEWARE += [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
+]
 
 DEBUG_TOOLBAR_CONFIG = {
     "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],

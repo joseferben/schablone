@@ -16,3 +16,4 @@ factory-boy==3.2.1
 gunicorn==20.1.0
 django-defender==0.9.1
 django-cache-memoize==0.1.10
+django-browser-reload==1.3.0
