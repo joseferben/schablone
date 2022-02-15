@@ -40,7 +40,7 @@ init:
 .PHONY: check.lint
 check.lint:
 	flake8 . --count --show-source --statistics
-	djhtml {{cookiecutter.project_slug}}/templates/*/** -c -t 2
+	djhtml {{cookiecutter.project_slug}}/templates/**/*.html -c -t 2
 
 .PHONY: check.types
 check.types:
@@ -53,7 +53,7 @@ check: check.lint check.types
 fix:
 	black . --experimental-string-processing
 	autoflake --in-place --remove-unused-variables --remove-all-unused-imports --remove-duplicate-keys .
-	djhtml {{cookiecutter.project_slug}}/templates/*/** -i -t 2
+	djhtml {{cookiecutter.project_slug}}/templates/**/*.html -i -t 2
 
 .PHONY: test.all
 test.all:
