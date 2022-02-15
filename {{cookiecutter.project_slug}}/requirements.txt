@@ -1,4 +1,4 @@
-Django==3.2.9
+Django==3.2.12
 django-health-check==3.16.4
 django-debug-toolbar==3.2.2
 django-allauth==0.46.0

@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Lint with flake8
           command: |
-            make setupdev
+            make init
             make check.lint
       - run:
           name: Check types with mypy
