@@ -75,7 +75,7 @@ location /media {
 1. `dokku letsencrypt:enable {{cookiecutter.project_slug}}`
 
 ### Creating initial admin
-1. `dokku run {{cookiecutter.project_slug}} "python loaddata {{cookiecutter.project_slug}}/fixtures/default/*"`
+1. `dokku run {{cookiecutter.project_slug}} "python manage.py loaddata {{cookiecutter.project_slug}}/fixtures/default/*"`
 2. Change the admin password `admin:password`
 
 ### Scheduling database backups
