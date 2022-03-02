@@ -67,6 +67,17 @@ location /media {
 6. `chown -R dokku:dokku /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf`
 7. `dokku ps:restart {{cookiecutter.project_slug}}`
 
+### Set up rate limiting (optional)
+If you need rate limiting, use NGINX to do that efficiently. Don't forget to use `$http_cf_connecting_ip` if using Cloudflare.
+
+```
+limit_req_zone $http_cf_connecting_ip zone=ip:10m rate=5r/s;
+limit_req zone=ip burst=5 nodelay;
+
+limit_conn_status 429;
+limit_req_status 429;
+```
+
 ### Initial deployment
 1. `git remote add dokku dokku@<host>:{{cookiecutter.project_slug}}`
 2. `git push dokku master:master`

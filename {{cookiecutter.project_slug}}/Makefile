@@ -31,7 +31,7 @@ init:
 		python3 -m venv .venv; \
 		source .venv/bin/activate; \
 		pip install -r requirements.txt; \
-		pip install flake8 black mypy django-stubs types-redis autoflake psycopg2-binary djhtml; \
+		pip install flake8 black mypy django-stubs types-redis autoflake psycopg2-binary djhtml isort; \
 		cp -u .env.sample .env; \
 		git init .; \
 		echo "Local environment ready, run 'source .venv/bin/activate' to start"; \
@@ -51,6 +51,7 @@ check: check.lint check.types
 
 .PHONY: fix
 fix:
+	isort --profile black .
 	black . --experimental-string-processing
 	autoflake --in-place --remove-unused-variables --remove-all-unused-imports --remove-duplicate-keys .
 	djhtml {{cookiecutter.project_slug}}/templates/**/*.html -i -t 2

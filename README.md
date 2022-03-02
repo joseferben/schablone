@@ -13,7 +13,7 @@ All you need to generate a project is Python 3 and `pip`.
 
 ## Usage
 
-Refer to the [README.md](%7B%7Bcookiecutter.project_slug%7D%7D/README.md) of the generated project.
+Refer to the README.md of the generated project.
 
 ## Features
 
