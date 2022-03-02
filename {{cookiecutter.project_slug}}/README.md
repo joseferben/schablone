@@ -46,7 +46,7 @@ dokku config:set --no-restart {{cookiecutter.project_slug}} \
 ```
 
 ### Set secret key
-1. `dokku config:set --no-restart {{cookuecutter.project_slug}} \
+1. `dokku config:set --no-restart {{cookiecutter.project_slug}} \
   SECRET_KEY=$(python manage.py generate_secret_key)`
 
 ### Serving media files using NGINX
