@@ -95,8 +95,7 @@ docker:
 .PHONY: data
 data:
 	python manage.py migrate
-	python manage.py loaddata {{cookiecutter.project_slug}}/fixtures/default/*
-	python manage.py loaddata {{cookiecutter.project_slug}}/fixtures/example/*
+	python manage.py loaddata {{cookiecutter.project_slug}}/contrib/fixtures/default/*
 
 .PHONE: migrations.delete
 migrations.delete:
