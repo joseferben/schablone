@@ -14,7 +14,7 @@ env.read_env(str(BASE_DIR / ".env"))
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = env.bool("DJANGO_DEBUG", False)
+DEBUG = env.bool("DJANGO_DEBUG", False)  # type: ignore
 
 # Security
 SESSION_COOKIE_HTTPONLY = True
@@ -110,7 +110,7 @@ LOGIN_URL = "account_login"
 WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {"default": env.db("DATABASE_URL")}
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]["ATOMIC_REQUESTS"] = True  # type: ignore
 
 # Redis
 REDIS_URL = env("REDIS_URL")
@@ -180,19 +180,19 @@ LOGGING = {
     "loggers": {
         "{{cookiecutter.project_slug}}": {
             "handlers": ["console"],
-            "level": env("DJANGO_LOG_LEVEL", default="INFO"),
+            "level": env("DJANGO_LOG_LEVEL", default="INFO"),  # type: ignore
         },
     },
 }
 
 DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL",
-    default="{{cookiecutter.project_name}} <noreply@{{cookiecutter.domain_name}}>",
+    default="{{cookiecutter.project_name}} <noreply@{{cookiecutter.domain_name}}>",  # type: ignore
 )
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 EMAIL_SUBJECT_PREFIX = env(
     "DJANGO_EMAIL_SUBJECT_PREFIX",
-    default="[{{cookiecutter.project_name}}]",
+    default="[{{cookiecutter.project_name}}]",  # type: ignore
 )
 
 EMAIL_TIMEOUT = 5
@@ -210,7 +210,7 @@ HEALTH_CHECK = {
 }
 
 # django-allauth
-ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
+ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)  # type: ignore
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True

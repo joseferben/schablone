@@ -1,10 +1,10 @@
 # flake8: noqa
-from .base import *
-
 from socket import getaddrinfo, gethostname
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+
+from .base import *
 
 ALLOWED_HOSTS.append(getaddrinfo(gethostname(), "http")[0][4][0])
 
@@ -22,21 +22,19 @@ Q_CLUSTER = {
     "max_attempts": 3,
     "cpu_affinity": 1,
     "label": "Django Q",
-    "redis": REDIS_URL + "/0",
+    "redis": REDIS_URL + "/0",  # type: ignore
 }
 
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "filters": {
-        "require_debug_false": {
-            "()": "django.utils.log.RequireDebugFalse"
-        }
-    },
+    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
     "formatters": {
         "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
+            "format": (
+                "%(levelname)s %(asctime)s %(module)s "
+                "%(process)d %(thread)d %(message)s"
+            )
         }
     },
     "handlers": {
@@ -64,7 +62,7 @@ LOGGING = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": REDIS_URL + "/1",
+        "LOCATION": REDIS_URL + "/1",  # type: ignore
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "IGNORE_EXCEPTIONS": True,
@@ -74,7 +72,7 @@ CACHES = {
 
 # email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = env("EMAIL_HOST", default="in-v3.mailjet.com")
+EMAIL_HOST = env("EMAIL_HOST", default="in-v3.mailjet.com")  # type: ignore
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
