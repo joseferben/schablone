@@ -60,7 +60,6 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "{{cookiecutter.project_slug}}.contrib",
     "{{cookiecutter.project_slug}}.main",
 ]
 
@@ -119,8 +118,7 @@ REDIS_URL = env("REDIS_URL")
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
-            "django.contrib.auth.password_validation."
-            "UserAttributeSimilarityValidator"
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
         )
     },
     {
@@ -165,8 +163,10 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
+            "format": (
+                "%(levelname)s %(asctime)s %(module)s "
+                "%(process)d %(thread)d %(message)s"
+            )
         }
     },
     "handlers": {
