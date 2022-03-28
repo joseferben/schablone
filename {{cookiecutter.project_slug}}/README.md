@@ -9,31 +9,21 @@ Just a simple {{cookiecutter.project_slug}}
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
 
-## Basic Commands
-
-### Creating .env file
+## Getting started
 
     $ cp .env.sample .env
+    $ pip install -r requirements/local.txt
+    $ make docker
 
-### Fix all templates
+## Basic commands
 
-    $ make fix
+### List all commands
 
-### Setting Up Your Users
+    $ make help
 
--To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
+### Create a Superuser
 
-- To create a **superuser account**, use this command:
-
-        $ python manage.py createsuperuser
-
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
-
-### Type checks
-
-Running type checks with mypy:
-
-    $ mypy {{cookiecutter.project_slug}}
+    $ python manage.py createsuperuser
 
 ### Test coverage
 
@@ -42,14 +32,6 @@ To run the tests, check your test coverage, and generate an HTML coverage report
     $ coverage run -m pytest
     $ coverage html
     $ open htmlcov/index.html
-
-#### Running tests with pytest
-
-    $ pytest
-
-### Live reloading and Sass CSS compilation
-
-Moved to [Live reloading and SASS compilation](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html#sass-compilation-live-reloading).
 
 ### Celery
 
@@ -66,8 +48,21 @@ Please note: For Celery's import magic to work, it is important *where* the cele
 
 ## Deployment
 
-The following details how to deploy this application.
+Adjust the script `create_dokku_app.sh` if needed.
 
-### Heroku
+    $ export AWS_S3_BACKUP_PATH=lettuce-backups/daily
+    $ export DOKKU_HOST=lettuce
+    $ export AWS_ACCESS_KEY_ID=<key>
+    $ export AWS_SECRET_ACCESS_KEY=<secret>
+    $ export BACKUP_ENCRYPTION_KEY=<key>
+    $ export MAILJET_API_KEY=<key>
+    $ export MAILJET_SECRET_KEY=<secret>
+    $ ./scripts/create_dokku_app.sh
+    $ git push dokku main
 
-See detailed [cookiecutter-django Heroku documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-on-heroku.html).
+### Let's Encrypt
+
+Make sure to disable any proxies such a Cloudflare so Let's Encrypt can do it's work.
+
+    $ sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+    $ dokku letsencrypt:enable {{cookiecutter.project_slug}}

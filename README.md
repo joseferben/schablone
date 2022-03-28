@@ -4,16 +4,10 @@ Schablone is a highly opinionated Django starter kit based on [cookiecutter-djan
 
 ## Getting started
 
-All you need to generate a project is Python 3 and `pip`.
+All you need to generate a project is Python3 and `pip`.
 
-1. `pip install cookiecutter`
-2. `cookiecutter gh:joseferben/schablone`
-3. `Answer the wizard`
-4. `cp .env.sample .env`
-5. `pip install -r requirements/local.txt`
-6. `make docker`
-7. `make data`
-8. `make run`
+    $ `pip install cookiecutter`
+    $ `cookiecutter gh:joseferben/schablone`
 
 ## Usage
 
@@ -44,11 +38,11 @@ The template itself does not have that many configuration options, which makes i
 The components and dependencies have been picked to be "good enough" for a specific use case.
 
 ### Assumptions
-These are the assumptions of that use case.
+These are the assumptions of the use case mentioned above.
 
 - Small team
 - Minimize hosting cost by self hosting
-- Minimize DevOps work (initial and operational)
+- Minimize DevOps work (initial and on-going)
 - Automated database backups
 - Automated zero downtime deployments
 - *No* load balancing across machines (one machine only)
@@ -58,13 +52,12 @@ These are the assumptions of that use case.
 Based on the listed assumption, some parts have been replaced by simpler alternatives.
 
 - Replace Heroku, Docker, PythonAnywhere with self-hosted Dokku
-- Replace DRF with HTMX and custom JS
-- Replace Celery with Django Q as lightweight (and less capable) alternative
+- Remove DRF
 - Replace Cloud media file hosting with built-in NGINX of Dokku
 - Replace custom CSS build process with vanilla CSS
 
 ## Initial setup
-These steps need to be taken initially after provisioning the machine.
+These steps need to be taken initially after provisioning the machine to set up Dokku.
 
 ### Automatic updates
 If you use Ubuntu or Debian you can enable automated security updated.
