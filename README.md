@@ -82,5 +82,9 @@ server {
 ```
 This makes sure that if the requested host is not valid it will be ignored. By default, Dokku just uses the first app by name which causes a lot of `DisallowedHost` noise if it is a Django app.
 
+Install the redis plugin:
+
+    $ dokku plugin:install https://github.com/dokku/dokku-redis.git redis
+
 ### Backups
 Create a AWS S3 bucket with a folder `weekly`. Using lifecycle rules it is possible to easily remove backups older than a certain amount of days. You can remove the weekly backups after a year or so.
