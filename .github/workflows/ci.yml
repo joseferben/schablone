@@ -38,6 +38,8 @@ jobs:
           cache-dependency-path: |
             {{cookiecutter.project_slug}}/requirements/base.txt
             {{cookiecutter.project_slug}}/requirements/local.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
       - name: Create and test
         run: |
           cookiecutter . --no-input --overwrite-if-exists "$@"
