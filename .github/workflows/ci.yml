@@ -40,11 +40,14 @@ jobs:
             {{cookiecutter.project_slug}}/requirements/local.txt
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Create and test
+      - name: Run cookiecutter
         run: |
           cookiecutter . --no-input --overwrite-if-exists "$@"
           cd my_awesome_project
           pip install -r requirements/local.txt
           git init
           git add .
-          make check
+      - name: Lint
+        run: make check
+      - name: Test
+        run: make test
