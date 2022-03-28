@@ -14,6 +14,7 @@ help:
 	@echo "- test                Runs all tests, requires a database"
 	@echo "- shell               Starts an interactive shell with all models imported"
 	@echo "- workers             Starts a cluster of worker processes"
+	@echo "- beat								 Starts a beat process for scheduled tasks"
 	@echo "- run                 Starts the development web server on localhost:8000"
 	@echo "- migrations          Creates migrations based on models.py change"
 	@echo ""

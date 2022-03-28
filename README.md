@@ -11,7 +11,31 @@ All you need to generate a project is Python3 and `pip`.
 
 ## Usage
 
-Refer to the README.md of the generated project.
+```
+Welcome to my_awesome_project
+=======================================================
+
+Here are some of the most convenient commands:
+
+- docker              Starts environment with Postgres and Redis using docker-compose, destroys current environment
+- data                Runs migrations, creates default user, groups and data
+- check               Runs linter and type checker
+- fix                 Formats all files and fixes imports
+- migrate             Runs migrations
+- env                 Starts environment and seeds examples data, destroys current environment!
+- test                Runs all tests, requires a database
+- shell               Starts an interactive shell with all models imported
+- workers             Starts a cluster of worker processes
+- run                 Starts the development web server on localhost:8000
+- migrations          Creates migrations based on models.py change
+
+Here are some of less used commands:
+
+- graph               Renders a graph with all models in graph.png
+- test.coverage       Runs tests and prints coverage
+- check.lint          Runs linter
+- check.types         Runs type checker
+```
 
 ## Features
 

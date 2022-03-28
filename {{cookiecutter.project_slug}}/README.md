@@ -25,19 +25,6 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
     $ python manage.py createsuperuser
 
-### Celery
-
-This app comes with Celery.
-
-To run a celery worker:
-
-``` bash
-cd {{cookiecutter.project_slug}}
-celery -A config.celery_app worker -l info
-```
-
-Please note: For Celery's import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
-
 ## Deployment
 
 Adjust the script `create_dokku_app.sh` if needed.
