@@ -10,6 +10,10 @@ All you need to generate a project is Python 3 and `pip`.
 2. `cookiecutter gh:joseferben/schablone`
 3. `Answer the wizard`
 4. `cp .env.sample .env`
+5. `pip install -r requirements/local.txt`
+6. `make docker`
+7. `make data`
+8. `make run`
 
 ## Usage
 
