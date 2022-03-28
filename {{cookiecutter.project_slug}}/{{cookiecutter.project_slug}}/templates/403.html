@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% raw %}{% extends "base.html" %}
 
 {% block title %}Forbidden (403){% endblock %}
 
@@ -7,3 +7,4 @@
 
 <p>{% if exception %}{{ exception }}{% else %}You're not allowed to access this page.{% endif %}</p>
 {% endblock content %}
+{%- endraw %}
