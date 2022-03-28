@@ -40,8 +40,8 @@ def update_site_forward(apps, schema_editor):
     _update_or_create_site_with_sequence(
         Site,
         schema_editor.connection,
-        "game.joseferben.com",
-        "{{Cookiecutter.Project_Slug}}",
+        "{{cookiecutter.domain_name}}",
+        "{{cookiecutter.project_slug}}",
     )
 
 

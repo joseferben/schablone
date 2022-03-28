@@ -13,8 +13,8 @@ for cls in [models.ForeignKey]:
     )
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# browsergame/
-APPS_DIR = ROOT_DIR / "browsergame"
+# {{cookiecutter.project_slug}}
+APPS_DIR = ROOT_DIR / "{{cookiecutter.project_slug}}"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -51,7 +51,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres:///browsergame",
+        default="postgres:///{{cookiecutter.project_slug}}",
     ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
@@ -245,7 +245,7 @@ EMAIL_TIMEOUT = 5
 # Django Admin URL.
 ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [("""Josef Erben""", "josef@erben.systems")]
+ADMINS = [("""{{cookiecutter.author_name}}""", "{{cookiecutter.email}}")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 

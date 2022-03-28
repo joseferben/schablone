@@ -4,7 +4,7 @@
 # TODO MAILJET_SECRET_KEY
 
 ssh -t dokku@lettuce apps:create {{cookiecutter.project_slug}}
-ssh -t dokku@lettuce domains:add {{cookiecutter.project_slug}} app.joseferben.com
+ssh -t dokku@lettuce domains:add {{cookiecutter.project_slug}} {{cookiecutter.domain_name}}
 ssh -t dokku@lettuce postgres:create {{cookiecutter.project_slug}}-database
 ssh -t dokku@lettuce postgres:link {{cookiecutter.project_slug}}-database {{cookiecutter.project_slug}}
 ssh -t dokku@lettuce redis:create {{cookiecutter.project_slug}}-redis

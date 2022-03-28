@@ -1,4 +1,4 @@
 {
-  "include": ["browsergame"],
+  "include": ["{{cookiecutter.project_slug}}"],
   "exclude": ["**/node_modules", "**/__pycache__", "**/migrations"]
 }

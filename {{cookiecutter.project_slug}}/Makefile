@@ -1,6 +1,6 @@
 .PHONY: help
 help:
-	@echo "Welcome to browsergame"
+	@echo "Welcome to {{cookiecutter.project_name}}"
 	@echo "======================================================="
 	@echo ""
 	@echo "Here are some of the most convenient commands:"

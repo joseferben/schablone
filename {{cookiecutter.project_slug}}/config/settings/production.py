@@ -8,7 +8,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["game.joseferben.com"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["{{cookiecutter.domain_name}}"])
 ALLOWED_HOSTS.append(
     socket.getaddrinfo(socket.gethostname(), "http")[0][4][0]  # noqa F405
 )
@@ -72,14 +72,14 @@ MEDIA_ROOT = "/app/storage"
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL",
-    default="{{Cookiecutter.Project_Slug}} <noreply@game.joseferben.com>",
+    default="{{cookiecutter.project_slug}} <noreply@{{cookiecutter.domain_name}}>",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = env(
     "DJANGO_EMAIL_SUBJECT_PREFIX",
-    default="[{{Cookiecutter.Project_Slug}}]",
+    default="[{{cookiecutter.project_slug}}]",
 )
 
 # ADMIN

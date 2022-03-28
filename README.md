@@ -24,12 +24,9 @@ Refer to the README.md of the generated project.
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
 - User handling with [django-allauth](https://django-allauth.readthedocs.io/en/latest/overview.html)
 - Bootstrap 5 forms with [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
-- Async and scheduled tasks with [django-q](https://django-q.readthedocs.io/en/latest/)
+- Async and scheduled tasks with [Celery](https://github.com/celery/celery) and [django-celery-beat](https://github.com/celery/django-celery-beat)
 - Caching with Redis
-- Monitoring with [Sentry](https://sentry.io/)
-- Dynamic elements with [HTMX](https://htmx.org/)
-- Analytics with Google Analytics
-- Static types with [mypy](http://mypy-lang.org/)
+- Static types with [pyright](https://github.com/microsoft/pyright)
 - Linting with [flake8](https://flake8.pycqa.org/en/latest/)
 - Zero-config formatting with [black](https://black.readthedocs.io/en/stable/)
 - Free and fast CI pipeline with [CircleCI](https://circleci.com/)

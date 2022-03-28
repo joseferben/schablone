@@ -1,4 +1,4 @@
-# {{Cookiecutter.Project_Slug}}
+# {{cookiecutter.project_slug}}
 
 Just a simple {{cookiecutter.project_slug}}
 
