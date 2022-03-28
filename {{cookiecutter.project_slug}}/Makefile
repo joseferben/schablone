@@ -25,6 +25,7 @@ help:
 
 .PHONY: check.lint
 check.lint:
+	python manage.py check --fail-level WARNING
 	pre-commit run --show-diff-on-failure -a
 
 .PHONY: check.types

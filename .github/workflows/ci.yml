@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:5.0
+        ports:
+          - 6379:6379
+      postgres:
+        image: postgres:12
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
+
+    env:
+      CELERY_BROKER_URL: "redis://localhost:6379/0"
+      # postgres://user:password@host:port/database
+      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+          cache: pip
+          cache-dependency-path: |
+            {{cookiecutter.project_slug}}/requirements/base.txt
+            {{cookiecutter.project_slug}}/requirements/local.txt
+      - name: Create and test
+        run: |
+          cookiecutter . --no-input --overwrite-if-exists "$@"
+          cd my_awesome_project
+          pip install -r requirements/local.txt
+          git init
+          git add .
+          make check
