@@ -33,7 +33,7 @@ ssh root@${DOKKU_HOST} -f 'mkdir -p /home/dokku/{{cookiecutter.project_slug}}/ng
 ssh root@${DOKKU_HOST} -f 'echo "location /media {" > /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf'
 ssh root@${DOKKU_HOST} -f 'echo "    alias /var/lib/dokku/data/storage/{{cookiecutter.project_slug}};" >> /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf'
 ssh root@${DOKKU_HOST} -f 'echo "}" >> /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf'
-ssh root@${DOKKU_HOST} -f 'chown -R dokku:dokku /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf'
+ssh root@${DOKKU_HOST} -f 'chown -R dokku:dokku /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d'
 
 echo "test backup to s3"
 ssh -t dokku@${DOKKU_HOST} postgres:backup {{cookiecutter.project_slug}}-database ${AWS_S3_BACKUP_PATH}
