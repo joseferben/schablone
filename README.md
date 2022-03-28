@@ -55,13 +55,9 @@ Here are some of less used commands:
 
 ## Design goals
 
-Schablone is heavily inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). The project layout, templates, Bootstrap 5 forms and configuration handling are the same. However, Schablone aims to be more minimal.
+Schablone is heavily inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django) but aims to be less configurable. In fact, the project name is pretty much the only thing you can configure. Everything else is trimmed to be suitable for a very specific use case.
 
-The template itself does not have that many configuration options, which makes it easier to maintain.
-
-The components and dependencies have been picked to be "good enough" for a specific use case.
-
-### Assumptions
+### Use case
 These are the assumptions of the use case mentioned above.
 
 - Small team
@@ -77,11 +73,12 @@ Based on the listed assumption, some parts have been replaced by simpler alterna
 
 - Replace Heroku, Docker, PythonAnywhere with self-hosted Dokku
 - Remove DRF
+- Remove Node.js based asset pipeline
 - Replace Cloud media file hosting with built-in NGINX of Dokku
 - Replace custom CSS build process with vanilla CSS
 
 ## Initial setup
-These steps need to be taken initially after provisioning the machine to set up Dokku.
+These are the steps to set up Dokku.
 
 ### Automatic updates
 If you use Ubuntu or Debian you can enable automated security updated.
