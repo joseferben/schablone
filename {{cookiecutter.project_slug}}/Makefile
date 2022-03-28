@@ -20,6 +20,7 @@ help:
 	@echo "Here are some of less used commands:"
 	@echo ""
 	@echo "- graph               Renders a graph with all models in graph.png"
+	@echo "- test.coverage       Runs tests and prints coverage"
 	@echo "- check.lint          Runs linter"
 	@echo "- check.types         Runs type checker"
 
@@ -45,6 +46,11 @@ fix:
 .PHONY: test
 test:
 	DJANGO_READ_DOT_ENV_FILE=True pytest
+
+.PHONY: test.coverage
+test.coverage:
+	DJANGO_READ_DOT_ENV_FILE=True coverage run -m pytest
+	coverage report
 
 .PHONY: shell
 shell:

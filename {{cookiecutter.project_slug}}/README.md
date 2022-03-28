@@ -25,14 +25,6 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
 
     $ python manage.py createsuperuser
 
-### Test coverage
-
-To run the tests, check your test coverage, and generate an HTML coverage report:
-
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
-
 ### Celery
 
 This app comes with Celery.
