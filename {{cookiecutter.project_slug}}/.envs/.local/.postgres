@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=browsergame
+POSTGRES_USER=XGZyoEpxEwKngzqbeAJyYbTmtlpfgsJO
+POSTGRES_PASSWORD=usCIrWmzS7mRhQqhMhAZhWBSK1iO7dXnev0579V05euclqPRTN8uSaSYu7jgS8W2

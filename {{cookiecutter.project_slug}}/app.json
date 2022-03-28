@@ -5,6 +5,9 @@
     },
     "worker": {
       "quantity": 1
+    },
+    "beat": {
+      "quantity": 1
     }
   }
 }

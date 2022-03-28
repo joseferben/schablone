@@ -1,19 +1,3 @@
-# type: ignore
-"""{{cookiecutter.project_slug}} URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -24,24 +8,23 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
-        "robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
-    ),
-    path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
+    # Django Admin, use {% url 'admin:index' %}
+    path(settings.ADMIN_URL, admin.site.urls),
+    # User management
     path(
-        "privacy/",
-        TemplateView.as_view(template_name="pages/privacy.html"),
-        name="privacy",
+        "users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")
     ),
-    path("admin/", admin.site.urls),
-    path("admin/defender/", include("defender.urls")),
     path("accounts/", include("allauth.urls")),
+    # Your stuff: custom urls includes go here
     path("ht/", include("health_check.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
 if settings.DEBUG:
+    # This allows the error pages to be debugged during development, just visit
+    # these url in browser to see how these error pages look like.
     urlpatterns += [
         path(
             "400/",
@@ -59,7 +42,6 @@ if settings.DEBUG:
             kwargs={"exception": Exception("Page not Found")},
         ),
         path("500/", default_views.server_error),
-        path("__reload__/", include("django_browser_reload.urls")),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar

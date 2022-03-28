@@ -1,3 +1,4 @@
-web: gunicorn --workers=5 config.wsgi:application
-release: python manage.py migrate --noinput
-worker: python manage.py qcluster
+release: python manage.py migrate
+web: gunicorn config.wsgi:application
+worker: celery -A config.celery_app worker --loglevel=info
+beat: celery -A config.celery_app beat --loglevel=info

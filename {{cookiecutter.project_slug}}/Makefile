@@ -1,50 +1,35 @@
 .PHONY: help
 help:
-	@echo "Welcome to {{cookiecutter.project_slug}}"
+	@echo "Welcome to browsergame"
 	@echo "======================================================="
 	@echo ""
 	@echo "Here are some of the most convenient commands:"
 	@echo ""
-	@echo "- init                Prepares local dev environment for development"
+	@echo "- docker              Starts environment with Postgres and Redis using docker-compose, destroys current environment"
+	@echo "- data                Runs migrations, creates default user, groups and data"
 	@echo "- check               Runs linter and type checker"
-	@echo "- fix                 Formats and fixes imports in all Python files"
+	@echo "- fix                 Formats all files and fixes imports"
 	@echo "- migrate             Runs migrations"
 	@echo "- env                 Starts environment and seeds examples data, destroys current environment!"
 	@echo "- test                Runs all tests, requires a database"
+	@echo "- shell               Starts an interactive shell with all models imported"
 	@echo "- workers             Starts a cluster of worker processes"
 	@echo "- run                 Starts the development web server on localhost:8000"
 	@echo "- migrations          Creates migrations based on models.py change"
-	@echo "- migrations.delete   Deletes all migrations from {{cookiecutter.project_slug}}/*"
+	@echo ""
+	@echo "Here are some of less used commands:"
+	@echo ""
 	@echo "- graph               Renders a graph with all models in graph.png"
-	@echo ""
-	@echo "Here are some of the low-level convenient commands:"
-	@echo ""
-	@echo "- docker              Starts environment with Postgres and Redis using docker-compose, destroys current environment"
-	@echo "- data                Runs migrations, creates default user, groups and data"
-	@echo "- test.<app>          Runs only the <app> tests, requires a database"
 	@echo "- check.lint          Runs linter"
 	@echo "- check.types         Runs type checker"
 
-.PHONY: init
-init:
-	( \
-		python3 -m venv .venv; \
-		source .venv/bin/activate; \
-		pip install -r requirements.txt; \
-		pip install flake8 black mypy django-stubs types-redis autoflake psycopg2-binary djhtml isort; \
-		cp -u .env.sample .env; \
-		git init .; \
-		echo "Local environment ready, run 'source .venv/bin/activate' to start"; \
-	)
-
 .PHONY: check.lint
 check.lint:
-	flake8 . --count --show-source --statistics
-	djhtml {{cookiecutter.project_slug}}/templates/**/*.html -c -t 2
+	pre-commit run --show-diff-on-failure -a
 
 .PHONY: check.types
 check.types:
-	mypy .
+	pyright
 
 .PHONY: check
 check: check.lint check.types
@@ -52,40 +37,41 @@ check: check.lint check.types
 .PHONY: fix
 fix:
 	isort --profile black .
-	black . --experimental-string-processing
+	black . --preview
 	autoflake --in-place --remove-unused-variables --remove-all-unused-imports --remove-duplicate-keys .
 	djhtml {{cookiecutter.project_slug}}/templates/**/*.html -i -t 2
 
-.PHONY: test.all
-test.all:
-	DJANGO_SETTINGS_MODULE=config.settings.test python manage.py test {{cookiecutter.project_slug}}
-
 .PHONY: test
 test:
-	DJANGO_SETTINGS_MODULE=config.settings.test python manage.py test --failfast {{cookiecutter.project_slug}}
+	DJANGO_READ_DOT_ENV_FILE=True pytest
+
+.PHONY: shell
+shell:
+	DJANGO_READ_DOT_ENV_FILE=True python manage.py shell_plus
 
 .PHONY: migrations
 migrations:
-	python manage.py makemigrations
+	DJANGO_READ_DOT_ENV_FILE=True python manage.py makemigrations
 
 .PHONY: migrate
 migrate:
-	python manage.py migrate
-
-.PHONE: env
-env: docker data
+	DJANGO_READ_DOT_ENV_FILE=True python manage.py migrate
 
 .PHONY: run
 run:
-	python manage.py runserver
+	DJANGO_READ_DOT_ENV_FILE=True python manage.py runserver_plus
 
 .PHONY: workers
 workers:
-	python manage.py qcluster
+	DJANGO_READ_DOT_ENV_FILE=True celery -A config.celery_app worker --loglevel=info
+
+.PHONY: beat
+beat:
+	DJANGO_READ_DOT_ENV_FILE=True celery -A config.celery_app beat --loglevel=info
 
 .PHONY: graph
 graph:
-	python manage.py graph_models -a --pygraphviz --output models.png
+	DJANGO_READ_DOT_ENV_FILE=True python manage.py graph_models -a --pygraphviz --output models.png
 
 .PHONY: docker
 docker:
@@ -94,8 +80,4 @@ docker:
 
 .PHONY: data
 data:
-	python manage.py migrate
-
-.PHONE: migrations.delete
-migrations.delete:
-	find . -path "./{{cookiecutter.project_slug}}/*/migrations/*.py" -not -name "__init__.py" -delete
+	DJANGO_READ_DOT_ENV_FILE=True python manage.py migrate

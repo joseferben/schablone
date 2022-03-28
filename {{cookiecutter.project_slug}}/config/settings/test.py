@@ -1,32 +1,29 @@
-# flake8: noqa
-from .base import *
+"""
+With these settings, tests run faster.
+"""
 
-DEBUG = True
+from .base import *  # noqa
+from .base import env
 
-ALLOWED_HOSTS = []
+# GENERAL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+SECRET_KEY = env(
+    "DJANGO_SECRET_KEY",
+    default="Y0HhZ0tDiPKIzwZLFlIhHtzHhbrpfDxb0tFsEp0AiQn0ALdVyiDDOULctHZhCX4d",
+)
+# https://docs.djangoproject.com/en/dev/ref/settings/#test-runner
+TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
+# PASSWORDS
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "test",
-        "USER": "admin",
-        "PASSWORD": "password",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
-}
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
-Q_CLUSTER = {
-    "name": "{{cookiecutter.project_slug}}",
-    "sync": True,
-}
-
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
-    }
-}
+# Your stuff...
+# ------------------------------------------------------------------------------
