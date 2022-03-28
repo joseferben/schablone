@@ -6,8 +6,8 @@ Schablone is a highly opinionated Django starter kit based on [cookiecutter-djan
 
 All you need to generate a project is Python3 and `pip`.
 
-    $ `pip install cookiecutter`
-    $ `cookiecutter gh:joseferben/schablone`
+    $ pip install cookiecutter
+    $ cookiecutter gh:joseferben/schablone
 
 ## Usage
 
@@ -62,10 +62,8 @@ These steps need to be taken initially after provisioning the machine to set up 
 ### Automatic updates
 If you use Ubuntu or Debian you can enable automated security updated.
 
-```sh
-sudo apt install unattended-upgrades
-sudo unattended-upgrade
-```
+    $ sudo apt install unattended-upgrades
+    $ sudo unattended-upgrade
 
 ### Dokku
 
