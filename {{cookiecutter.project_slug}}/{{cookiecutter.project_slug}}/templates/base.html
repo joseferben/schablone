@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}{{cookiecutter.project_name}}{% endblock title %}</title>
+    <title>{% block title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{cookiecutter.description}}">
-    <meta name="author" content="{{cookiecutter.author_name}}">
+    <meta name="description" content="{% endraw %}{{ cookiecutter.description }}{% raw %}">
+    <meta name="author" content="{% endraw %}{{ cookiecutter.author_name }}{% raw %}">
 
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
 
@@ -47,7 +47,7 @@
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'home' %}">{{cookiecutter.project_name}}</a>
+          <a class="navbar-brand" href="{% url 'home' %}">{% endraw %}{{ cookiecutter.project_name }}{% raw %}</a>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">

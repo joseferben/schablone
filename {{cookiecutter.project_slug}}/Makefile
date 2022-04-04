@@ -67,7 +67,7 @@ migrate:
 
 .PHONY: run
 run:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py runserver_plus
+	DJANGO_READ_DOT_ENV_FILE=True python manage.py runserver_plus --nopin
 
 .PHONY: workers
 workers:
