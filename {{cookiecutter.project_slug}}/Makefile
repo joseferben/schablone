@@ -7,8 +7,8 @@ help:
 	@echo ""
 	@echo "- docker              Starts environment with Postgres and Redis using docker-compose, destroys current environment"
 	@echo "- data                Runs migrations, creates default user, groups and data"
-	@echo "- check               Runs linter and type checker"
-	@echo "- fix                 Formats all files and fixes imports"
+	@echo "- check               Runs linter and type checker and fixes found issues"
+	@echo "- fix                 Fixes issues like formatting and imports"
 	@echo "- migrate             Runs migrations"
 	@echo "- env                 Starts environment and seeds examples data, destroys current environment!"
 	@echo "- test                Runs all tests, requires a database"
@@ -21,7 +21,7 @@ help:
 	@echo "Here are some of less used commands:"
 	@echo ""
 	@echo "- graph               Renders a graph with all models in graph.png"
-	@echo "- test.coverage       Runs tests and prints coverage"
+	@echo "- coverage            Runs tests and prints coverage in terminal"
 	@echo "- check.lint          Runs linter"
 	@echo "- check.types         Runs type checker"
 
@@ -48,8 +48,8 @@ fix:
 test:
 	DJANGO_READ_DOT_ENV_FILE=True pytest
 
-.PHONY: test.coverage
-test.coverage:
+.PHONY: coverage
+coverage:
 	DJANGO_READ_DOT_ENV_FILE=True coverage run -m pytest
 	coverage report
 
