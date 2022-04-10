@@ -48,4 +48,4 @@ jobs:
           git init
           git add .
           make check
-          make test.coverage
+          make coverage
