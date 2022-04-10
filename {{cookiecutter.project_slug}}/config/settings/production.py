@@ -11,9 +11,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list(
     "DJANGO_ALLOWED_HOSTS", default=["{{cookiecutter.domain_name}}"]
 )
-ALLOWED_HOSTS.append(
-    socket.getaddrinfo(socket.gethostname(), "http")[0][4][0]  # noqa F405
-)
+ALLOWED_HOSTS.append(socket.getaddrinfo(socket.gethostname(), "http")[0][4][0])
 
 # DATABASES
 # ------------------------------------------------------------------------------
