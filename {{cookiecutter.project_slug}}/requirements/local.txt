@@ -8,7 +8,7 @@ watchgod==0.8.2  # https://github.com/samuelcolvin/watchgod
 # Testing
 # ------------------------------------------------------------------------------
 django-types==0.15.0 # https://github.com/sbdchd/django-types
-pyright==1.1.237 # https://github.com/pytest-dev/pytest
+pyright==1.1.239 # https://github.com/pytest-dev/pytest
 pytest==7.1.1  # https://github.com/pytest-dev/pytest
 
 # Code quality
