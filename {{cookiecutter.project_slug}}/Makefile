@@ -55,7 +55,7 @@ coverage:
 
 .PHONY: shell
 shell:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py shell_plus
+	IPYTHONDIR=.ipython DJANGO_READ_DOT_ENV_FILE=True python manage.py shell_plus
 
 .PHONY: migrations
 migrations:
