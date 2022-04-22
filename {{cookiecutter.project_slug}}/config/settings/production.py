@@ -63,7 +63,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # MEDIA
 # ------------------------------------------------------------------------------
-MEDIA_ROOT = "/app/storage"
+MEDIA_ROOT = "/storage"
 
 # EMAIL
 # ------------------------------------------------------------------------------
