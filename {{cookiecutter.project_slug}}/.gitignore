@@ -25,7 +25,7 @@ wheels/
 .installed.cfg
 *.egg
 .ipython
-!.iptyhon/profile_default/iptyhon_config.py
+!.iptyhon/profile_default/ipython_config.py
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
