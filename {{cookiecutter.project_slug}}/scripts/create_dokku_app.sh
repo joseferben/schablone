@@ -35,13 +35,13 @@ ssh root@${DOKKU_HOST} -f 'echo "    alias /var/lib/dokku/data/storage/{{cookiec
 ssh root@${DOKKU_HOST} -f 'echo "}" >> /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d/media.conf'
 ssh root@${DOKKU_HOST} -f 'chown -R dokku:dokku /home/dokku/{{cookiecutter.project_slug}}/nginx.conf.d'
 
-echo "test backup to s3"
-ssh -t dokku@${DOKKU_HOST} postgres:backup {{cookiecutter.project_slug}}-database ${AWS_S3_BACKUP_PATH}
-
 echo "set up daily backups to s3"
 ssh -t dokku@${DOKKU_HOST} postgres:backup-set-encryption {{cookiecutter.project_slug}}-database ${BACKUP_ENCRYPTION_KEY}
 ssh -t dokku@${DOKKU_HOST} postgres:backup-auth {{cookiecutter.project_slug}}-database ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY}
 ssh -t dokku@${DOKKU_HOST} postgres:backup-schedule {{cookiecutter.project_slug}}-database @daily ${AWS_S3_BACKUP_PATH}
+
+echo "test backup to s3"
+ssh -t dokku@${DOKKU_HOST} postgres:backup {{cookiecutter.project_slug}}-database ${AWS_S3_BACKUP_PATH}
 
 echo "add dokku host as git remote"
 git remote add dokku dokku@${DOKKU_HOST}:{{cookiecutter.project_slug}}
