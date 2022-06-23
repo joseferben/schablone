@@ -19,7 +19,7 @@ coverage==6.4.1  # https://github.com/nedbat/coveragepy
 black==22.6.0  # https://github.com/psf/black
 pylint-django==2.5.3  # https://github.com/PyCQA/pylint-django
 pylint-celery==0.3  # https://github.com/PyCQA/pylint-celery
-djhtml==1.5.0 # https://github.com/rtts/djhtml
+djhtml==1.5.1 # https://github.com/rtts/djhtml
 isort==5.10.1 # https://pycqa.github.io/isort/
 autoflake==1.4 # https://pypi.org/project/autoflake/
 pre-commit==2.19.0  # https://github.com/pre-commit/pre-commit
