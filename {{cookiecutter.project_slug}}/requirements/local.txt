@@ -21,7 +21,7 @@ pylint-django==2.5.3  # https://github.com/PyCQA/pylint-django
 pylint-celery==0.3  # https://github.com/PyCQA/pylint-celery
 djhtml==1.5.1 # https://github.com/rtts/djhtml
 isort==5.10.1 # https://pycqa.github.io/isort/
-autoflake==1.4 # https://pypi.org/project/autoflake/
+autoflake==1.5.1 # https://pypi.org/project/autoflake/
 pre-commit==2.20.0  # https://github.com/pre-commit/pre-commit
 
 # Django
