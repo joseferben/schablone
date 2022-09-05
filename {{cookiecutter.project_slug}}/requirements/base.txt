@@ -20,4 +20,4 @@ django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-cri
 crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-compressor==4.0  # https://github.com/django-compressor/django-compressor
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
-django-health-check==3.16.5 # https://github.com/KristianOellegaard/django-health-check
+django-health-check==3.17.0 # https://github.com/KristianOellegaard/django-health-check
