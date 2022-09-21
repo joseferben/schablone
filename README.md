@@ -46,7 +46,7 @@ Here are some of less used commands:
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
 - User handling with [django-allauth](https://django-allauth.readthedocs.io/en/latest/overview.html)
 - Bootstrap 5 forms with [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
-- Async and scheduled tasks with [Celery](https://github.com/celery/celery) and [django-celery-beat](https://github.com/celery/django-celery-beat)
+- Async and scheduled tasks with [Celery](https://github.com/celery/celery)
 - Caching with Redis
 - Static types with [pyright](https://github.com/microsoft/pyright)
 - Linting with [flake8](https://flake8.pycqa.org/en/latest/)
