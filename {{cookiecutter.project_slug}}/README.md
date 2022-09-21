@@ -14,6 +14,8 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
     $ cp .env.sample .env
     $ pip install -r requirements/local.txt
     $ make docker
+    $ make data
+    $ make run
 
 ## Basic commands
 
