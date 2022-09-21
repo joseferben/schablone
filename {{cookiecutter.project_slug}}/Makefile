@@ -27,7 +27,7 @@ help:
 
 .PHONY: check.lint
 check.lint:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py check --fail-level WARNING
+	python manage.py check --fail-level WARNING
 	pre-commit run --show-diff-on-failure -a
 
 .PHONY: check.types
@@ -46,40 +46,40 @@ fix:
 
 .PHONY: test
 test:
-	DJANGO_READ_DOT_ENV_FILE=True pytest
+	pytest
 
 .PHONY: coverage
 coverage:
-	DJANGO_READ_DOT_ENV_FILE=True coverage run -m pytest
+	coverage run -m pytest
 	coverage report
 
 .PHONY: shell
 shell:
-	IPYTHONDIR=.ipython DJANGO_READ_DOT_ENV_FILE=True python manage.py shell_plus
+	IPYTHONDIR=.ipython python manage.py shell_plus
 
 .PHONY: migrations
 migrations:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py makemigrations
+	python manage.py makemigrations
 
 .PHONY: migrate
 migrate:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py migrate
+	python manage.py migrate
 
 .PHONY: run
 run:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py runserver_plus --nopin
+	python manage.py runserver_plus --nopin
 
 .PHONY: workers
 workers:
-	DJANGO_READ_DOT_ENV_FILE=True celery -A config.celery_app worker --loglevel=info
+	celery -A config.celery_app worker --loglevel=info
 
 .PHONY: beat
 beat:
-	DJANGO_READ_DOT_ENV_FILE=True celery -A config.celery_app beat --loglevel=info
+	celery -A config.celery_app beat --loglevel=info
 
 .PHONY: graph
 graph:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py graph_models -a --pygraphviz --output models.png
+	python manage.py graph_models -a --pygraphviz --output models.png
 
 .PHONY: docker
 docker:
@@ -88,4 +88,4 @@ docker:
 
 .PHONY: data
 data:
-	DJANGO_READ_DOT_ENV_FILE=True python manage.py migrate
+	python manage.py migrate
