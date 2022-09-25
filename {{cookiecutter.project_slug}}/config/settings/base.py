@@ -204,6 +204,8 @@ TEMPLATES = [
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
+
+
 class FormRenderer(TemplatesSetting):
     form_template_name = "form_snippet.html"
 
