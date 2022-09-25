@@ -15,7 +15,7 @@ help:
 	@echo "- shell               Starts an interactive shell with all models imported"
 	@echo "- workers             Starts a cluster of worker processes"
 	@echo "- beat								 Starts a beat process for scheduled tasks"
-	@echo "- run                 Starts the development web server on localhost:8000"
+	@echo "- run                 Starts the development web server on localhost:8000 and compiles TailwindCSS"
 	@echo "- migrations          Creates migrations based on models.py change"
 	@echo ""
 	@echo "Here are some of less used commands:"
@@ -24,10 +24,13 @@ help:
 	@echo "- coverage            Runs tests and prints coverage in terminal"
 	@echo "- check.lint          Runs linter"
 	@echo "- check.types         Runs type checker"
+	@echo "- watch.server        Runs web server on localhost:8000"
+	@echo "- watch.css           Runs the TailwindCSS compiler"
 
 .PHONY: check.lint
 check.lint:
 	python manage.py check --fail-level WARNING
+	djhtml {{cookiecutter.project_slug}}/templates/**/*.html --check -t 2
 	pre-commit run --show-diff-on-failure -a
 
 .PHONY: check.types
@@ -65,9 +68,16 @@ migrations:
 migrate:
 	python manage.py migrate
 
+.PHONY: watch.css
+watch.css:
+	tailwindcss --watch -i {{cookiecutter.project_slug}}/static/css/project.css -o {{cookiecutter.project_slug}}/static/css/dist/styles.css
+
+.PHONY: watch.server
+watch.server:
+	python manage.py runserver
+
 .PHONY: run
-run:
-	python manage.py runserver_plus --nopin
+run: ; ${MAKE} -j2 watch.css watch.server
 
 .PHONY: workers
 workers:

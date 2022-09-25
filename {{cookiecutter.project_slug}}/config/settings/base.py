@@ -5,6 +5,7 @@ from pathlib import Path
 
 import environ
 from django.db import models
+from django.forms.renderers import TemplatesSetting
 
 # Monkey patching classes for static typing with pyright
 for cls in [models.ForeignKey]:
@@ -83,11 +84,10 @@ THIRD_PARTY_APPS = [
     "health_check.contrib.migrations",
     "health_check.contrib.psutil",
     "health_check.contrib.redis",
-    "crispy_forms",
-    "crispy_bootstrap5",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "widget_tweaks"
 ]
 
 LOCAL_APPS = [
@@ -204,11 +204,11 @@ TEMPLATES = [
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
-FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
+class FormRenderer(TemplatesSetting):
+    form_template_name = "form_snippet.html"
 
-# http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+FORM_RENDERER = "config.settings.base.FormRenderer"
 
 # FIXTURES
 # ------------------------------------------------------------------------------
@@ -314,9 +314,13 @@ ACCOUNT_ADAPTER = "{{cookiecutter.project_slug}}.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 ACCOUNT_FORMS = {"signup": "{{cookiecutter.project_slug}}.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "{{cookiecutter.project_slug}}.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = (
+    "{{cookiecutter.project_slug}}.users.adapters.SocialAccountAdapter"
+)
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "{{cookiecutter.project_slug}}.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {
+    "signup": "{{cookiecutter.project_slug}}.users.forms.UserSocialSignupForm"
+}
 # django-compressor
 # ------------------------------------------------------------------------------
 # https://django-compressor.readthedocs.io/en/latest/quickstart/#installation

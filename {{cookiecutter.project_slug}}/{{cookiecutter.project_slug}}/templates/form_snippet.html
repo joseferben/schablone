@@ -1,0 +1,25 @@
+{% load widget_tweaks %}
+
+<div class="grid grid-cols-1 gap-6">
+  {% for field in form %}
+    <label class="block">
+      <span class="text-gray-700">{{ field.label }}</span>
+      <!-- Checkbox -->
+      {% if field|field_type == 'booleanfield' %}
+        {{ field|add_class:"rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" }}
+        <!-- Date -->
+      {% elif field|field_type == 'datefield' %}
+        {{ field|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" }}
+        <!-- Email -->
+      {% elif field|field_type == 'emailfield' %}
+        {{ field|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"|attr:"placeholder:" }}
+        <!-- Password -->
+      {% elif field|field_type == 'passwordfield' %}
+        {{ field|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"|attr:"placeholder:" }}
+      {% else %}
+        <!-- Fallback -->
+        {{ field }}
+      {% endif %}
+    </label>
+  {% endfor %}
+</div>

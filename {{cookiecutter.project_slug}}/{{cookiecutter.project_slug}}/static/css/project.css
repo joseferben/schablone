@@ -1,13 +1,13 @@
-/* These styles are generated from project.scss. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.alert-debug {
-  color: black;
-  background-color: white;
-  border-color: #d6e9c6;
-}
+@layer components {
+  .btn-link {
+    @apply font-medium text-indigo-600 hover:text-indigo-500;
+  }
 
-.alert-error {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
+  .btn-primary {
+    @apply items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700;
+  }
 }

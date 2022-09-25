@@ -1,23 +1,33 @@
 {% raw %}{% extends "account/base.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
 
-{% block head_title %}{% translate "Signup" %}{% endblock %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
 
-{% block inner %}
-<h1>{% translate "Sign Up" %}</h1>
+{% block content %}
 
-<p>{% blocktranslate %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktranslate %}</p>
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <img class="mx-auto w-auto h-12" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&amp;shade=600" alt="Your Company">
+    <h2 class="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">Create an account</h2>
+    <p class="mt-2 text-sm text-center text-gray-600">
+      Or
+      <!-- space -->
+      <a href="{% url 'account_login' %}" class="font-medium text-indigo-600 hover:text-indigo-500">log in</a>
+    </p>
+  </div>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button class="btn btn-primary" type="submit">{% translate "Sign Up" %} &raquo;</button>
-</form>
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="py-8 px-4 bg-white shadow sm:px-10 sm:rounded-lg">
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form }}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="mt-8 btn-primary" type="submit">{% trans "Sign Up" %}</button>
+      </form>
+    </div>
+  </div>
 
 {% endblock %}
 {%- endraw %}

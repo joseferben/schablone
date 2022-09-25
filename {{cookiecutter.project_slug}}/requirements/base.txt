@@ -1,3 +1,4 @@
+pytailwindcss==0.1.4  # https://github.com/timonweb/pytailwindcss
 pytz==2022.1  # https://github.com/stub42/pytz
 psutil==5.9.2 # https://psutil.readthedocs.io/en/latest/
 python-slugify==6.1.2  # https://github.com/un33k/python-slugify
@@ -11,12 +12,11 @@ celery==5.2.6  # pyup: < 6.0  # https://github.com/celery/celery
 
 # Django
 # ------------------------------------------------------------------------------
-django==3.2.15  # pyup: < 4.0  # https://www.djangoproject.com/
+django==4.1  # https://www.djangoproject.com/
 django-environ==0.8.1  # https://github.com/joke2k/django-environ
 django-model-utils==4.2.0  # https://github.com/jazzband/django-model-utils
 django-allauth==0.51.0  # https://github.com/pennersr/django-allauth
-django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-crispy-forms
-crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-compressor==4.1  # https://github.com/django-compressor/django-compressor
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
 django-health-check==3.17.0 # https://github.com/KristianOellegaard/django-health-check
+django-widget-tweaks==1.4.12  # https://github.com/jazzband/django-widget-tweaks

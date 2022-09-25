@@ -1,11 +1,9 @@
-{% raw %}{% extends "base.html" %}
-{% block title %}{% block head_title %}{% endblock head_title %}{% endblock title %}
+{% raw %}{% extends 'pages/base.html' %}
 
-{% block content %}
-<div class="row">
-  <div class="col-md-6 offset-md-3">
-    {% block inner %}{% endblock %}
-  </div>
-</div>
-{% endblock %}
+{% block content_base_page %}
+  {% block content %}
+  {% endblock content %}
+  {% block extra_body %}
+  {% endblock extra_body %}
+{% endblock content_base_page %}
 {%- endraw %}

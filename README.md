@@ -45,7 +45,7 @@ Here are some of less used commands:
 - Media file hosting with Dokku [NGINX](https://dokku.com/docs/configuration/nginx/)
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
 - User handling with [django-allauth](https://django-allauth.readthedocs.io/en/latest/overview.html)
-- Bootstrap 5 forms with [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+- TailwindCSS without Node.js using [pytailwindcss](https://github.com/timonweb/pytailwindcss)
 - Async and scheduled tasks with [Celery](https://github.com/celery/celery)
 - Caching with Redis
 - Static types with [pyright](https://github.com/microsoft/pyright)

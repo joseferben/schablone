@@ -6,10 +6,7 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    ),
+    path("", TemplateView.as_view(template_name="pages/landing.html"), name="landing"),
     path(
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
@@ -17,7 +14,9 @@ urlpatterns = [
     # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path("users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")),
+    path(
+        "users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")
+    ),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("ht/", include("health_check.urls")),
