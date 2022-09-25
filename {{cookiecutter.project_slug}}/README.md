@@ -17,6 +17,7 @@ Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings
     $ make data
     $ make run
 
+A command line tool for TailwindCSS compilation will be downloaded and the styling won't be right until then.
 ## Basic commands
 
 ### List all commands

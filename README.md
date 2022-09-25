@@ -35,6 +35,8 @@ Here are some of less used commands:
 - test.coverage       Runs tests and prints coverage
 - check.lint          Runs linter
 - check.types         Runs type checker
+- watch.server        Runs web server on localhost:8000
+- watch.css           Runs the TailwindCSS compiler
 ```
 
 ## Features
