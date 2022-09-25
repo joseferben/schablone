@@ -1,4 +1,4 @@
-{% load widget_tweaks %}
+{% raw %}{% load widget_tweaks %}
 
 <div class="grid grid-cols-1 gap-6">
   {% for field in form %}
@@ -23,3 +23,4 @@
     </label>
   {% endfor %}
 </div>
+{%- endraw %}
