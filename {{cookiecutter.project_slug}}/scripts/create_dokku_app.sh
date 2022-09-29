@@ -24,8 +24,7 @@ ssh -t dokku@${DOKKU_HOST} config:set --no-restart {{cookiecutter.project_slug}}
 ssh -t dokku@${DOKKU_HOST} config:set --no-restart {{cookiecutter.project_slug}} MAILJET_SECRET_KEY=${MAILJET_SECRET_KEY}
 
 echo "mount media files to docker volume"
-ssh root@${DOKKU_HOST} -f 'mkdir -p /var/lib/dokku/data/storage/{{cookiecutter.project_slug}}/'
-ssh root@${DOKKU_HOST} -f 'chown -R dokku:dokku /var/lib/dokku/data/storage/{{cookiecutter.project_slug}}/'
+ssh -t dokku@${DOKKU_HOST} storage:ensure-directory depozit
 ssh -t dokku@${DOKKU_HOST} storage:mount {{cookiecutter.project_slug}} /var/lib/dokku/data/storage/{{cookiecutter.project_slug}}:/app/storage
 
 echo "serve media files using nginx"
