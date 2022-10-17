@@ -1,6 +1,6 @@
-# Schablone
+# schablone
 
-Schablone is a highly opinionated Django starter kit based on [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). It aims to be a more minimal and lightweight but less configurable alternative.
+schablone is a highly opinionated Django starter kit based on [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). It aims to be a more minimal and lightweight but less configurable alternative.
 
 ## Getting started
 
@@ -19,15 +19,14 @@ Here are some of the most convenient commands:
 
 - docker              Starts environment with Postgres and Redis using docker-compose, destroys current environment
 - data                Runs migrations, creates default user, groups and data
+- run                 Starts the development web server on localhost:8000
 - check               Runs linter and type checker
-- fix                 Formats all files and fixes imports
+- migrations          Creates migrations based on models.py change
 - migrate             Runs migrations
 - env                 Starts environment and seeds examples data, destroys current environment!
 - test                Runs all tests, requires a database
 - shell               Starts an interactive shell with all models imported
 - workers             Starts a cluster of worker processes
-- run                 Starts the development web server on localhost:8000
-- migrations          Creates migrations based on models.py change
 
 Here are some of less used commands:
 
@@ -41,23 +40,20 @@ Here are some of less used commands:
 
 ## Features
 
-- Heroku-like deployment to [Dokku](https://dokku.com/)
+- Deployment to [fly.io](https://fly.io/)
 - Local PostgreSQL, Redis and DB UI with [docker-compose](https://docs.docker.com/compose/)
-- Static file hosting with [whitenoise](http://whitenoise.evans.io/en/stable/)
-- Media file hosting with Dokku [NGINX](https://dokku.com/docs/configuration/nginx/)
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
-- User handling with [django-allauth](https://django-allauth.readthedocs.io/en/latest/overview.html)
+- Magic-link login using [django-sesame](https://github.com/aaugustin/django-sesame)
 - TailwindCSS without Node.js using [pytailwindcss](https://github.com/timonweb/pytailwindcss)
 - Async and scheduled tasks with [Celery](https://github.com/celery/celery)
-- Caching with Redis
+- Caching with [Memcached](https://memcached.org/)
 - Static types with [pyright](https://github.com/microsoft/pyright)
 - Linting with [flake8](https://flake8.pycqa.org/en/latest/)
 - Zero-config formatting with [black](https://black.readthedocs.io/en/stable/)
-- Free and fast CI pipeline with [CircleCI](https://circleci.com/)
 
 ## Design goals
 
-Schablone is heavily inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django) but aims to be less configurable. In fact, the project name is pretty much the only thing you can configure. Everything else is trimmed to be suitable for a very specific use case.
+schablone is heavily inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django) but aims to be less configurable. In fact, the project name is pretty much the only thing you can configure. Everything else is trimmed to be suitable for a very specific use case.
 
 ### Use case
 These are the assumptions of the use case mentioned above.
