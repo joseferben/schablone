@@ -1,10 +1,13 @@
 {% raw %}{% extends "base.html" %}
 
-{% block title %}Forbidden (403){% endblock %}
+{% block title %}403 | Forbidden{% endblock %}
 
 {% block content %}
-<h1>Forbidden (403)</h1>
-
-<p>{% if exception %}{{ exception }}{% else %}You're not allowed to access this page.{% endif %}</p>
+  <div class="flex justify-around mt-64">
+    <div>
+      <h1 class="text-xl font-bold text-indigo-600">403 | Forbidden</h1>
+      <p class="text-md texg-gray-500">You are not allowed to do this.</p>
+    </div>
+  </div>
 {% endblock content %}
 {%- endraw %}

@@ -1,12 +1,13 @@
 {% raw %}{% extends "base.html" %}
 
-{% block title %}Server Error{% endblock %}
+{% block title %}500 | Server error{% endblock %}
 
 {% block content %}
-<h1>Ooops!!! 500</h1>
-
-<h3>Looks like something went wrong!</h3>
-
-<p>We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.</p>
+  <div class="flex justify-around mt-64">
+    <div>
+      <h1 class="text-xl font-bold text-indigo-600">500 | Server error</h1>
+      <p class="text-md texg-gray-500">We got notified that this happened. This should be fixed by tomorrow.</p>
+    </div>
+  </div>
 {% endblock content %}
 {%- endraw %}

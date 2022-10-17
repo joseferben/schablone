@@ -1,51 +1,54 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-from django.views.generic import DetailView, RedirectView, UpdateView
+from django.views.generic import FormView
+from sesame.utils import get_query_string
+
+from {{cookiecutter.project_slug}}.users.forms import EmailLoginForm
 
 User = get_user_model()
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+class EmailLoginView(FormView):
+    template_name = "users/email_login.html"
+    form_class = EmailLoginForm
 
-    model = User
-    slug_field = "username"
-    slug_url_kwarg = "username"
+    def get_or_create_user(self, email: str) -> "User":
+        """Find or create a user with this email address."""
+        User = get_user_model()
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            user = User.objects.create(email=email, username=email)
+            # user.set_unusable_password()  # type: ignore
+        return user
 
+    def create_link(self, user: "User") -> str:
+        """Create a login link for this user."""
+        link = reverse("users:login")
+        link = self.request.build_absolute_uri(link)
+        link += get_query_string(user)
+        return link
 
-user_detail_view = UserDetailView.as_view()
+    def send_email(self, user, link):
+        """Send an email with this login link to this user."""
+        user.email_user(
+            subject="[django-sesame] Log in to our app",
+            message=f"""\
+Hello,
 
+You requested that we send you a link to log in to our app:
 
-class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    {link}
 
-    model = User
-    fields = ["name"]
-    success_message = _("Information successfully updated")
-
-    def get_success_url(self):
-        assert (
-            self.request.user.is_authenticated
-        )  # for pyright to know that the user is authenticated
-        return self.request.user.get_absolute_url()  # type: ignore
-
-    def get_object(self):
-        return self.request.user
-
-
-user_update_view = UserUpdateView.as_view()
-
-
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse(
-            "users:detail",
-            kwargs={"username": self.request.user.username},  # type: ignore
+Thank you for using django-sesame!
+""",
         )
 
+    def email_submitted(self, email):
+        user = self.get_or_create_user(email)
+        link = self.create_link(user)
+        self.send_email(user, link)
 
-user_redirect_view = UserRedirectView.as_view()
+    def form_valid(self, form):
+        self.email_submitted(form.cleaned_data["email"])
+        return render(self.request, "users/email_login_success.html")

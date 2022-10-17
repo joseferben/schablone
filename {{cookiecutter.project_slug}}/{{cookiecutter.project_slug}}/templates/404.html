@@ -1,10 +1,13 @@
 {% raw %}{% extends "base.html" %}
 
-{% block title %}Page not found{% endblock %}
+{% block title %}404 | Page not found{% endblock %}
 
 {% block content %}
-<h1>Page not found</h1>
-
-<p>{% if exception %}{{ exception }}{% else %}This is not the page you were looking for.{% endif %}</p>
+  <div class="flex justify-around mt-64">
+    <div>
+      <h1 class="text-xl font-bold text-indigo-600">404 | Page not found</h1>
+      <p class="text-md texg-gray-500">Please check the URL in the address bar and try again.</p>
+    </div>
+  </div>
 {% endblock content %}
 {%- endraw %}

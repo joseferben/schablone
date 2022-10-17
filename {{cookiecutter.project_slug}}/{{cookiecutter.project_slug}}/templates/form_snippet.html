@@ -1,21 +1,28 @@
 {% raw %}{% load widget_tweaks %}
 
 <div class="grid grid-cols-1 gap-6">
+  {% if form.non_field_errors %}
+    <span class="text-sm text-center text-red-500">{{ form.non_field_errors }}</span>
+  {% endif %}
   {% for field in form %}
     <label class="block">
       <span class="text-gray-700">{{ field.label }}</span>
       <!-- Checkbox -->
       {% if field|field_type == 'booleanfield' %}
         {{ field|add_class:"rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50" }}
+        <span class="text-sm text-red-500">{{ field.errors }}</span>
         <!-- Date -->
       {% elif field|field_type == 'datefield' %}
         {{ field|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" }}
+        <span class="text-sm text-red-500">{{ field.errors }}</span>
         <!-- Email -->
       {% elif field|field_type == 'emailfield' %}
         {{ field|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"|attr:"placeholder:" }}
+        <span class="text-sm text-red-500">{{ field.errors }}</span>
         <!-- Password -->
       {% elif field|field_type == 'passwordfield' %}
         {{ field|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"|attr:"placeholder:" }}
+        <span class="text-sm text-red-500">{{ field.errors }}</span>
       {% else %}
         <!-- Fallback -->
         {{ field }}

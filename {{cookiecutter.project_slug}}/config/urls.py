@@ -3,21 +3,31 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/landing.html"), name="landing"),
+    path("", TemplateView.as_view(template_name="landing.html"), name="landing"),
+    path(
+        "favicon.ico",
+        RedirectView.as_view(url=settings.STATIC_URL + "images/favicons/favicon.ico"),
+    ),
     path(
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
-    # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
+    # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path("users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+    path(
+        "users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")
+    ),
+    # Main app
+    path("app/", include("{{cookiecutter.project_slug}}.app.urls", namespace="app")),
+    # Health check
     path("ht/", include("health_check.urls")),
+    # Hijack
+    path("hijack/", include("hijack.urls")),
+    # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

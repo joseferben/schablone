@@ -6,7 +6,6 @@ from factory.django import DjangoModelFactory
 
 
 class UserFactory(DjangoModelFactory):
-
     username = Faker("user_name")
     email = Faker("email")
     name = Faker("name")
@@ -25,7 +24,7 @@ class UserFactory(DjangoModelFactory):
                 lower_case=True,
             ).evaluate(None, None, extra={"locale": None})
         )
-        self.set_password(password)
+        self.set_password(password)  # type: ignore
 
     class Meta:
         model = get_user_model()

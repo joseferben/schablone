@@ -1,6 +1,6 @@
 .PHONY: help
 help:
-	@echo "Welcome to {{cookiecutter.project_name}}"
+	@echo "Welcome to {{cookiecutter.project_slug}}"
 	@echo "======================================================="
 	@echo ""
 	@echo "Here are some of the most convenient commands:"
@@ -27,25 +27,9 @@ help:
 	@echo "- watch.server        Runs web server on localhost:8000"
 	@echo "- watch.css           Runs the TailwindCSS compiler"
 
-.PHONY: check.lint
-check.lint:
-	python manage.py check --fail-level WARNING
-	djhtml {{cookiecutter.project_slug}}/templates/**/*.html --check -t 2
-	pre-commit run --show-diff-on-failure -a
-
-.PHONY: check.types
-check.types:
-	pyright
-
 .PHONY: check
-check: check.lint check.types
-
-.PHONY: fix
-fix:
-	isort --profile black .
-	black . --preview
-	autoflake --in-place --remove-unused-variables --remove-all-unused-imports --remove-duplicate-keys .
-	djhtml {{cookiecutter.project_slug}}/templates/**/*.html -i -t 2
+check:
+	pre-commit run --show-diff-on-failure -a
 
 .PHONY: test
 test:
