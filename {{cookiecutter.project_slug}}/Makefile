@@ -29,6 +29,8 @@ help:
 
 .PHONY: check
 check:
+	mkdir -p {{cookiecutter.project_slug}}/static/css/dist
+	touch {{cookiecutter.project_slug}}/static/css/dist/styles.css
 	pre-commit run --show-diff-on-failure -a
 
 .PHONY: test
