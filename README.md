@@ -45,7 +45,7 @@ Here are some of less used commands:
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
 - Magic-link login using [django-sesame](https://github.com/aaugustin/django-sesame)
 - TailwindCSS without Node.js using [pytailwindcss](https://github.com/timonweb/pytailwindcss)
-- [Custom form rendering](/posts/django-4-form-tailwind-without-node-crispy/) without dependencies such as django-crispy-forms
+- [Custom form rendering](https://www.joseferben.com/posts/django-4-form-tailwind-without-node-crispy/) without dependencies such as django-crispy-forms
 - Mail sending using [Anymail](https://anymail.dev/en/stable/)
 - Async and scheduled tasks with [Celery](https://github.com/celery/celery)
 - Caching with [Memcached](https://memcached.org/)
