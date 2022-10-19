@@ -2,6 +2,10 @@
 
 Just a simple {{cookiecutter.project_slug}}
 
+## Requirements
+
+* [Memcached](https://memcached.org/)
+
 ## Getting started
 
     $ cp .env.sample .env

@@ -4,6 +4,7 @@
 
 gunicorn==20.1.0  # https://github.com/benoitc/gunicorn
 psycopg2==2.9.4  # https://github.com/psycopg/psycopg2
+pymemcache==4.0.0  # https://github.com/pinterest/pymemcache
 
 # Django
 # ------------------------------------------------------------------------------
