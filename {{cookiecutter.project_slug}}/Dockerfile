@@ -33,7 +33,7 @@ ARG DJANGO_ADMIN_URL="for for building purposes"
 ARG MAILJET_API_KEY="for for building purposes"
 ARG MAILJET_SECRET_KEY="for for building purposes"
 
-RUN tailwindcss --minify -i {{cookiecutter.project_slug}}/static/css/project.css -o {{cookiecutter.project_slut}}/static/css/dist/styles.css
+RUN tailwindcss --minify -i {{cookiecutter.project_slug}}/static/css/project.css -o {{cookiecutter.project_slug}}/static/css/dist/styles.css
 RUN python manage.py compress
 RUN python manage.py collectstatic --noinput
 
