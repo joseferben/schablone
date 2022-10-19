@@ -53,4 +53,4 @@ Here are some of less used commands:
 - Static typing with [pyright](https://github.com/microsoft/pyright)
 - Simple test assertions using [pytest](https://github.com/pytest-dev/pytest)
 
-I wrote about [design decisions](https://www.joseferben.com/posts/schablone-django-starter-template-for-simplicity/) in my blog.
+Read about the [design decisions](https://www.joseferben.com/posts/schablone-django-starter-template-for-simplicity/) in my blog at [joseferben.com](http://www.joseferben.com).
