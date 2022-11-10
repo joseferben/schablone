@@ -17,16 +17,14 @@ Welcome to my_awesome_project
 
 Here are some of the most convenient commands:
 
-- docker              Starts environment with Postgres and Redis using docker-compose, destroys current environment
 - data                Runs migrations, creates default user, groups and data
-- run                 Starts the development web server on localhost:8000
+- dev                 Starts the development web server on localhost:8000
 - check               Runs linter and type checker
 - migrations          Creates migrations based on models.py change
 - migrate             Runs migrations
 - env                 Starts environment and seeds examples data, destroys current environment!
 - test                Runs all tests, requires a database
 - shell               Starts an interactive shell with all models imported
-- workers             Starts a cluster of worker processes
 
 Here are some of less used commands:
 
@@ -41,14 +39,12 @@ Here are some of less used commands:
 ## Features & Design goals
 
 - Deployment to [fly.io](https://fly.io/)
-- Local PostgreSQL, Redis and DB UI using [docker-compose](https://docs.docker.com/compose/)
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
 - Magic-link login using [django-sesame](https://github.com/aaugustin/django-sesame)
 - TailwindCSS without Node.js using [pytailwindcss](https://github.com/timonweb/pytailwindcss)
 - [Custom form rendering](https://www.joseferben.com/posts/django-4-form-tailwind-without-node-crispy/) without dependencies such as django-crispy-forms
 - Mail sending using [Anymail](https://anymail.dev/en/stable/)
-- Async and scheduled tasks with [Celery](https://github.com/celery/celery)
-- Caching with [Memcached](https://memcached.org/)
+- Async and scheduled tasks with [huey](https://github.com/coleifer/huey)
 - Zero-config formatting, linting and auto-fixing with [black](https://black.readthedocs.io/en/stable/) and [flake8](https://flake8.pycqa.org/en/latest/)
 - Static typing with [pyright](https://github.com/microsoft/pyright)
 - Simple test assertions using [pytest](https://github.com/pytest-dev/pytest)
