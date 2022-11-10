@@ -4,6 +4,8 @@ Just a simple {{cookiecutter.project_slug}}
 
 ## Running locally
 
+    $ python -m venv .venv
+    $ source .venv/bin/activate
     $ pip install -r requirements/local.txt
     $ make data
     $ make dev

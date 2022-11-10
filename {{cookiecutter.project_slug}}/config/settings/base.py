@@ -291,8 +291,6 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
-REDIS_URL = env("REDIS_URL")
-
 # MAGIC LINK
 # ------------------------------------------------------------------------------
 # https://django-sesame.readthedocs.io/en/stable/tutorial.html#configure-short-lived-tokens
