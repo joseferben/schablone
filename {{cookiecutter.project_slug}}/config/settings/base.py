@@ -36,8 +36,6 @@ LANGUAGE_CODE = "en-us"
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
-USE_L10N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
@@ -189,7 +187,7 @@ HUEY = {
     "name": DATABASES["default"]["NAME"],  # Use db name for huey.
     "results": True,  # Store return values of tasks.
     "store_none": False,  # If a task returns None, do not save to results.
-    "immediate": True,  # If DEBUG=True, run synchronously.
+    "immediate": True,  # Run synchronously.
     "utc": True,  # Use UTC for all times internally.
 }
 
