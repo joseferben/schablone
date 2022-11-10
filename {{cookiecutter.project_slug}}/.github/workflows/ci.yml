@@ -41,26 +41,7 @@ jobs:
   # With no caching at all the entire ci process takes 4m 30s to complete!
   pytest:
     runs-on: ubuntu-latest
-
-    services:
-      redis:
-        image: redis:6
-        ports:
-          - 6379:6379
-      postgres:
-        image: postgres:12
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_PASSWORD: postgres
-
-    env:
-      REDIS_URL: "redis://localhost:6379"
-      # postgres://user:password@host:port/database
-      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
-
     steps:
-
       - name: Checkout Code Repository
         uses: actions/checkout@v3
 
