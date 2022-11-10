@@ -22,7 +22,6 @@ Here are some of the most convenient commands:
 - check               Runs linter and type checker
 - migrations          Creates migrations based on models.py change
 - migrate             Runs migrations
-- env                 Starts environment and seeds examples data, destroys current environment!
 - test                Runs all tests, requires a database
 - shell               Starts an interactive shell with all models imported
 
