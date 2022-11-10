@@ -38,6 +38,8 @@ Here are some of less used commands:
 ## Features & Design goals
 
 - Deployment to [fly.io](https://fly.io/)
+- Production data persisted using [SQLite](https://www.sqlite.org/index.html)
+- Database backups using [Litestream](https://litestream.io/)
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
 - Magic-link login using [django-sesame](https://github.com/aaugustin/django-sesame)
 - TailwindCSS without Node.js using [pytailwindcss](https://github.com/timonweb/pytailwindcss)
