@@ -46,8 +46,8 @@ Use `openssl rand -base64 32` to create a Django secret.
 
 3. Launch!
 
-`$ fly launch`
-`$ fly secrets import < .env`
-`$ fly volumes create data -s 1`
-`$ fly scale memory 512` (256MB is not enough)
-`$ fly deploy`
+    $ fly launch
+    $ fly secrets import < .env
+    $ fly volumes create data -s 1
+    $ fly scale memory 512 (256MB is not enough)
+    $ fly deploy
