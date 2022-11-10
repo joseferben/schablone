@@ -1,3 +1,4 @@
+import os
 import socket
 
 from .base import *  # noqa
@@ -8,14 +9,18 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["{{cookiecutter.domain_name}}"])
+FLY_HOSTNAME = f'{os.getenv("FLY_APP_NAME")}.fly.dev'
+ALLOWED_HOSTS = env.list(
+    "DJANGO_ALLOWED_HOSTS",
+    default=[FLY_HOSTNAME, "{{cookiecutter.domain_name}}", "health.check"],
+)
 ALLOWED_HOSTS.append(socket.getaddrinfo(socket.gethostname(), "http")[0][4][0])
 
 # DATABASES
 # ------------------------------------------------------------------------------
-DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
-DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
-DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
+DATABASES = {
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": env("DB_FILE")},
+}
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -23,12 +28,6 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
         "LOCATION": "unix:/tmp/memcached.sock",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            # Mimicing memcache behavior.
-            # https://github.com/jazzband/django-redis#memcached-exceptions-behavior
-            "IGNORE_EXCEPTIONS": True,
-        },
     }
 }
 
@@ -61,9 +60,36 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 # STATIC
 # ------------------------
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 # MEDIA
 # ------------------------------------------------------------------------------
-MEDIA_ROOT = "/storage"
+DEFAULT_FILE_STORAGE = "{{cookiecutter.project_slug}}.storages.storages.MediaStorage"
+
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+
+# QUEUE
+# ------------------------------------------------------------------------------
+HUEY = {
+    "huey_class": "huey.SqliteHuey",  # Huey implementation to use.
+    "name": DATABASES["default"]["NAME"],  # Use db name for huey.
+    "results": True,  # Store return values of tasks.
+    "store_none": False,  # If a task returns None, do not save to results.
+    "immediate": False,  # If DEBUG=True, run synchronously.
+    "utc": True,  # Use UTC for all times internally.
+    "filename": env("DB_FILE_QUEUE"),
+    "consumer": {
+        "workers": 1,
+        "worker_type": "thread",
+        "initial_delay": 0.1,  # Smallest polling interval, same as -d.
+        "backoff": 1.15,  # Exponential backoff using this rate, -b.
+        "max_delay": 10.0,  # Max possible polling interval, -m.
+        "scheduler_interval": 1,  # Check schedule every second, -s.
+        "periodic": True,  # Enable crontab feature.
+        "check_worker_health": True,  # Enable worker health checks.
+        "health_check_interval": 1,  # Check worker health every second.
+    },
+}
 
 # EMAIL
 # ------------------------------------------------------------------------------

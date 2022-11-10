@@ -2,20 +2,10 @@ exclude: "^docs/|/migrations/"
 default_stages: [commit]
 
 repos:
-  - repo: local
+  - repo: https://github.com/necaris/pre-commit-pyright
+    rev: "1.1.53"
     hooks:
       - id: pyright
-        name: pyright
-        entry: pyright
-        language: node
-        types: [python]
-        pass_filenames: false
-      - id: django-check
-        name: django-check
-        entry: python manage.py check
-        language: system
-        pass_filenames: false
-        args: ["--fail-level", "WARNING"]
 
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1

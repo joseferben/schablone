@@ -1,11 +1,10 @@
 from django.contrib.auth import get_user_model
-
-from config import celery_app
+from huey import crontab
+from huey.contrib.djhuey import periodic_task, task
 
 User = get_user_model()
 
 
-@celery_app.task()
+@task()
 def get_users_count():
-    """A pointless Celery task to demonstrate usage."""
     return User.objects.count()

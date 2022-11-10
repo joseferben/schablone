@@ -1,0 +1,18 @@
+.git/
+.github/
+__pycache__/
+.log/
+.venv
+
+fly.toml
+*.sqlite3
+
+# Files that store secrets
+.env
+
+# macOS file
+.DS_Store
+
+# Editor-specific configuration
+.idea/
+.vscode

@@ -7,6 +7,7 @@ import environ
 from django.db import models
 from django.forms.renderers import TemplatesSetting
 
+#
 # Monkey patching classes for static typing with pyright
 for cls in [models.ForeignKey]:
     cls.__class_getitem__ = classmethod(  # type: ignore [attr-defined]
@@ -45,14 +46,13 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
 DATABASES = {
-    "default": env.db(
-        "DATABASE_URL",
-        default="postgres:///{{cookiecutter.project_slug}}",
-    ),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db.sqlite3",
+    },
 }
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -83,9 +83,9 @@ THIRD_PARTY_APPS = [
     "health_check.storage",
     "health_check.contrib.migrations",
     "health_check.contrib.psutil",
-    "health_check.contrib.redis",
     "widget_tweaks",
     "hijack",
+    "huey.contrib.djhuey",
 ]
 
 LOCAL_APPS = [
@@ -95,6 +95,13 @@ LOCAL_APPS = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+# HEALTH CHECK
+# ------------------------------------------------------------------------------
+HEALTH_CHECK = {
+    "DISK_USAGE_MAX": 90,  # percent
+    "MEMORY_MIN": 50,  # in MB
+}
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -175,6 +182,18 @@ STATICFILES_FINDERS = [
 MEDIA_ROOT = "/tmp"
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
+
+# QUEUE
+# ------------------------------------------------------------------------------
+HUEY = {
+    "huey_class": "huey.SqliteHuey",  # Huey implementation to use.
+    "name": DATABASES["default"]["NAME"],  # Use db name for huey.
+    "results": True,  # Store return values of tasks.
+    "store_none": False,  # If a task returns None, do not save to results.
+    "immediate": True,  # If DEBUG=True, run synchronously.
+    "utc": True,  # Use UTC for all times internally.
+}
+
 
 # TEMPLATES
 # ------------------------------------------------------------------------------
@@ -275,30 +294,7 @@ LOGGING = {
 
 REDIS_URL = env("REDIS_URL")
 
-# Celery
-# ------------------------------------------------------------------------------
-if USE_TZ:
-    # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
-    CELERY_TIMEZONE = TIME_ZONE
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
-CELERY_BROKER_URL = env("CELERY_BROKER_URL", default=(REDIS_URL + "/0"))
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
-CELERY_RESULT_BACKEND = CELERY_BROKER_URL
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-accept_content
-CELERY_ACCEPT_CONTENT = ["json"]
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_serializer
-CELERY_TASK_SERIALIZER = "json"
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_serializer
-CELERY_RESULT_SERIALIZER = "json"
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-time-limit
-# TODO: set to whatever value is adequate in your circumstances
-CELERY_TASK_TIME_LIMIT = 5 * 60
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-soft-time-limit
-# TODO: set to whatever value is adequate in your circumstances
-CELERY_TASK_SOFT_TIME_LIMIT = 60
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#beat-scheduler
-CELERY_BEAT_SCHEDULER = "celery.beat:PersistentScheduler"
-# django-sesame
+# MAGIC LINK
 # ------------------------------------------------------------------------------
 # https://django-sesame.readthedocs.io/en/stable/tutorial.html#configure-short-lived-tokens
 SESAME_MAX_AGE = 300  # 300 seconds = 5 minutes
