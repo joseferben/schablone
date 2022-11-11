@@ -17,6 +17,7 @@ for cls in [models.ForeignKey]:
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # {{cookiecutter.project_slug}}
 APPS_DIR = ROOT_DIR / "{{cookiecutter.project_slug}}"
+BASE_DIR = ROOT_DIR
 env = environ.Env()
 
 env.read_env(str(ROOT_DIR / ".env"))
@@ -84,11 +85,13 @@ THIRD_PARTY_APPS = [
     "widget_tweaks",
     "hijack",
     "huey.contrib.djhuey",
+    "django_tailwind_cli",
 ]
 
 LOCAL_APPS = [
     "{{cookiecutter.project_slug}}.users",
-    "{{cookiecutter.project_slug}}.app"
+    "{{cookiecutter.project_slug}}.app",
+    "{{cookiecutter.project_slug}}.theme"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

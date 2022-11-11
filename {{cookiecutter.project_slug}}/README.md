@@ -7,6 +7,7 @@ Just a simple {{cookiecutter.project_slug}}
     $ python -m venv .venv
     $ source .venv/bin/activate
     $ pip install -r requirements/local.txt
+    $ make init
     $ make data
     $ make dev
 

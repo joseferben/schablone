@@ -5,6 +5,7 @@ help:
 	@echo ""
 	@echo "Here are some of the most convenient commands:"
 	@echo ""
+	@echo "- init                Install the TailwindCSS CLI"
 	@echo "- data                Applies migrations and creates default dev data"
 	@echo "- dev                 Starts the development web server on localhost:8000 and compiles TailwindCSS"
 	@echo "- check               Lints and fixes codebase"
@@ -45,13 +46,18 @@ shell:
 migrations:
 	python manage.py makemigrations
 
+.PHONY: init
+init:
+	python manage.py tailwind installcli
+	python manage.py tailwind init
+
 .PHONY: migrate
 migrate:
 	python manage.py migrate
 
 .PHONY: watch.css
 watch.css:
-	tailwindcss --watch -i {{cookiecutter.project_slug}}/static/css/project.css -o {{cookiecutter.project_slug}}/static/css/dist/styles.css
+	python manage.py tailwind watch
 
 .PHONY: watch.server
 watch.server:

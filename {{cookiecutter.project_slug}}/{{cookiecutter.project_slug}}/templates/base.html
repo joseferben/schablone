@@ -1,4 +1,4 @@
-{% raw %}{% load static i18n compress%}<!DOCTYPE html>
+{% raw %}{% load static i18n compress tailwind_cli%}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}" class="h-full bg-gray-50">
   <head>
@@ -16,7 +16,7 @@
 
       <!-- This file stores project-specific CSS -->
       {% compress css %}
-        <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+        {% tailwind_css %}
       {% endcompress %}
     {% endblock %}
     <!-- Le javascript

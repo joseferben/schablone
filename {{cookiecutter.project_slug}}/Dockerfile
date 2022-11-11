@@ -34,7 +34,8 @@ ARG AWS_ACCESS_KEY_ID="for for building purposes"
 ARG AWS_SECRET_ACCESS_KEY="for for building purposes"
 
 
-RUN tailwindcss --minify -i {{cookiecutter.project_slug}}/static/css/project.css -o {{cookiecutter.project_slug}}/static/css/dist/styles.css
+RUN python manage.py tailwind installcli
+RUN python manage.py tailwind build
 RUN python manage.py collectstatic --noinput
 RUN python manage.py compress --force
 

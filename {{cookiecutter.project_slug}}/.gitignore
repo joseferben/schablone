@@ -272,10 +272,10 @@ Session.vim
 # Auto-generated tag files
 tags
 
-### Project template
-browsergame/media/
-
 .pytest_cache/
 .env
 .envs/*
 !.envs/.local/
+
+
+{{cookiecutter.project_slug}}/theme/static/css/styles.css
