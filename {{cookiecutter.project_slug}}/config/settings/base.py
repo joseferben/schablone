@@ -17,7 +17,7 @@ for cls in [models.ForeignKey]:
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # {{cookiecutter.project_slug}}
 APPS_DIR = ROOT_DIR / "{{cookiecutter.project_slug}}"
-BASE_DIR = ROOT_DIR
+BASE_DIR = APPS_DIR
 env = environ.Env()
 
 env.read_env(str(ROOT_DIR / ".env"))
