@@ -60,7 +60,9 @@ jobs:
           pip install -r requirements/local.txt
 
       - name: Install Tailwind
-        run:  make init
+        run: |
+          python manage.py tailwind installcli
+          python manage.py tailwind build
 
       - name: Test with pytest
         run:  pytest
