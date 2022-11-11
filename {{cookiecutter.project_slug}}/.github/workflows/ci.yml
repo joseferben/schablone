@@ -59,5 +59,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements/local.txt
 
+      - name: Install Tailwind
+        run:  make init
+
       - name: Test with pytest
         run:  pytest
