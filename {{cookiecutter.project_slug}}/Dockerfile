@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.9/litestream-v0.3.9-linux-amd64-static.tar.gz /tmp/litestream.tar.gz
 RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz && rm /tmp/litestream.tar.gz
 
-RUN mkdir -p /mnt/data
+RUN mkdir -p /mnt/data && mkdir -p /mnt/cache
 
 WORKDIR /app
 
