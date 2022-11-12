@@ -13,6 +13,7 @@ help:
 	@echo "- test                Runs all tests, requires a database"
 	@echo "- shell               Starts an interactive shell with all models imported"
 	@echo "- migrations          Creates migrations based on models.py change"
+	@echo "- webp                Compresses static images to webp (requires imagemagick)"
 	@echo ""
 	@echo "Here are some of less used commands:"
 	@echo ""
@@ -72,3 +73,7 @@ graph:
 .PHONY: data
 data:
 	python manage.py migrate
+
+.PHONY: webp
+webp:
+	zsh -c 'mogrify -format webp performance90/static/images/**/*.(png|jpeg|jpg|svg)'

@@ -24,6 +24,7 @@ Here are some of the most convenient commands:
 - migrate             Runs migrations
 - test                Runs all tests, requires a database
 - shell               Starts an interactive shell with all models imported
+- webp                Compresses static images to webp
 
 Here are some of less used commands:
 

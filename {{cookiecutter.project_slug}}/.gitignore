@@ -279,3 +279,5 @@ tags
 
 
 {{cookiecutter.project_slug}}/theme/static/css/styles.css
+
+*.sqlite3
