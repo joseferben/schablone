@@ -3,6 +3,7 @@
 -r base.txt
 
 gunicorn==20.1.0  # https://github.com/benoitc/gunicorn
+pymemcache==4.0.0  # https://github.com/pinterest/pymemcache
 
 # Django
 # ------------------------------------------------------------------------------
