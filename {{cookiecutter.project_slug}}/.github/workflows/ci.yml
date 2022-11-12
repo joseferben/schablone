@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linter:
+  lint:
     runs-on: ubuntu-latest
     steps:
 
@@ -43,8 +43,7 @@ jobs:
       - name: Run pre-commit
         uses: pre-commit/action@v2.0.3
 
-  # With no caching at all the entire ci process takes 4m 30s to complete!
-  pytest:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code Repository
@@ -71,3 +70,16 @@ jobs:
 
       - name: Test with pytest
         run:  pytest
+
+  deploy:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
