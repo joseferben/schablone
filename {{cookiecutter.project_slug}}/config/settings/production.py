@@ -12,7 +12,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 FLY_HOSTNAME = f'{os.getenv("FLY_APP_NAME")}.fly.dev'
 ALLOWED_HOSTS = env.list(
     "DJANGO_ALLOWED_HOSTS",
-    default=[FLY_HOSTNAME, "{{cookiecutter.domain_name}}", "health.check"],
+    default=[FLY_HOSTNAME, "www.{{cookiecutter.domain_name}}", "health.check"],
 )
 ALLOWED_HOSTS.append(socket.getaddrinfo(socket.gethostname(), "http")[0][4][0])
 
@@ -60,6 +60,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 # STATIC
 # ------------------------
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+# https://docs.djangoproject.com/en/dev/ref/settings/#static-root
+STATIC_ROOT = "/app/static"
+
 
 # MEDIA
 # ------------------------------------------------------------------------------
