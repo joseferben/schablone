@@ -1,4 +1,4 @@
-{% raw %}name: CI
+name: CI
 
 # Enable Buildkit and let compose use it to speed up image building
 env:
@@ -82,5 +82,4 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-{%- endraw %}
+          FLY_API_TOKEN: {% raw %}${{ secrets.FLY_API_TOKEN }}{% endraw %}
