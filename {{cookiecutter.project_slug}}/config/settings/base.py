@@ -3,6 +3,7 @@ Base settings to build other settings files upon.
 """
 from pathlib import Path
 
+import environ
 from django.forms.renderers import TemplatesSetting
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
