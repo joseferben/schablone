@@ -40,7 +40,7 @@ coverage:
 
 .PHONY: shell
 shell:
-	IPYTHONDIR=.ipython python manage.py shell_plus
+	python manage.py shell
 
 .PHONY: migrations
 migrations:
