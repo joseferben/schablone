@@ -64,15 +64,11 @@ watch.server:
 	python manage.py runserver
 
 .PHONY: dev
-dev: ; ${MAKE} -j2 watch.css watch.server
+dev: ; ${MAKE} -j2 migrate watch.css watch.server
 
 .PHONY: graph
 graph:
 	python manage.py graph_models -a --pygraphviz --output models.png
-
-.PHONY: data
-data:
-	python manage.py migrate
 
 .PHONY: webp
 webp:
