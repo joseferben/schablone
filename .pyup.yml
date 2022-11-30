@@ -14,6 +14,6 @@ pin: True
 label_prs: update
 
 requirements:
-  - "{{cookiecutter.project_slug}}/requirements/base.txt"
-  - "{{cookiecutter.project_slug}}/requirements/local.txt"
-  - "{{cookiecutter.project_slug}}/requirements/production.txt"
+  - "{{project_name}}/requirements/base.txt"
+  - "{{project_name}}/requirements/local.txt"
+  - "{{project_name}}/requirements/production.txt"

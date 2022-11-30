@@ -1,54 +1,59 @@
-# schablone
+# {{project_name}}
 
-schablone is a highly opinionated Django starter kit based on [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). It aims to be a more minimal and lightweight but less configurable alternative.
+Just a simple {{project_name}}
 
-## Getting started
+## Running locally
 
-All you need to generate a project is Python3 and `pip`.
+    $ python -m venv .venv
+    $ source .venv/bin/activate
+    $ pip install -r requirements/local.txt
+    $ make init
+    $ make data
+    $ make dev
 
-    $ pip install cookiecutter
-    $ cookiecutter gh:joseferben/schablone
+A command line tool for Tailwind compilation will be downloaded. This might take a few minutes, refresh the browser after that.
 
-## Usage
+## Deployment
 
+1. Create a AWS IAM user `{{project_name}}` with following policy attached:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetBucketLocation", "s3:ListBucket"],
+      "Resource": "arn:aws:s3:::{{project_name}}"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:DeleteObject", "s3:GetObject"],
+      "Resource": [
+        "arn:aws:s3:::{{project_name}}/*",
+        "arn:aws:s3:::{{project_name}}"
+      ]
+    }
+  ]
+}
 ```
-Welcome to my_awesome_project
-=======================================================
 
-Here are some of the most convenient commands:
+2. Prepare the secrets:
 
-- data                Runs migrations, creates default user, groups and data
-- dev                 Starts the development web server on localhost:8000
-- check               Runs linter and type checker
-- migrations          Creates migrations based on models.py change
-- migrate             Runs migrations
-- test                Runs all tests, requires a database
-- shell               Starts an interactive shell with all models imported
-- webp                Compresses static images to webp
+`$ cp .env.sample .env`
 
-Here are some of less used commands:
+Use `openssl rand -base64 32` to create a Django secret.
 
-- graph               Renders a graph with all models in graph.png
-- test.coverage       Runs tests and prints coverage
-- check.lint          Runs linter
-- check.types         Runs type checker
-- watch.server        Runs web server on localhost:8000
-- watch.css           Runs the TailwindCSS compiler
-```
+3. Launch!
 
-## Features & Design goals
+   $ fly launch
+   $ fly secrets import < .env
+   $ fly volumes create data -s 1
+   $ fly scale memory 512
+   $ fly deploy
 
-- Deployment to [fly.io](https://fly.io/)
-- Production data persisted using [SQLite](https://www.sqlite.org/index.html)
-- Database backups using [Litestream](https://litestream.io/)
-- Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
-- Magic-link login using [django-sesame](https://github.com/aaugustin/django-sesame)
-- TailwindCSS without Node.js using [pytailwindcss](https://github.com/timonweb/pytailwindcss)
-- [Custom form rendering](https://www.joseferben.com/posts/django-4-form-tailwind-without-node-crispy/) without dependencies such as django-crispy-forms
-- Mail sending using [Anymail](https://anymail.dev/en/stable/)
-- Async and scheduled tasks with [huey](https://github.com/coleifer/huey)
-- Zero-config formatting, linting and auto-fixing with [black](https://black.readthedocs.io/en/stable/) and [flake8](https://flake8.pycqa.org/en/latest/)
-- Static typing with [pyright](https://github.com/microsoft/pyright)
-- Simple test assertions using [pytest](https://github.com/pytest-dev/pytest)
+4. Setup Github Actions
 
-Read about the [design decisions](https://www.joseferben.com/posts/schablone-django-starter-template-for-simplicity/) in my blog at [joseferben.com](http://www.joseferben.com).
+   $ fly auth token
+
+And create a secret `FLY_API_TOKEN` in the Github repo.

@@ -1,0 +1,40 @@
+{% load static i18n compress tailwind_cli%}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" class="h-full bg-gray-50">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endraw %}{{project_name}}{% raw %}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{project_name}}">
+    <meta name="author" content="Josef Erben">
+
+    <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+
+    {% block css %}
+      <!-- Your stuff: Third-party CSS libraries go here -->
+
+      <!-- This file stores project-specific CSS -->
+      {% compress css %}
+        {% tailwind_css %}
+      {% endcompress %}
+    {% endblock %}
+    <!-- Le javascript
+    ================================================== -->
+    {# Placed at the top of the document so pages load faster with defer #}
+    {% block javascript %}
+      <!-- Your stuff: Third-party javascript libraries go here -->
+
+      <!-- place project specific Javascript in this file -->
+      {% compress js %}
+        <script defer src="{% static 'js/project.js' %}"></script>
+      {% endcompress %}
+
+    {% endblock javascript %}
+  </head>
+
+  <body class="h-full">
+    {% block content %}
+    {% endblock content %}
+  </body>
+</html>
