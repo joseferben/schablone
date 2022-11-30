@@ -76,4 +76,4 @@ data:
 
 .PHONY: webp
 webp:
-	zsh -c 'mogrify -format webp performance90/static/images/**/*.(png|jpeg|jpg|svg)'
+	zsh -c 'mogrify -format webp {{cookiecutter.project_slug}}/static/images/**/*.(png|jpeg|jpg|svg)'
