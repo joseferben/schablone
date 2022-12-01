@@ -32,6 +32,7 @@ ARG DB_FILE="for for building purposes"
 ARG DB_FILE_QUEUE="for for building purposes"
 ARG AWS_ACCESS_KEY_ID="for for building purposes"
 ARG AWS_SECRET_ACCESS_KEY="for for building purposes"
+ARG SENTRY_DSN="https://user@key.ingest.sentry.io/4504194864381952"
 
 
 RUN python manage.py tailwind installcli

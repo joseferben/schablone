@@ -4,6 +4,9 @@ import socket
 from .base import *  # noqa
 from .base import env
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 FLY_HOSTNAME = f'{os.getenv("FLY_APP_NAME")}.fly.dev'
 ALLOWED_HOSTS = env.list(
@@ -40,7 +43,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 STATIC_ROOT = "/app/static"
 
-DEFAULT_FILE_STORAGE = "{{cookiecutter.project_slug}}.contrib.storages.storages.MediaStorage"
+DEFAULT_FILE_STORAGE = (
+    "{{cookiecutter.project_slug}}.contrib.storages.storages.MediaStorage"
+)
 
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
@@ -136,3 +141,17 @@ LOGGING = {
         },
     },
 }
+
+sentry_sdk.init(
+    dsn=env("SENTRY_DSN"),
+    integrations=[
+        DjangoIntegration(),
+    ],
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True,
+)

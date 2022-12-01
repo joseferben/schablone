@@ -13,7 +13,6 @@ Just a simple {{cookiecutter.project_slug}}
 
 A command line tool for Tailwind compilation will be downloaded. This might take a few minutes, refresh the browser after that.
 
-
 ## Deployment
 
 1. Create a AWS IAM user `{{cookiecutter.project_slug}}` with following policy attached:
@@ -47,14 +46,16 @@ Use `openssl rand -base64 32` to create a Django secret.
 
 3. Launch!
 
+```sh
     $ fly launch
     $ fly secrets import < .env
     $ fly volumes create data -s 1
     $ fly scale memory 512
     $ fly deploy
+```
 
 4. Setup Github Actions
 
-    $ fly auth token
+`$ fly auth token`
 
 And create a secret `FLY_API_TOKEN` in the Github repo.
