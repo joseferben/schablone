@@ -7,7 +7,6 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from .base import *  # noqa
 from .base import env
 
-
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 FLY_HOSTNAME = f'{os.getenv("FLY_APP_NAME")}.fly.dev'
 ALLOWED_HOSTS = env.list(
@@ -44,7 +43,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 STATIC_ROOT = "/app/static"
 
-DEFAULT_FILE_STORAGE = "{{cookiecutter.project_slug}}.contrib.storages.storages.MediaStorage"
+DEFAULT_FILE_STORAGE = (
+    "{{cookiecutter.project_slug}}.contrib.storages.storages.MediaStorage"
+)
 
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
