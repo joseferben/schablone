@@ -50,7 +50,6 @@ migrations:
 .PHONY: init
 init:
 	python manage.py tailwind installcli
-	python manage.py tailwind init
 
 .PHONY: migrate
 migrate:
