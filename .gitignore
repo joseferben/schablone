@@ -1,2 +1,5 @@
 .venv
 .log
+theme/static/css/styles.css
+*.sqlite3
+huey.db*
