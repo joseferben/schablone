@@ -12,22 +12,6 @@ jobs:
   test:
     name: "Test"
     runs-on: ubuntu-latest
-    services:
-      redis:
-        image: redis:5.0
-        ports:
-          - 6379:6379
-      postgres:
-        image: postgres:12
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_PASSWORD: postgres
-
-    env:
-      REDIS_URL: "redis://localhost:6379"
-      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
-
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
