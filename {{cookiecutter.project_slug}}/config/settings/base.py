@@ -124,12 +124,12 @@ MEDIA_ROOT = "/tmp"
 MEDIA_URL = "/media/"
 
 HUEY = {
-    "huey_class": "huey.SqliteHuey",  # Huey implementation to use.
-    "name": DATABASES["default"]["NAME"],  # Use db name for huey.
-    "results": True,  # Store return values of tasks.
-    "store_none": False,  # If a task returns None, do not save to results.
-    "immediate": True,  # Run synchronously.
-    "utc": True,  # Use UTC for all times internally.
+    "huey_class": "huey.SqliteHuey",
+    "name": DATABASES["default"]["NAME"],
+    "results": True,
+    "store_none": False,
+    "immediate": False,
+    "utc": True,
 }
 
 TEMPLATES = [

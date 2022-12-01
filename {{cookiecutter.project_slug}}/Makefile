@@ -9,6 +9,7 @@ help:
 	@echo "- data                Applies migrations and creates default dev data"
 	@echo "- dev                 Starts the development web server on localhost:8000 and compiles TailwindCSS"
 	@echo "- check               Lints and fixes codebase"
+	@echo "- work                Run huey worker process"
 	@echo "- migrate             Applies pending migrations"
 	@echo "- test                Runs all tests, requires a database"
 	@echo "- shell               Starts an interactive shell with all models imported"
@@ -62,6 +63,10 @@ watch.css:
 .PHONY: watch.server
 watch.server:
 	python manage.py runserver
+
+.PHONY: work
+work:
+	python manage.py run_huey
 
 .PHONY: dev
 dev: ; ${MAKE} -j2 migrate watch.css watch.server
