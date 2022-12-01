@@ -5,7 +5,7 @@ help:
 	@echo ""
 	@echo "Here are some of the most convenient commands:"
 	@echo ""
-	@echo "- init                Install the TailwindCSS CLI"
+	@echo "- init                Install the TailwindCSS CLI and reformats all templates initially"
 	@echo "- data                Applies migrations and creates default dev data"
 	@echo "- dev                 Starts the development web server on localhost:8000 and compiles TailwindCSS"
 	@echo "- check               Lints and fixes codebase"
@@ -50,7 +50,7 @@ migrations:
 .PHONY: init
 init:
 	python manage.py tailwind installcli
-	python manage.py tailwind init
+	djlint . --reformat
 
 .PHONY: migrate
 migrate:
