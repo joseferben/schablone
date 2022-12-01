@@ -11,6 +11,8 @@ All you need to generate a project is Python3 and `pip`.
 
 ## Usage
 
+`$ make`
+
 ```
 Welcome to my_awesome_project
 =======================================================
@@ -19,6 +21,7 @@ Here are some of the most convenient commands:
 
 - data                Runs migrations, creates default user, groups and data
 - dev                 Starts the development web server on localhost:8000
+- work                Runs a huey worker process
 - check               Runs linter and type checker
 - migrations          Creates migrations based on models.py change
 - migrate             Runs migrations
