@@ -6,7 +6,7 @@ huey==2.4.4  # https://pypi.org/project/huey/
 # Django
 # ------------------------------------------------------------------------------
 django-environ==0.9.0  # https://github.com/joke2k/django-environ
-django==4.1.4  # https://www.djangoproject.com/
+django==4.1.5  # https://www.djangoproject.com/
 django-environ==0.9.0  # https://github.com/joke2k/django-environ
 django-model-utils==4.2.0  # https://github.com/jazzband/django-model-utils
 django-compressor==4.1  # https://github.com/django-compressor/django-compressor
