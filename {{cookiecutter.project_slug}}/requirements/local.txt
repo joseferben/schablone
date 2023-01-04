@@ -6,7 +6,7 @@ watchgod==0.8.2  # https://github.com/samuelcolvin/watchgod
 
 # Testing
 # ------------------------------------------------------------------------------
-pyright==1.1.284 # https://github.com/pytest-dev/pytest
+pyright==1.1.287 # https://github.com/pytest-dev/pytest
 pytest==7.1.3  # https://github.com/pytest-dev/pytest
 factory-boy==3.2.1  # https://github.com/FactoryBoy/factory_boy
 
