@@ -8,20 +8,20 @@ repos:
       - id: pyright
 
   - repo: https://github.com/pycqa/isort
-    rev: v5.11.3
+    rev: 5.11.4
     hooks:
       - id: isort
         name: isort (python)
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.19.9
+    rev: v1.19.11
     hooks:
       - id: djlint-django
         name: "djlint format"
         args: ["--reformat"]
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.19.9
+    rev: v1.19.11
     hooks:
       - id: djlint-django
         name: "djlint lint"
@@ -40,7 +40,7 @@ repos:
       - id: black
 
   - repo: https://github.com/PyCQA/isort
-    rev: v5.11.3
+    rev: 5.11.4
     hooks:
       - id: isort
 
