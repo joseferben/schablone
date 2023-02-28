@@ -14,4 +14,4 @@ django-health-check==3.17.0 # https://github.com/KristianOellegaard/django-healt
 django-widget-tweaks==1.4.12  # https://github.com/jazzband/django-widget-tweaks
 django-sesame==3.1  # https://github.com/aaugustin/django-sesame
 django-hijack==3.2.6  # https://github.com/django-hijack/django-hijack
-django-tailwind-cli==1.1.1  # https://github.com/oliverandrich/django-tailwind-cli
+django-tailwind-cli==1.2.0  # https://github.com/oliverandrich/django-tailwind-cli
