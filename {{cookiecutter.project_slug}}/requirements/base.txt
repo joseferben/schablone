@@ -2,7 +2,6 @@ pytz==2022.7.1  # https://github.com/stub42/pytz
 psutil==5.9.4 # https://psutil.readthedocs.io/en/latest/
 argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
 huey==2.4.4  # https://pypi.org/project/huey/
-Werkzeug==2.2.3 # vulerability
 
 # Django
 # ------------------------------------------------------------------------------
