@@ -1,7 +1,7 @@
 -r base.txt
 
 Werkzeug[watchdog]==2.2.3 # https://github.com/pallets/werkzeug
-ipdb==0.13.11  # https://github.com/gotcha/ipdb
+ipdb==0.13.13  # https://github.com/gotcha/ipdb
 watchgod==0.8.2  # https://github.com/samuelcolvin/watchgod
 
 # Testing
