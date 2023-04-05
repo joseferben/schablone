@@ -5,13 +5,12 @@ help:
 	@echo ""
 	@echo "Here are some of the most convenient commands:"
 	@echo ""
-	@echo "- init                Install the TailwindCSS CLI"
 	@echo "- data                Applies migrations and creates default dev data"
-	@echo "- dev                 Starts the development web server on localhost:8000 and compiles TailwindCSS"
+	@echo "- dev                 Starts the development web server on localhost:8000
 	@echo "- check               Lints and fixes codebase"
 	@echo "- work                Run huey worker process"
 	@echo "- migrate             Applies pending migrations"
-	@echo "- test                Runs all tests, requires a database"
+	@echo "- test                Runs all tests"
 	@echo "- shell               Starts an interactive shell with all models imported"
 	@echo "- migrations          Creates migrations based on models.py change"
 	@echo "- webp                Compresses static images to webp (requires imagemagick)"
@@ -23,11 +22,9 @@ help:
 	@echo "- check.lint          Runs linter"
 	@echo "- check.types         Runs type checker"
 	@echo "- watch.server        Runs web server on localhost:8000"
-	@echo "- watch.css           Runs the TailwindCSS compiler"
 
 .PHONY: check
 check:
-	python manage.py tailwind build
 	pre-commit run --show-diff-on-failure -a
 
 .PHONY: test
@@ -47,17 +44,9 @@ shell:
 migrations:
 	python manage.py makemigrations
 
-.PHONY: init
-init:
-	python manage.py tailwind installcli
-
 .PHONY: migrate
 migrate:
 	python manage.py migrate
-
-.PHONY: watch.css
-watch.css:
-	python manage.py tailwind watch
 
 .PHONY: watch.server
 watch.server:

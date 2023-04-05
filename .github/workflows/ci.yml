@@ -32,7 +32,5 @@ jobs:
           pip install -r requirements/local.txt
           git init
           git add .
-          python manage.py tailwind installcli
-          python manage.py tailwind build
           make check
           make coverage

@@ -35,8 +35,6 @@ ARG AWS_SECRET_ACCESS_KEY="for for building purposes"
 ARG SENTRY_DSN="https://user@key.ingest.sentry.io/4504194864381952"
 
 
-RUN python manage.py tailwind installcli
-RUN python manage.py tailwind build
 RUN python manage.py collectstatic --noinput
 RUN python manage.py compress --force
 

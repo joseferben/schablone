@@ -4,7 +4,6 @@ Base settings to build other settings files upon.
 from pathlib import Path
 
 import environ
-from django.forms.renderers import TemplatesSetting
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 APPS_DIR = ROOT_DIR / "{{cookiecutter.project_slug}}"
@@ -54,7 +53,6 @@ THIRD_PARTY_APPS = [
     "widget_tweaks",
     "hijack",
     "huey.contrib.djhuey",
-    "django_tailwind_cli",
     "compressor",
 ]
 LOCAL_APPS = [
@@ -151,13 +149,6 @@ TEMPLATES = [
         },
     }
 ]
-
-
-class FormRenderer(TemplatesSetting):
-    form_template_name = "form_snippet.html"
-
-
-FORM_RENDERER = "config.settings.base.FormRenderer"
 
 FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
 

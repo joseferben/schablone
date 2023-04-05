@@ -36,7 +36,6 @@ Here are some of less used commands:
 - check.lint          Runs linter
 - check.types         Runs type checker
 - watch.server        Runs web server on localhost:8000
-- watch.css           Runs the TailwindCSS compiler
 ```
 
 ## Features & Design goals
@@ -46,8 +45,6 @@ Here are some of less used commands:
 - Database backups using [Litestream](https://litestream.io/)
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
 - Magic-link login using [django-sesame](https://github.com/aaugustin/django-sesame)
-- TailwindCSS without Node.js using [django-tailwind-cli](https://github.com/oliverandrich/django-tailwind-cli)
-- [Custom form rendering](https://www.joseferben.com/posts/django-4-form-tailwind-without-node-crispy/) without dependencies such as django-crispy-forms
 - Mail sending using [Anymail](https://anymail.dev/en/stable/)
 - Async and scheduled tasks with [huey](https://github.com/coleifer/huey)
 - Zero-config formatting, linting and auto-fixing with [black](https://black.readthedocs.io/en/stable/) and [flake8](https://flake8.pycqa.org/en/latest/)
