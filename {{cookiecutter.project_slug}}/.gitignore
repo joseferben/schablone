@@ -277,7 +277,5 @@ tags
 .envs/*
 !.envs/.local/
 
-
-{{cookiecutter.project_slug}}/theme/static/css/styles.css
-
 *.sqlite3
+huey.db

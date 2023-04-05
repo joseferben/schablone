@@ -55,7 +55,7 @@ work:
 	python manage.py run_huey
 
 .PHONY: dev
-dev: ; ${MAKE} -j2 migrate watch.server
+dev: migrate watch.server
 
 .PHONY: webp
 webp:
