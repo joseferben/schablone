@@ -9,16 +9,18 @@
     </ul>
     <ul>
       <li>
-        <a href="{% url 'app:index' %}">Home</a>
+        <a href="#">Other</a>
       </li>
       <li>
-        <a href="{% url 'users:logout' %}" role="button">Logout</a>
+        <a href="{% url 'users:email_login' %}" role="button">Login</a>
       </li>
     </ul>
   </nav>
-  <main class="container">
-    {% block content_app %}
-    {% endblock content_app %}
-  </main>
+  <header class="container">
+    <hgroup>
+      <h1>Let's go</h1>
+      <h2>You are are all set.</h2>
+    </hgroup>
+  </header>
 {% endblock content %}
 {%- endraw %}

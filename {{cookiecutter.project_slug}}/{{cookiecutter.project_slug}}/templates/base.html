@@ -2,7 +2,7 @@
 {% load static i18n compress %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}" class="h-full bg-gray-50">
+<html lang="{{ LANGUAGE_CODE }}" data-theme="dark">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -33,7 +33,7 @@
       {% endcompress %}
     {% endblock javascript %}
   </head>
-  <body class="h-full">
+  <body>
     {% block content %}
     {% endblock content %}
   </body>

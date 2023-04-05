@@ -58,7 +58,6 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "{{cookiecutter.project_slug}}.users",
     "{{cookiecutter.project_slug}}.app",
-    "{{cookiecutter.project_slug}}.theme"
     # Your stuff: custom apps go here
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -75,7 +74,7 @@ AUTHENTICATION_BACKENDS = [
     "sesame.backends.ModelBackend",
 ]
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = "app:dashboard"
+LOGIN_REDIRECT_URL = "app:index"
 LOGIN_URL = "users:email_login"
 
 PASSWORD_HASHERS = [

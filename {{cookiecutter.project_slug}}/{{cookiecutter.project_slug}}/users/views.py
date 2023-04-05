@@ -10,7 +10,7 @@ User = get_user_model()
 
 
 class EmailLoginView(FormView):
-    template_name = "users/email_login.html"
+    template_name = "email_login.html"
     form_class = EmailLoginForm
 
     def get_or_create_user(self, email: str) -> "User":
@@ -51,4 +51,4 @@ Thank you for using django-sesame!
 
     def form_valid(self, form):
         self.email_submitted(form.cleaned_data["email"])
-        return render(self.request, "users/email_login_success.html")
+        return render(self.request, "email_sent.html")

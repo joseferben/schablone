@@ -1,9 +1,9 @@
 from django.urls import path
 
-from {{cookiecutter.project_slug}}.app.views import DashboardView
+from {{cookiecutter.project_slug}}.app.views import IndexView
 
 app_name = "app"
 
 urlpatterns = [
-    path("", DashboardView.as_view(), name="dashboard"),
+    path("", IndexView.as_view(), name="index"),
 ]

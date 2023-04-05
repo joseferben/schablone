@@ -1,7 +1,9 @@
+import re
+
 import pytest
 from django.test.client import Client
 from django.urls import reverse
-from sesame.utils import get_query_string
+from sesame.utils import get_query_string, get_user
 
 from {{cookiecutter.project_slug}}.users.models import User
 
@@ -18,7 +20,11 @@ class TestEmailLoginView:
             },
         )
         assert response.status_code == 200
-        assert get_query_string(user) in mailoutbox[0].body
+        match = re.search(r"\?sesame=([^ \n]+)", mailoutbox[0].body)
+        sesame_value = match.group(1)
+        authenticated_user = get_user(sesame_value)
+        assert authenticated_user == user
+
 
     def test_email_register(self, client: Client, mailoutbox):
         email = "foo@example.com"

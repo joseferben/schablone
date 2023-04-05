@@ -6,7 +6,7 @@ from django.views import defaults as default_views
 from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="landing.html"), name="landing"),
+    path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path(
         "favicon.ico",
         RedirectView.as_view(url=settings.STATIC_URL + "images/favicons/favicon.ico"),
@@ -18,7 +18,9 @@ urlpatterns = [
     # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path("users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")),
+    path(
+        "users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")
+    ),
     # Main app
     path("app/", include("{{cookiecutter.project_slug}}.app.urls", namespace="app")),
     # Health check

@@ -1,14 +1,15 @@
 {% raw -%}
 {% extends "base.html" %}
 {% block title %}
-  404 | Page not found
+  Log in
 {% endblock title %}
 {% block content %}
   <main class="container">
-    <div>
-      <h1>404 | Page not found</h1>
-      <p>Please check the URL in the address bar and try again.</p>
-    </div>
+    <h1>Check your email</h1>
+    <h5>
+      Or go <a href="{% url 'landing' %}" class="btn-link">back</a>
+    </h5>
   </main>
 {% endblock content %}
 {%- endraw %}
+

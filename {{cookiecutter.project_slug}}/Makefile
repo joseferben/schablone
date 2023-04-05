@@ -5,8 +5,7 @@ help:
 	@echo ""
 	@echo "Here are some of the most convenient commands:"
 	@echo ""
-	@echo "- data                Applies migrations and creates default dev data"
-	@echo "- dev                 Starts the development web server on localhost:8000
+	@echo "- dev                 Starts the development web server on localhost:8000"
 	@echo "- check               Lints and fixes codebase"
 	@echo "- work                Run huey worker process"
 	@echo "- migrate             Applies pending migrations"
@@ -17,7 +16,6 @@ help:
 	@echo ""
 	@echo "Here are some of less used commands:"
 	@echo ""
-	@echo "- graph               Renders a graph with all models in graph.png"
 	@echo "- coverage            Runs tests and prints coverage in terminal"
 	@echo "- check.lint          Runs linter"
 	@echo "- check.types         Runs type checker"
@@ -57,11 +55,7 @@ work:
 	python manage.py run_huey
 
 .PHONY: dev
-dev: ; ${MAKE} -j2 migrate watch.css watch.server
-
-.PHONY: graph
-graph:
-	python manage.py graph_models -a --pygraphviz --output models.png
+dev: ; ${MAKE} -j2 migrate watch.server
 
 .PHONY: webp
 webp:

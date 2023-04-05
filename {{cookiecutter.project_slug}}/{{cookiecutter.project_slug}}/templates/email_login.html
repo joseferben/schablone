@@ -1,0 +1,30 @@
+{% raw -%}
+{% extends "base.html" %}
+{% block title %}
+  Log in
+{% endblock title %}
+{% block content %}
+  <main class="container">
+    <article class="grid">
+      <div>
+        <hgroup>
+          <h1>Sign in</h1>
+        </hgroup>
+        <form method="post">
+          {% csrf_token %}
+          <input type="email"
+                 name="email"
+                 placeholder="Email"
+                 aria-label="Email"
+                 autocomplete="email"
+                 required=""
+                 id="id_email"/>
+          <button type="submit" class="contrast">Send link</button>
+          <span>Don't have an account? You can still log in.</span>
+        </form>
+      </div>
+      <div></div>
+    </article>
+  </main>
+{% endblock content %}
+{%- endraw %}
