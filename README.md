@@ -19,7 +19,6 @@ Welcome to my_awesome_project
 
 Here are some of the most convenient commands:
 
-- data                Runs migrations, creates default user, groups and data
 - dev                 Starts the development web server on localhost:8000
 - work                Runs a huey worker process
 - check               Runs linter and type checker
@@ -31,16 +30,13 @@ Here are some of the most convenient commands:
 
 Here are some of less used commands:
 
-- graph               Renders a graph with all models in graph.png
 - test.coverage       Runs tests and prints coverage
-- check.lint          Runs linter
-- check.types         Runs type checker
 - watch.server        Runs web server on localhost:8000
 ```
 
 ## Features & Design goals
 
-- Deployment to [fly.io](https://fly.io/)
+- Styling of semantic HTML with [PicoCSS](https://picocss.com/)
 - Production data persisted using [SQLite](https://www.sqlite.org/index.html)
 - Database backups using [Litestream](https://litestream.io/)
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
