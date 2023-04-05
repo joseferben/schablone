@@ -25,7 +25,6 @@ class TestEmailLoginView:
         authenticated_user = get_user(sesame_value)
         assert authenticated_user == user
 
-
     def test_email_register(self, client: Client, mailoutbox):
         email = "foo@example.com"
         response = client.post(

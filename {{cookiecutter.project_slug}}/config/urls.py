@@ -18,9 +18,7 @@ urlpatterns = [
     # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    path(
-        "users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")
-    ),
+    path("users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")),
     # Main app
     path("app/", include("{{cookiecutter.project_slug}}.app.urls", namespace="app")),
     # Health check
