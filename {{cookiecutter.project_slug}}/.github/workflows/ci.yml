@@ -33,12 +33,12 @@ jobs:
           cache: pip
           cache-dependency-path: |
             requirements/base.txt
-            requirements/local.txt
+            requirements/dev.txt
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements/local.txt
+          pip install -r requirements/dev.txt
 
       - name: Run pre-commit
         uses: pre-commit/action@v2.0.3
@@ -56,12 +56,12 @@ jobs:
           cache: pip
           cache-dependency-path: |
             requirements/base.txt
-            requirements/local.txt
+            requirements/dev.txt
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements/local.txt
+          pip install -r requirements/dev.txt
 
       - name: Test with pytest
         run:  pytest

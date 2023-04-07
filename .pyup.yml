@@ -15,5 +15,5 @@ label_prs: update
 
 requirements:
   - "{{cookiecutter.project_slug}}/requirements/base.txt"
-  - "{{cookiecutter.project_slug}}/requirements/local.txt"
+  - "{{cookiecutter.project_slug}}/requirements/dev.txt"
   - "{{cookiecutter.project_slug}}/requirements/production.txt"

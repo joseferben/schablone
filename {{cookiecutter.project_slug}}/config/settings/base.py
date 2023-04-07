@@ -1,37 +1,21 @@
-"""
-Base settings to build other settings files upon.
-"""
-from pathlib import Path
-
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
 import environ
 
-ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-APPS_DIR = ROOT_DIR / "{{cookiecutter.project_slug}}"
-BASE_DIR = APPS_DIR
+# Build paths and read env variables
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 env = environ.Env()
+env.read_env(os.path.join(PROJECT_DIR, ".env"))
 
-env.read_env(str(ROOT_DIR / ".env"))
-
+# Basic settings
 DEBUG = env.bool("DJANGO_DEBUG", False)
-TIME_ZONE = "UTC"
-LANGUAGE_CODE = "en-us"
 SITE_ID = 1
-USE_I18N = True
-USE_TZ = True
-LOCALE_PATHS = [str(ROOT_DIR / "locale")]
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "db.sqlite3",
-    },
-}
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
+LOCALE_PATHS = [os.path.join(PROJECT_DIR, "locale")]
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
 
+# Django apps
 DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,7 +23,6 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
 ]
@@ -58,42 +41,10 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "{{cookiecutter.project_slug}}.users",
     "{{cookiecutter.project_slug}}.app",
-    # Your stuff: custom apps go here
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-HEALTH_CHECK = {
-    "DISK_USAGE_MAX": 90,  # percent
-    "MEMORY_MIN": 50,  # in MB
-}
-
-MIGRATION_MODULES = {"sites": "{{cookiecutter.project_slug}}.contrib.sites.migrations"}
-
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "sesame.backends.ModelBackend",
-]
-AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = "app:index"
-LOGIN_URL = "users:email_login"
-
-PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
-]
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": (
-            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-        )
-    },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
-]
-
+# Middlewares
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -108,31 +59,11 @@ MIDDLEWARE = [
     "hijack.middleware.HijackUserMiddleware",
 ]
 
-STATIC_ROOT = str(ROOT_DIR / "staticfiles")
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
-]
-
-MEDIA_ROOT = "/tmp"
-MEDIA_URL = "/media/"
-
-HUEY = {
-    "huey_class": "huey.SqliteHuey",
-    "name": DATABASES["default"]["NAME"],
-    "results": True,
-    "store_none": False,
-    "immediate": False,
-    "utc": True,
-}
-
+# Django template settings
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": [os.path.join(PROJECT_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -149,23 +80,98 @@ TEMPLATES = [
     }
 ]
 
-FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
+# Internationalization & language settings
+LANGUAGE_CODE = "en-us"
+USE_I18N = True
+USE_TZ = True
+TIME_ZONE = "UTC"
 
+# Database settings
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db.sqlite3",
+    },
+}
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+MIGRATION_MODULES = {"sites": "{{cookiecutter.project_slug}}.contrib.sites.migrations"}
+
+# General security settings
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 
+# Authentication settings
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "sesame.backends.ModelBackend",
+]
+AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = "app:index"
+LOGIN_URL = "users:email_login"
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": (
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        )
+    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+]
+SESAME_MAX_AGE = 300  # 300 seconds = 5 minutes
+
+# Static, media and fixture settings
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = "/static/"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STATICFILES_DIRS = [os.path.join(PROJECT_DIR, "static")]
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
+]
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+FIXTURE_DIRS = (os.path.join(PROJECT_DIR, "fixtures"),)
+
+# Worker queue settings
+HUEY = {
+    "huey_class": "huey.SqliteHuey",
+    "name": DATABASES["default"]["NAME"],
+    "results": True,
+    "store_none": False,
+    "immediate": False,
+    "utc": True,
+}
+
+# Health check settings
+HEALTH_CHECK = {
+    "DISK_USAGE_MAX": 90,  # percent
+    "MEMORY_MIN": 50,  # in MB
+}
+
+
+# Email settings
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
 EMAIL_TIMEOUT = 5
 
+# Admin settings
 ADMIN_URL = "admin/"
 ADMINS = [("""{{cookiecutter.author_name}}""", "{{cookiecutter.email}}")]
 MANAGERS = ADMINS
 
+# Logging settings
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -186,5 +192,3 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
-
-SESAME_MAX_AGE = 300  # 300 seconds = 5 minutes

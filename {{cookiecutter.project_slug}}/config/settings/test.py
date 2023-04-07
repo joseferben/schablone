@@ -1,14 +1,6 @@
-"""
-With these settings, tests run faster.
-"""
-
 from .base import *  # noqa
-from .base import env
 
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY",
-    default="Y0HhZ0tDiPKIzwZLFlIhHtzHhbrpfDxb0tFsEp0AiQn0ALdVyiDDOULctHZhCX4d",
-)
+SECRET_KEY = "Y0HhZ0tDiPKIzwZLFlIhHtzHhbrpfDxb0tFsEp0AiQn0ALdVyiDDOULctHZhCX4d"
 
 HUEY = {
     "huey_class": "huey.SqliteHuey",

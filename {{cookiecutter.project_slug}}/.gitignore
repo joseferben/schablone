@@ -279,3 +279,5 @@ tags
 
 *.sqlite3
 huey.db
+
+media

@@ -1,20 +1,9 @@
-import os
 import socket
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
-from .base import *  # noqa
+from .base import *
 from .base import env
 
-SECRET_KEY = env("DJANGO_SECRET_KEY")
-FLY_HOSTNAME = f'{os.getenv("FLY_APP_NAME")}.fly.dev'
-ALLOWED_HOSTS = env.list(
-    "DJANGO_ALLOWED_HOSTS",
-    default=[FLY_HOSTNAME, "www.{{cookiecutter.domain_name}}", "health.check"],
-)
-ALLOWED_HOSTS.append(socket.getaddrinfo(socket.gethostname(), "http")[0][4][0])
-
+# Database settings
 DATABASES = {
     "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": env("DB_FILE")},
 }
@@ -26,6 +15,14 @@ CACHES = {
     }
 }
 
+# Security settings
+SECRET_KEY = env("DJANGO_SECRET_KEY")
+ALLOWED_HOSTS = env.list(
+    "DJANGO_ALLOWED_HOSTS",
+    default=["www.{{cookiecutter.domain_name}}", "health.check"],
+)
+# Docker environment like Dokku
+ALLOWED_HOSTS.append(socket.getaddrinfo(socket.gethostname(), "http")[0][4][0])
 SECURE_REDIRECT_EXEMPT = [r"^ht/", r"^/"]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
@@ -40,15 +37,14 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
     "DJANGO_SECURE_CONTENT_TYPE_NOSNIFF", default=True
 )
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+# Static and media settings
 STATIC_ROOT = "/app/static"
-
 # fmt: off
 DEFAULT_FILE_STORAGE = "{{cookiecutter.project_slug}}.contrib.storages.storages.MediaStorage"
-
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
 
+# Worker queue settings
 HUEY = {
     "huey_class": "huey.SqliteHuey",  # Huey implementation to use.
     "name": DATABASES["default"]["NAME"],  # Use db name for huey.
@@ -70,6 +66,15 @@ HUEY = {
     },
 }
 
+# Admin settings
+ADMIN_URL = env("DJANGO_ADMIN_URL")
+
+# Email settings
+INSTALLED_APPS += ["anymail"]  # noqa F405
+EMAIL_BACKEND = "anymail.backends.postmark.EmailBackend"
+ANYMAIL = {
+    "POSTMARK_SERVER_TOKEN": env("POSTMARK_SERVER_TOKEN"),
+}
 DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL",
     default="{{cookiecutter.project_slug}} <noreply@{{cookiecutter.domain_name}}>",
@@ -80,14 +85,7 @@ EMAIL_SUBJECT_PREFIX = env(
     default="[{{cookiecutter.project_slug}}]",
 )
 
-ADMIN_URL = env("DJANGO_ADMIN_URL")
-
-INSTALLED_APPS += ["anymail"]  # noqa F405
-EMAIL_BACKEND = "anymail.backends.postmark.EmailBackend"
-ANYMAIL = {
-    "POSTMARK_SERVER_TOKEN": env("POSTMARK_SERVER_TOKEN"),
-}
-
+# Compression settings
 COMPRESS_ENABLED = True
 COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
 COMPRESS_URL = STATIC_URL  # noqa F405
@@ -100,6 +98,7 @@ COMPRESS_FILTERS = {
     "js": ["compressor.filters.jsmin.JSMinFilter"],
 }
 
+# Logging & performance settings
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -138,17 +137,13 @@ LOGGING = {
         },
     },
 }
-
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 sentry_sdk.init(
     dsn=env("SENTRY_DSN"),
     integrations=[
         DjangoIntegration(),
     ],
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
     traces_sample_rate=1.0,
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True,
 )

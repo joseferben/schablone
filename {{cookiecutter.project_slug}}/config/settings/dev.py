@@ -1,13 +1,12 @@
-from .base import *  # noqa
-from .base import env
+from .base import *
 
 DEBUG = True
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY",
-    default="LJPhQzD2G6GRAXkQKlDxYCu6OJbzHu38aH6cdiQhcvS3cyA7LUP5sS27bkgiB3lN",
-)
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+SECRET_KEY = "LJPhQzD2G6GRAXkQKlDxYCu6OJbzHu38aH6cdiQhcvS3cyA7LUP5sS27bkgiB3lN"
+
+ALLOWED_HOSTS = ["*"]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 CACHES = {
     "default": {
@@ -16,12 +15,10 @@ CACHES = {
     }
 }
 
-EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
-)
-
 INSTALLED_APPS += ["debug_toolbar"]  # noqa F405
+
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa F405
+
 DEBUG_TOOLBAR_CONFIG = {
     "DISABLE_PANELS": [
         "debug_toolbar.panels.redirects.RedirectsPanel",
