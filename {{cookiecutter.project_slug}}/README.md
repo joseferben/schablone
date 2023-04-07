@@ -42,18 +42,4 @@ Just a simple {{cookiecutter.project_slug}}
 
 Use `openssl rand -base64 32` to create a Django secret.
 
-3. Launch!
-
-```sh
-    $ fly launch
-    $ fly secrets import < .env
-    $ fly volumes create data -s 1
-    $ fly scale memory 512
-    $ fly deploy
-```
-
-4. Setup Github Actions
-
-`$ fly auth token`
-
-And create a secret `FLY_API_TOKEN` in the Github repo.
+3. Deploy!
