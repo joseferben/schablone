@@ -280,5 +280,5 @@ tags
 *.sqlite3
 huey.db
 
-static/
-media/
+/static/
+/media/
