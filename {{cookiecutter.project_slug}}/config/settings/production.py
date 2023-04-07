@@ -39,6 +39,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 
 # Static and media settings
 STATIC_ROOT = "/app/static"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 # fmt: off
 DEFAULT_FILE_STORAGE = "{{cookiecutter.project_slug}}.contrib.storages.storages.MediaStorage"
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")

@@ -4,8 +4,9 @@ import os
 import environ
 
 # Build paths and read env variables
-PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.dirname(PROJECT_DIR)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_DIR = os.path.join(BASE_DIR, {{cookiecutter.project_slug}})
+
 env = environ.Env()
 env.read_env(os.path.join(PROJECT_DIR, ".env"))
 
@@ -132,7 +133,6 @@ SESAME_MAX_AGE = 300  # 300 seconds = 5 minutes
 # Static, media and fixture settings
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 STATICFILES_DIRS = [os.path.join(PROJECT_DIR, "static")]
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
