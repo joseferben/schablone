@@ -9,21 +9,16 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path(
         "favicon.ico",
-        RedirectView.as_view(url=settings.STATIC_URL + "images/favicons/favicon.ico"),
+        RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico"),
     ),
     path(
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
-    # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
     path(settings.ADMIN_URL, admin.site.urls),
-    # User management
     path("users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")),
-    # Main app
     path("app/", include("{{cookiecutter.project_slug}}.app.urls", namespace="app")),
-    # Health check
     path("ht/", include("health_check.urls")),
-    # Hijack
     path("hijack/", include("hijack.urls")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

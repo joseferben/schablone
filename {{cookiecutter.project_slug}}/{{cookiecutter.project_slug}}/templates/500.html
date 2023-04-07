@@ -1,14 +1,23 @@
 {% raw -%}
-{% extends "base.html" %}
-{% block title %}
-  500 | Server error
-{% endblock title %}
-{% block content %}
-  <main class="container">
-    <div>
-      <h1>500 | Server error</h1>
-      <p>We got notified that this happened. This should be fixed by tomorrow.</p>
-    </div>
-  </main>
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="description" content="500 | Server error"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta description="500 | Server error"/>
+    <title>500 | Server error</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="{% static 'css/pico.css' %}" />
+  </head>
+  <body>
+    <main class="container">
+      <div>
+        <h1>500 | Server error</h1>
+        <p>We got notified that this happened. This should be fixed by tomorrow.</p>
+      </div>
+    </main>
+  </body>
+</html>
 {%- endraw %}
+
