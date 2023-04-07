@@ -140,6 +140,7 @@ LOGGING = {
 
 import sentry_sdk # noqa E402
 from sentry_sdk.integrations.django import DjangoIntegration # noqa E402
+
 sentry_sdk.init(
     dsn=env("SENTRY_DSN"),
     integrations=[
