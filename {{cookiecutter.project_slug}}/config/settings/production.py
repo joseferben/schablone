@@ -11,7 +11,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": "/tmp/cache",
+        "LOCATION": env("CACHE_DIR", default="/storage/cache"),
     }
 }
 
@@ -37,35 +37,40 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
     "DJANGO_SECURE_CONTENT_TYPE_NOSNIFF", default=True
 )
 
-# Static and media settings
-STATIC_ROOT = "/app/static"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
-# fmt: off
-DEFAULT_FILE_STORAGE = "{{cookiecutter.project_slug}}.contrib.storages.storages.MediaStorage"
+# Media settings
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = "{{cookiecutter.project_slug}}"
+AWS_LOCATION = "media"
+AWS_S3_REGION_NAME = "eu-central-1"
+AWS_S3_FILE_OVERWRITE = False
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # Worker queue settings
-HUEY = {
-    "huey_class": "huey.SqliteHuey",  # Huey implementation to use.
-    "name": DATABASES["default"]["NAME"],  # Use db name for huey.
-    "results": True,  # Store return values of tasks.
-    "store_none": False,  # If a task returns None, do not save to results.
-    "immediate": False,  # If DEBUG=True, run synchronously.
-    "utc": True,  # Use UTC for all times internally.
-    "filename": env("DB_FILE_QUEUE"),
-    "consumer": {
-        "workers": 1,
-        "worker_type": "thread",
-        "initial_delay": 0.1,  # Smallest polling interval, same as -d.
-        "backoff": 1.15,  # Exponential backoff using this rate, -b.
-        "max_delay": 10.0,  # Max possible polling interval, -m.
-        "scheduler_interval": 1,  # Check schedule every second, -s.
-        "periodic": True,  # Enable crontab feature.
-        "check_worker_health": True,  # Enable worker health checks.
-        "health_check_interval": 1,  # Check worker health every second.
-    },
-}
+HUEY = (
+    {
+        "huey_class": "huey.SqliteHuey",  # Huey implementation to use.
+        "name": DATABASES["default"]["NAME"],  # Use db name for huey.
+        "results": True,  # Store return values of tasks.
+        "store_none": False,  # If a task returns None, do not save to results.
+        "immediate": False,  # If DEBUG=True, run synchronously.
+        "utc": True,  # Use UTC for all times internally.
+        "filename": env("DB_FILE_QUEUE"),
+        "consumer": {
+            "workers": 1,
+            "worker_type": "thread",
+            "initial_delay": 0.1,  # Smallest polling interval, same as -d.
+            "backoff": 1.15,  # Exponential backoff using this rate, -b.
+            "max_delay": 10.0,  # Max possible polling interval, -m.
+            "scheduler_interval": 1,  # Check schedule every second, -s.
+            "periodic": True,  # Enable crontab feature.
+            "check_worker_health": True,  # Enable worker health checks.
+            "health_check_interval": 1,  # Check worker health every second.
+        },
+    }
+    if not env.bool("DISABLE_HUEY", default=False)
+    else {"huey_class": "huey.BlackHoleHuey"}
+)
 
 # Admin settings
 ADMIN_URL = env("DJANGO_ADMIN_URL")
@@ -113,11 +118,6 @@ LOGGING = {
         }
     },
     "handlers": {
-        "mail_admins": {
-            "level": "ERROR",
-            "filters": ["require_debug_false"],
-            "class": "django.utils.log.AdminEmailHandler",
-        },
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
@@ -127,13 +127,13 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "django.request": {
-            "handlers": ["mail_admins"],
             "level": "ERROR",
+            "handlers": ["console"],
             "propagate": True,
         },
         "django.security.DisallowedHost": {
             "level": "ERROR",
-            "handlers": ["console", "mail_admins"],
+            "handlers": ["console"],
             "propagate": True,
         },
     },

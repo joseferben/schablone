@@ -278,7 +278,6 @@ tags
 !.envs/.local/
 
 *.sqlite3
-huey.db
 
 /static/
 /media/

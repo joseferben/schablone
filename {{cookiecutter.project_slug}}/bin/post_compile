@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+DISABLE_HUEY=1 python manage.py collectstatic --noinput
+DISABLE_HUEY=1 python manage.py compress
+DISABLE_HUEY=1 python manage.py collectstatic --noinput

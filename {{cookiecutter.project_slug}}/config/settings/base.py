@@ -39,6 +39,7 @@ THIRD_PARTY_APPS = [
     "hijack",
     "huey.contrib.djhuey",
     "compressor",
+    "whitenoise.runserver_nostatic",
 ]
 LOCAL_APPS = [
     "{{cookiecutter.project_slug}}.users",
@@ -131,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 SESAME_MAX_AGE = 300  # 300 seconds = 5 minutes
 
 # Static, media and fixture settings
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(PROJECT_DIR, "static")]
 STATICFILES_FINDERS = [
@@ -139,6 +140,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "compressor.finders.CompressorFinder",
 ]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 FIXTURE_DIRS = (os.path.join(PROJECT_DIR, "fixtures"),)
@@ -147,6 +149,7 @@ FIXTURE_DIRS = (os.path.join(PROJECT_DIR, "fixtures"),)
 HUEY = {
     "huey_class": "huey.SqliteHuey",
     "name": DATABASES["default"]["NAME"],
+    "filename": os.path.join(BASE_DIR, "huey.sqlite3"),
     "results": True,
     "store_none": False,
     "immediate": False,
@@ -156,7 +159,7 @@ HUEY = {
 # Health check settings
 HEALTH_CHECK = {
     "DISK_USAGE_MAX": 90,  # percent
-    "MEMORY_MIN": 50,  # in MB
+    "MEMORY_MIN": 200,  # in MB
 }
 
 
