@@ -1,11 +1,14 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from pathlib import Path
 import os
 
 import environ
 
 # Build paths and read env variables
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PROJECT_DIR = os.path.join(BASE_DIR, "{{cookiecutter.project_slug}}")
+BASE_DIR = Path(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+)
+PROJECT_DIR = Path(os.path.join(BASE_DIR, "{{cookiecutter.project_slug}}"))
 
 env = environ.Env()
 env.read_env(os.path.join(PROJECT_DIR, ".env"))
