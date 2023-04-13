@@ -1,6 +1,6 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from pathlib import Path
 import os
+from pathlib import Path
 
 import environ
 
