@@ -3,5 +3,10 @@
     "web": {
       "quantity": 2
     }
+  },
+  "scripts": {
+    "dokku": {
+      "postdeploy": "python manage.py clearcache"
+    }
   }
 }
