@@ -5,6 +5,7 @@ from django.views.generic import FormView
 from sesame.utils import get_query_string
 
 from {{cookiecutter.project_slug}}.users.forms import EmailLoginForm
+from {{cookiecutter.project_slug}}.users.notifications import LoginEmail
 
 User = get_user_model()
 
@@ -31,18 +32,7 @@ class EmailLoginView(FormView):
 
     def send_email(self, user, link):
         """Send an email with this login link to this user."""
-        user.email_user(
-            subject="[django-sesame] Log in to our app",
-            message=f"""\
-Hello,
-
-You requested that we send you a link to log in to our app:
-
-    {link}
-
-Thank you for using django-sesame!
-""",
-        )
+        LoginEmail(user, link).send()
 
     def email_submitted(self, email):
         user = self.get_or_create_user(email)

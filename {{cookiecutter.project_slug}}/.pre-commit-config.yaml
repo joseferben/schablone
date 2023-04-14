@@ -38,6 +38,7 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
+        args: ["--experimental-string-processing"]
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0

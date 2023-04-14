@@ -1,0 +1,9 @@
+{% raw -%}
+Hi there!
+
+Click the following link to sign in or confirm your email address: {{link}}
+
+Best,
+{%- endraw -%}
+{{cookiecutter.author_name}}
+

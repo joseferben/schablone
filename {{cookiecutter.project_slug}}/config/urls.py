@@ -2,23 +2,16 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
-from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="index.html"), name="index"),
-    path(
-        "favicon.ico",
-        RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico"),
-    ),
-    path(
-        "robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
-    ),
     path(settings.ADMIN_URL, admin.site.urls),
-    path("users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")),
+    path(
+        "users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")
+    ),
     path("app/", include("{{cookiecutter.project_slug}}.app.urls", namespace="app")),
     path("ht/", include("health_check.urls")),
     path("hijack/", include("hijack.urls")),
+    path("", include("{{cookiecutter.project_slug}}.website.urls", namespace="website")),
 ]
 
 if settings.DEBUG:
@@ -49,3 +42,4 @@ if settings.DEBUG:
     ]
 
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
+    urlpatterns += [path("herald/", include("herald.urls"))]

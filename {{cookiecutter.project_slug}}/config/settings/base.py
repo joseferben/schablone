@@ -44,10 +44,12 @@ THIRD_PARTY_APPS = [
     "huey.contrib.djhuey",
     "compressor",
     "whitenoise.runserver_nostatic",
+    "herald",
 ]
 LOCAL_APPS = [
     "{{cookiecutter.project_slug}}.users",
     "{{cookiecutter.project_slug}}.app",
+    "{{cookiecutter.project_slug}}.website",
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
