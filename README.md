@@ -48,6 +48,7 @@ Here are some of less used commands:
 - Zero-config formatting, linting and auto-fixing with [black](https://black.readthedocs.io/en/stable/) and [flake8](https://flake8.pycqa.org/en/latest/)
 - Static typing with [pyright](https://github.com/microsoft/pyright)
 - Simple test assertions using [pytest](https://github.com/pytest-dev/pytest)
+- Notifications using [django-herald](https://github.com/worthwhile/django-herald)
 - Ready to be deployed to Heroku or [Dokku](https://dokku.com/)
 
 Read about the [design decisions](https://www.joseferben.com/posts/schablone-django-starter-template-for-simplicity/) in my blog at [joseferben.com](http://www.joseferben.com).
