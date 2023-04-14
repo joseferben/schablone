@@ -9,12 +9,14 @@ app_name = "website"
 urlpatterns = [
     path(
         "",
-        TemplateView.as_view(template_name="index.html", extra_context={"faqs": faqs}),
+        TemplateView.as_view(
+            template_name="website/index.html", extra_context={"faqs": faqs}
+        ),
         name="index",
     ),
     path(
         "privacy",
-        TemplateView.as_view(template_name="privacy.html"),
+        TemplateView.as_view(template_name="website/privacy.html"),
         name="privacy",
     ),
     path(
@@ -23,6 +25,8 @@ urlpatterns = [
     ),
     path(
         "robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+        TemplateView.as_view(
+            template_name="website/robots.txt", content_type="text/plain"
+        ),
     ),
 ]

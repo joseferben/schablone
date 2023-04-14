@@ -11,7 +11,7 @@ User = get_user_model()
 
 
 class EmailLoginView(FormView):
-    template_name = "email_login.html"
+    template_name = "users/email_login.html"
     form_class = EmailLoginForm
 
     def get_or_create_user(self, email: str) -> "User":
