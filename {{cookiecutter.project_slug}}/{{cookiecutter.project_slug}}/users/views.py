@@ -1,5 +1,8 @@
+from typing import Any
+
 from django.contrib.auth import get_user_model
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import FormView
 from sesame.utils import get_query_string
@@ -13,6 +16,11 @@ User = get_user_model()
 class EmailLoginView(FormView):
     template_name = "users/email_login.html"
     form_class = EmailLoginForm
+
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        if request.user.is_authenticated:
+            return redirect("app:index")
+        return super().get(request, *args, **kwargs)
 
     def get_or_create_user(self, email: str) -> "User":
         """Find or create a user with this email address."""
