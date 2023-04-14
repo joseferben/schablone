@@ -41,4 +41,4 @@ class EmailLoginView(FormView):
 
     def form_valid(self, form):
         self.email_submitted(form.cleaned_data["email"])
-        return render(self.request, "email_sent.html")
+        return render(self.request, "users/email_sent.html")

@@ -28,7 +28,7 @@ jobs:
       - name: Run cookiecutter, lint & test
         run: |
           cookiecutter . --no-input --overwrite-if-exists "$@"
-          cd my_awesome_project
+          cd my_awesome_project_123456789
           pip install -r requirements/dev.txt
           git init
           git add .
