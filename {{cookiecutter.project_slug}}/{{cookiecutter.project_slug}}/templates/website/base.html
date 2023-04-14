@@ -1,0 +1,26 @@
+{% raw -%}
+{% extends "base.html" %}
+{% block content %}
+    <nav class="container">
+        <ul>
+            <li>
+                <a href="{% url 'website:index' %}"><mark><strong>Performance90</strong></mark></a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="{% url 'website:index' %}#features">Features</a>
+            </li>
+            <li>
+                <a href="{% url 'website:index' %}#faqs">FAQs</a>
+            </li>
+            <li>
+                <a href="{% url 'users:email_login' %}" role="button">Login</a>
+            </li>
+        </ul>
+    </nav>
+    {% block content_website %}
+    {% endblock content_website %}
+{% endblock content %}
+{%- endraw %}
+

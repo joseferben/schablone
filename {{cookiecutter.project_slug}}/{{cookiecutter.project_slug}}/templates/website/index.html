@@ -1,26 +1,12 @@
 {% raw -%}
-{% extends "base.html" %}
-{% block content %}
-  <nav class="container">
-    <ul>
-      <li>
-        <strong>Brand</strong>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <a href="#">Other</a>
-      </li>
-      <li>
-        <a href="{% url 'users:email_login' %}" role="button">Login</a>
-      </li>
-    </ul>
-  </nav>
+{% extends "website/base.html" %}
+{% load static i18n %}
+{% block content_website %}
   <header class="container">
     <hgroup>
       <h1>Let's go</h1>
       <h2>You are are all set.</h2>
     </hgroup>
   </header>
-{% endblock content %}
+{% endblock content_website %}
 {%- endraw %}
