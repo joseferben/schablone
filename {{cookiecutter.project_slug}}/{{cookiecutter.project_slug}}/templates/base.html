@@ -16,18 +16,11 @@
     <meta name="author" content="{% endraw %}{{ cookiecutter.author_name }}{% raw %}" />
     <link rel="icon" href="{% static 'favicon.ico' %}" />
     {% block css %}
-      <!-- Your stuff: Third-party CSS libraries go here -->
-      <!-- This file stores project-specific CSS -->
       {% compress css %}
         <link rel="stylesheet" href="{% static 'css/pico.css' %}" />
       {% endcompress %}
     {% endblock css %}
-    <!-- Le javascript
-  ================================================== -->
-    {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
-      <!-- Your stuff: Third-party javascript libraries go here -->
-      <!-- place project specific Javascript in this file -->
       {% compress js %}
         <script defer src="{% static 'js/scripts.js' %}"></script>
       {% endcompress %}
