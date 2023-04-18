@@ -28,7 +28,9 @@ class EmailLoginView(FormView):
         user = User.objects.filter(email=email).first()
         if user is None:
             user = User.objects.create(email=email, username=email)
-            # user.set_unusable_password()  # type: ignore
+            # this user has no password yet
+            user.set_unusable_password()
+            user.save()
         return user
 
     def create_link(self, user: "User") -> str:
