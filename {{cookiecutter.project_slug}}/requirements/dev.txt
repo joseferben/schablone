@@ -19,7 +19,7 @@ black==22.12.0  # https://github.com/psf/black
 pylint-django==2.5.3  # https://github.com/PyCQA/pylint-django
 djhtml==3.0.5 # https://github.com/rtts/djhtml
 isort==5.11.4 # https://pycqa.github.io/isort/
-autoflake==1.7.7 # https://pypi.org/project/autoflake/
+autoflake==2.1.1 # https://pypi.org/project/autoflake/
 pre-commit==3.1.1  # https://github.com/pre-commit/pre-commit
 
 # Django
