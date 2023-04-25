@@ -1,5 +1,12 @@
 {% raw -%}
 {% extends "base.html" %}
+{% load compress static %}
+{% block javascript %}
+  {% compress js %}
+    <script defer src="{% static 'js/scripts.js' %}"></script>
+    <script defer src="{% static 'js/htmx.min.js' %}"></script>
+  {% endcompress %}
+{% endblock javascript %}
 {% block content %}
   <nav class="container">
     <ul>
