@@ -1,10 +1,12 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# type: ignore
 import os
 from pathlib import Path
 
 import environ
 
-# Build paths and read env variables
+# PATHS
+# ------------------------------------------------------------------------------
 BASE_DIR = Path(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 )
@@ -13,14 +15,16 @@ PROJECT_DIR = Path(os.path.join(BASE_DIR, "{{cookiecutter.project_slug}}"))
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, ".env"))
 
-# Basic settings
+# BASIC
+# ------------------------------------------------------------------------------
 DEBUG = env.bool("DJANGO_DEBUG", False)
 SITE_ID = 1
 LOCALE_PATHS = [os.path.join(PROJECT_DIR, "locale")]
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Django apps
+# APPS
+# ------------------------------------------------------------------------------
 DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,13 +53,15 @@ THIRD_PARTY_APPS = [
     "django_htmx",
 ]
 LOCAL_APPS = [
+    "{{cookiecutter.project_slug}}.contrib.litestream",
     "{{cookiecutter.project_slug}}.users",
     "{{cookiecutter.project_slug}}.app",
     "{{cookiecutter.project_slug}}.website",
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-# Middlewares
+# MIDDLEWARE
+# ------------------------------------------------------------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -69,7 +75,8 @@ MIDDLEWARE = [
     "hijack.middleware.HijackUserMiddleware",
 ]
 
-# Django template settings
+# TEMPLATE
+# ------------------------------------------------------------------------------
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -90,13 +97,15 @@ TEMPLATES = [
     }
 ]
 
-# Internationalization & language settings
+# INTERNATIONALIZATION
+# ------------------------------------------------------------------------------
 LANGUAGE_CODE = "en-us"
 USE_I18N = True
 USE_TZ = True
 TIME_ZONE = "UTC"
 
-# Database settings
+# DATABASES
+# ------------------------------------------------------------------------------
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -106,13 +115,15 @@ DATABASES = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MIGRATION_MODULES = {"sites": "{{cookiecutter.project_slug}}.contrib.sites.migrations"}
 
-# General security settings
+# SECURITY
+# ------------------------------------------------------------------------------
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 
-# Authentication settings
+# AUTHENTICATION
+# ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "sesame.backends.ModelBackend",
@@ -138,7 +149,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 SESAME_MAX_AGE = 300  # 300 seconds = 5 minutes
 
-# Static, media and fixture settings
+# STATIC & MEDIA
+# ------------------------------------------------------------------------------
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(PROJECT_DIR, "static")]
@@ -152,7 +164,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 FIXTURE_DIRS = (os.path.join(PROJECT_DIR, "fixtures"),)
 
-# Worker queue settings
+# QUEUE
+# ------------------------------------------------------------------------------
 HUEY = {
     "huey_class": "huey.SqliteHuey",
     "name": DATABASES["default"]["NAME"],
@@ -163,26 +176,30 @@ HUEY = {
     "utc": True,
 }
 
-# Health check settings
+# HEALTH
+# ------------------------------------------------------------------------------
 HEALTH_CHECK = {
     "DISK_USAGE_MAX": 90,  # percent
     "MEMORY_MIN": 200,  # in MB
 }
 
 
-# Email settings
+# EMAIL
+# ------------------------------------------------------------------------------
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
 EMAIL_TIMEOUT = 5
 
-# Admin settings
+# ADMIN
+# ------------------------------------------------------------------------------
 ADMIN_URL = "admin/"
 ADMINS = [("""{{cookiecutter.author_name}}""", "{{cookiecutter.email}}")]
 MANAGERS = ADMINS
 
-# Logging settings
+# LOGGING
+# ------------------------------------------------------------------------------
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -203,3 +220,6 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
+
+# CUSTOM
+# ------------------------------------------------------------------------------

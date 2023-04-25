@@ -1,13 +1,25 @@
+# type: ignore
+import logging
 import socket
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 from .base import *  # noqa F403
 from .base import env
 
-# Database settings
+# DATABASES
+# ------------------------------------------------------------------------------
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": env("DB_FILE")},
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": env("DB_FILE", default="/databases/db.sqlite3"),
+    },
 }
 
+# CACHING
+# ------------------------------------------------------------------------------
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
@@ -15,7 +27,8 @@ CACHES = {
     }
 }
 
-# Security settings
+# SECURITY
+# ------------------------------------------------------------------------------
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list(
     "DJANGO_ALLOWED_HOSTS",
@@ -37,7 +50,8 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
     "DJANGO_SECURE_CONTENT_TYPE_NOSNIFF", default=True
 )
 
-# Media settings
+# MEDIA
+# ------------------------------------------------------------------------------
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = "{{cookiecutter.project_slug}}"
@@ -46,7 +60,8 @@ AWS_S3_REGION_NAME = "eu-central-1"
 AWS_S3_FILE_OVERWRITE = False
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-# Worker queue settings
+# QUEUE
+# ------------------------------------------------------------------------------
 HUEY = (
     {
         "huey_class": "huey.SqliteHuey",  # Huey implementation to use.
@@ -55,7 +70,7 @@ HUEY = (
         "store_none": False,  # If a task returns None, do not save to results.
         "immediate": False,  # If DEBUG=True, run synchronously.
         "utc": True,  # Use UTC for all times internally.
-        "filename": env("DB_FILE_QUEUE"),
+        "filename": env("DB_FILE_QUEUE", default="/databases/huey.sqlite3"),
         "consumer": {
             "workers": 1,
             "worker_type": "thread",
@@ -72,10 +87,12 @@ HUEY = (
     else {"huey_class": "huey.BlackHoleHuey"}
 )
 
-# Admin settings
+# ADMIN
+# ------------------------------------------------------------------------------
 ADMIN_URL = env("DJANGO_ADMIN_URL")
 
-# Email settings
+# EMAIL
+# ------------------------------------------------------------------------------
 INSTALLED_APPS += ["anymail"]  # noqa F405
 EMAIL_BACKEND = "anymail.backends.postmark.EmailBackend"
 ANYMAIL = {
@@ -91,7 +108,8 @@ EMAIL_SUBJECT_PREFIX = env(
     default="[{{cookiecutter.project_slug}}]",
 )
 
-# Compression settings
+# COMPRESSION
+# ------------------------------------------------------------------------------
 COMPRESS_ENABLED = True
 COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
 COMPRESS_URL = STATIC_URL  # noqa F405
@@ -104,49 +122,65 @@ COMPRESS_FILTERS = {
     "js": ["compressor.filters.jsmin.JSMinFilter"],
 }
 
-# Logging & performance settings
+# LOGGING
+# ------------------------------------------------------------------------------
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": False,
-    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
+    "disable_existing_loggers": True,
     "formatters": {
         "verbose": {
             "format": (
-                "%(levelname)s %(asctime)s %(module)s "
-                "%(process)d %(thread)d %(message)s"
-            )
-        }
+                "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d"
+                " %(message)s"
+            ),
+        },
     },
     "handlers": {
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
-        },
+        }
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
-        "django.request": {
+        "django.db.backends": {
             "level": "ERROR",
             "handlers": ["console"],
-            "propagate": True,
+            "propagate": False,
         },
+        # Errors logged by the SDK itself
+        "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
         "django.security.DisallowedHost": {
             "level": "ERROR",
             "handlers": ["console"],
-            "propagate": True,
+            "propagate": False,
         },
     },
 }
 
-import sentry_sdk  # noqa E402
-from sentry_sdk.integrations.django import DjangoIntegration  # noqa E402
+# SENTRY
+# ------------------------------------------------------------------------------
+SENTRY_DSN = env("SENTRY_DSN")
+SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
+
+sentry_logging = LoggingIntegration(
+    level=SENTRY_LOG_LEVEL,
+    event_level=logging.ERROR,
+)
+
+integrations = [
+    sentry_logging,
+    DjangoIntegration(),
+]
 
 sentry_sdk.init(
-    dsn=env("SENTRY_DSN"),
-    integrations=[
-        DjangoIntegration(),
-    ],
-    traces_sample_rate=1.0,
+    dsn=SENTRY_DSN,
+    integrations=integrations,
+    environment=env("SENTRY_ENVIRONMENT", default="production"),
+    traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.2),
     send_default_pii=True,
 )
+
+# CUSTOM
+# ------------------------------------------------------------------------------
