@@ -21,6 +21,7 @@ djhtml==3.0.5 # https://github.com/rtts/djhtml
 isort==5.11.4 # https://pycqa.github.io/isort/
 autoflake==1.7.7 # https://pypi.org/project/autoflake/
 pre-commit==3.1.1  # https://github.com/pre-commit/pre-commit
+djlint==1.23.0 # https://djlint.com/
 
 # Django
 # ------------------------------------------------------------------------------
