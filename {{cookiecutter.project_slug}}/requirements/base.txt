@@ -17,3 +17,5 @@ django-sesame==3.1  # https://github.com/aaugustin/django-sesame
 django-hijack==3.2.6  # https://github.com/django-hijack/django-hijack
 django-clearcache==1.2.1  # https://pypi.org/project/django-clearcache/
 django-herald==0.3.0  # https://github.com/worthwhile/django-herald
+django-extensions==3.2.1 # https://pypi.org/project/django-extensions/
+django-htmx==1.14.0 # https://pypi.org/project/django-htmx/

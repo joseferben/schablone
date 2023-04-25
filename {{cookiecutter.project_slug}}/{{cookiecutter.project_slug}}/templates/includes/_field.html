@@ -1,0 +1,22 @@
+{% load widget_tweaks %}
+{% if field|widget_type == "checkboxinput" %}
+  <label for="{{ field.auto_id }}">
+    {% render_field field|add_error_attr:"aria-invalid:true" placeholder=placeholder %}
+    {{ label }}
+    {% for error in field.errors %}<small>{{ error }}</small>{% endfor %}
+    <small class="mt-1">{{ field.help_text }}</small>
+  </label>
+{% else %}
+  <label for="{{ field.auto_id }}">
+    {{ label }}
+    {% render_field field|add_error_attr:"aria-invalid:true" placeholder=placeholder %}
+    {% for error in field.errors %}<small>{{ error }}</small>{% endfor %}
+    <small>
+      {% if help_text %}
+        {{ help_text }}
+      {% else %}
+        {{ field.help_text }}
+      {% endif %}
+    </small>
+  </label>
+{% endif %}

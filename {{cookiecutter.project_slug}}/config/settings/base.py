@@ -11,7 +11,7 @@ BASE_DIR = Path(
 PROJECT_DIR = Path(os.path.join(BASE_DIR, "{{cookiecutter.project_slug}}"))
 
 env = environ.Env()
-env.read_env(os.path.join(PROJECT_DIR, ".env"))
+env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Basic settings
 DEBUG = env.bool("DJANGO_DEBUG", False)
@@ -45,6 +45,8 @@ THIRD_PARTY_APPS = [
     "compressor",
     "whitenoise.runserver_nostatic",
     "herald",
+    "django_extensions",
+    "django_htmx",
 ]
 LOCAL_APPS = [
     "{{cookiecutter.project_slug}}.users",
@@ -62,7 +64,6 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "hijack.middleware.HijackUserMiddleware",
