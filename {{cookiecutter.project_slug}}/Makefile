@@ -36,7 +36,7 @@ coverage:
 
 .PHONY: shell
 shell:
-	python manage.py shell
+	python manage.py shell_plus
 
 .PHONY: migrations
 migrations:
