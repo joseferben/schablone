@@ -21,7 +21,7 @@ class TestEmailLoginView:
         )
         assert response.status_code == 200
         match = re.search(r"\?sesame=([^ \n]+)", mailoutbox[0].body)
-        sesame_value = match.group(1)
+        sesame_value = match.group(1)  # type: ignore [union-attr]
         authenticated_user = get_user(sesame_value)
         assert authenticated_user == user
 

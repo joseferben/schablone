@@ -1,16 +1,13 @@
 from typing import Any
 
-from django.contrib.auth import get_user_model
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse
 from django.views.generic import FormView
-from sesame.utils import get_query_string
 
 from {{cookiecutter.project_slug}}.users.forms import EmailLoginForm
 from {{cookiecutter.project_slug}}.users.notifications import LoginEmail
-
-User = get_user_model()
+from {{cookiecutter.project_slug}}.users.models import User
+from {{cookiecutter.project_slug}}.users.shortcuts import get_magic_link
 
 
 class EmailLoginView(FormView):
@@ -22,7 +19,7 @@ class EmailLoginView(FormView):
             return redirect("app:index")
         return super().get(request, *args, **kwargs)
 
-    def get_or_create_user(self, email: str) -> "User":
+    def get_or_create_user(self, email: str) -> User:
         """Find or create a user with this email address."""
         User = get_user_model()
         user = User.objects.filter(email=email).first()
@@ -33,20 +30,13 @@ class EmailLoginView(FormView):
             user.save()
         return user
 
-    def create_link(self, user: "User") -> str:
-        """Create a login link for this user."""
-        link = reverse("users:login")
-        link = self.request.build_absolute_uri(link)
-        link += get_query_string(user)
-        return link
-
     def send_email(self, user, link):
         """Send an email with this login link to this user."""
         LoginEmail(user, link).send()
 
     def email_submitted(self, email):
         user = self.get_or_create_user(email)
-        link = self.create_link(user)
+        link = get_magic_link(user)
         self.send_email(user, link)
 
     def form_valid(self, form):
