@@ -5,8 +5,8 @@ from django.shortcuts import redirect, render
 from django.views.generic import FormView
 
 from {{cookiecutter.project_slug}}.users.forms import EmailLoginForm
-from {{cookiecutter.project_slug}}.users.notifications import LoginEmail
 from {{cookiecutter.project_slug}}.users.models import User
+from {{cookiecutter.project_slug}}.users.notifications import LoginEmail
 from {{cookiecutter.project_slug}}.users.shortcuts import get_magic_link
 
 
@@ -21,7 +21,6 @@ class EmailLoginView(FormView):
 
     def get_or_create_user(self, email: str) -> User:
         """Find or create a user with this email address."""
-        User = get_user_model()
         user = User.objects.filter(email=email).first()
         if user is None:
             user = User.objects.create(email=email, username=email)
