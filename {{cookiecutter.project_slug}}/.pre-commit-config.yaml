@@ -18,14 +18,14 @@ repos:
         name: isort (python)
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.24.0
+    rev: v1.25.0
     hooks:
       - id: djlint-django
         name: "djlint format"
         args: ["--reformat"]
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.24.0
+    rev: v1.25.0
     hooks:
       - id: djlint-django
         name: "djlint lint"
