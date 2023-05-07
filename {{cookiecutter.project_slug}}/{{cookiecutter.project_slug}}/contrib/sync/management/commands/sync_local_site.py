@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if settings.DEBUG:
             print("Adjusting Site")
-            s = Site.objects.get(hostname="{{cookiecutter.domain}}")
+            s = Site.objects.get(hostname="{{cookiecutter.domain_name}}")
             s.hostname = "localhost"
             s.port = 8000
             s.save()
