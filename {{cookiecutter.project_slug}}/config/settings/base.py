@@ -53,6 +53,7 @@ THIRD_PARTY_APPS = [
     "django_htmx",
 ]
 LOCAL_APPS = [
+    "theme",
     "{{cookiecutter.project_slug}}.contrib.litestream",
     "{{cookiecutter.project_slug}}.users",
     "{{cookiecutter.project_slug}}.app",

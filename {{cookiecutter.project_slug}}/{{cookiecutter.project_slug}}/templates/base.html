@@ -1,8 +1,8 @@
 {% raw -%}
-{% load static i18n compress %}
+{% load static i18n compress tailwind_cli %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}" data-theme="dark">
+<html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -17,7 +17,7 @@
     <link rel="icon" href="{% static 'favicon.ico' %}" />
     {% block css %}
       {% compress css %}
-        <link rel="stylesheet" href="{% static 'css/pico.css' %}" />
+        {% tailwind_css %}
       {% endcompress %}
     {% endblock css %}
     {% block javascript %}
