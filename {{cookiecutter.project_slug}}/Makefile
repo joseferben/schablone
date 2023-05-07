@@ -12,6 +12,7 @@ help:
 	@echo "- test                Runs all tests"
 	@echo "- shell               Starts an interactive shell with all models imported"
 	@echo "- migrations          Creates migrations based on models.py change"
+	@echo "- sync                Downloads DB and media files from production" (requires litestream)
 	@echo "- webp                Compresses static images to webp (requires imagemagick)"
 	@echo ""
 	@echo "Here are some of less used commands:"
@@ -60,3 +61,8 @@ dev: migrate watch.server
 .PHONY: webp
 webp:
 	zsh -c 'mogrify -format webp {{cookiecutter.project_slug}}/static/images/**/*.(png|jpeg|jpg|svg)'
+
+.PHONY: sync
+sync:
+	./manage.py sync_data
+	./manage.py sync_local_site
