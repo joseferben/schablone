@@ -13,4 +13,4 @@ def media_storage(settings, tmpdir):
 
 @pytest.fixture
 def user() -> User:
-    return User(email=fake.email(), name=fake.name())
+    return User(email=fake.email(), username=fake.name(), name=fake.name())
