@@ -36,6 +36,11 @@ Here are some of less used commands:
 - watch.server        Runs web server on localhost:8000
 ```
 
+## Sync
+
+For `make sync` to work you need to install [litestream](https://litestream.io/).
+Run `cp .env.sample .env` and fill in the environment variables.
+
 ## Features & Design goals
 
 - Styling of semantic HTML with [PicoCSS](https://picocss.com/)

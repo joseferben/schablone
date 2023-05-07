@@ -165,6 +165,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 FIXTURE_DIRS = (os.path.join(PROJECT_DIR, "fixtures"),)
+# needed for make sync
+AWS_STORAGE_BUCKET_NAME = "bucket-name"
+AWS_LOCATION = "media"
 
 # QUEUE
 # ------------------------------------------------------------------------------
