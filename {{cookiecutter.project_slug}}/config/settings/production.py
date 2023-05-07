@@ -58,6 +58,9 @@ AWS_STORAGE_BUCKET_NAME = "{{cookiecutter.project_slug}}"
 AWS_LOCATION = "media"
 AWS_S3_REGION_NAME = "eu-central-1"
 AWS_S3_FILE_OVERWRITE = False
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=1209600",
+}
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # QUEUE
@@ -126,7 +129,7 @@ COMPRESS_FILTERS = {
 # ------------------------------------------------------------------------------
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
             "format": (
@@ -140,10 +143,24 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
-        }
+        },
+        "django.server": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+        "django.server": {
+            "handlers": ["django.server"],
+            "level": "INFO",
+            "propagate": False,
+        },
         "django.db.backends": {
             "level": "ERROR",
             "handlers": ["console"],
