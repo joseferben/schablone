@@ -10,7 +10,7 @@ fake = Faker()
 
 def test_user_count(settings):
     """A basic test to execute the get_users_count task."""
-    User.objects.create(email=fake.email())
-    User.objects.create(email=fake.email())
-    User.objects.create(email=fake.email())
+    User.objects.create(email=fake.email(), username=fake.name())
+    User.objects.create(email=fake.email(), username=fake.name())
+    User.objects.create(email=fake.email(), username=fake.name())
     assert get_users_count()() == 3  # type: ignore
