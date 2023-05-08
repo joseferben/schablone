@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
     "herald",
     "django_extensions",
     "django_htmx",
+    "django_tailwind_cli",
 ]
 LOCAL_APPS = [
     "theme",
