@@ -1,6 +1,6 @@
 from django import http
-from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 from {{cookiecutter.project_slug}}.users.models import User
 

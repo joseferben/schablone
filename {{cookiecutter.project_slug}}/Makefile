@@ -62,7 +62,6 @@ watch.css:
 .PHONY: dev
 dev: migrate
 	$(MAKE) -j 2 watch.css watch.server
- 
 
 .PHONY: webp
 webp:

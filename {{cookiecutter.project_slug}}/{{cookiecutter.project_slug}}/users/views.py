@@ -44,4 +44,3 @@ class EmailLoginView(FormView):
         context = self.get_context_data()
         context["email"] = email
         return render(self.request, "users/email_sent.html", context)
-
