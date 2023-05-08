@@ -7,6 +7,8 @@ Just a simple {{cookiecutter.project_slug}}
     $ python -m venv .venv
     $ source .venv/bin/activate
     $ pip install -r requirements/dev.txt
+    $ ./manage.py tailwind installcli
+    $ ./manage.py tailwind build
     $ make dev
 
 ## Config

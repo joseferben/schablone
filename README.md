@@ -1,6 +1,6 @@
-# schablone
+# Schablone
 
-schablone is a highly opinionated Django starter kit based on [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). It aims to be a more minimal and lightweight but less configurable alternative.
+Schablone is a highly opinionated Django starter kit for SaaS apps inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). It aims to be a more minimal and lightweight but less configurable alternative.
 
 ## Getting started
 
@@ -27,6 +27,7 @@ Here are some of the most convenient commands:
 - shell               Starts an interactive shell with all models imported
 - migrations          Creates migrations based on models.py change
 - webp                Compresses static images to webp (requires imagemagick)
+- sync                Downloads DB and media files from production (requires litestream)
 
 Here are some of less used commands:
 
@@ -41,9 +42,9 @@ Here are some of less used commands:
 For `make sync` to work you need to install [litestream](https://litestream.io/).
 Run `cp .env.sample .env` and fill in the environment variables.
 
-## Features & Design goals
+## Features
 
-- Styling of semantic HTML with [PicoCSS](https://picocss.com/)
+- Styling using TailwindCSS without Node
 - Production data persisted using [SQLite](https://www.sqlite.org/index.html)
 - Database backups using [Litestream](https://litestream.io/)
 - Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
@@ -58,15 +59,11 @@ Run `cp .env.sample .env` and fill in the environment variables.
 
 Read about the [design decisions](https://www.joseferben.com/posts/schablone-django-starter-template-for-simplicity/) in my blog at [joseferben.com](http://www.joseferben.com).
 
-## Dokku config
-
-Example config:
+## Config
 
 ```
 AWS_ACCESS_KEY_ID:       <hidden>
 AWS_SECRET_ACCESS_KEY:   <hidden>
-DB_FILE:                 /databases/db.sqlite3
-DB_FILE_QUEUE:           /databases/huey.sqlite3
 DISABLE_COLLECTSTATIC:   1
 DJANGO_ADMIN_URL:        <hidden>
 DJANGO_SECRET_KEY:       <hidden>
