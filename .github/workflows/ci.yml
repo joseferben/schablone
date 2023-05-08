@@ -33,6 +33,4 @@ jobs:
           git init
           git add .
           make check
-          python manage.py tailwind installcli
-          python manage.py tailwind build
           make coverage
