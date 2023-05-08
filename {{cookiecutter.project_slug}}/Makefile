@@ -56,11 +56,11 @@ work:
 	python manage.py run_huey
 
 .PHONY: watch.css
-watch.css: 
+watch.css:
 	python manage.py tailwind watch
 
 .PHONY: dev
-dev: migrate 
+dev: migrate
 	$(MAKE) -j 2 watch.css watch.server
  
 
