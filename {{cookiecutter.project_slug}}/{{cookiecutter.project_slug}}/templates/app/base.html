@@ -2,24 +2,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-  <nav class="container">
-    <ul>
-      <li>
-        <strong>Brand</strong>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <a href="{% url 'app:index' %}">Home</a>
-      </li>
-      <li>
-        <a href="{% url 'users:logout' %}" role="button">Logout</a>
-      </li>
-    </ul>
-  </nav>
-  <main class="container">
-    {% block content_app %}
-    {% endblock content_app %}
-  </main>
+  {% block content_app %}
+  {% endblock content_app %}
 {% endblock content %}
 {%- endraw %}
