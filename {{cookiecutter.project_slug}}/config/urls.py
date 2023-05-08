@@ -8,11 +8,10 @@ urlpatterns = [
     path(
         "users/", include("{{cookiecutter.project_slug}}.users.urls", namespace="users")
     ),
-    path("app/", include("{{cookiecutter.project_slug}}.app.urls", namespace="app")),
     path("ht/", include("health_check.urls")),
     path("hijack/", include("hijack.urls")),
     path("clearcache/", include("clearcache.urls")),
-    path("", include("{{cookiecutter.project_slug}}.website.urls", namespace="website")),
+    path("", include("{{cookiecutter.project_slug}}.app.urls", namespace="app")),
 ]
 
 if settings.DEBUG:

@@ -57,7 +57,6 @@ LOCAL_APPS = [
     "{{cookiecutter.project_slug}}.contrib.litestream",
     "{{cookiecutter.project_slug}}.users",
     "{{cookiecutter.project_slug}}.app",
-    "{{cookiecutter.project_slug}}.website",
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
