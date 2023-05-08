@@ -8,10 +8,10 @@
   <main class="px-4">
     <article class="bg-white rounded-lg shadow mx-auto max-w-lg p-12 mt-32 md:mt-48">
       <p class="text-center text-xl text-indigo-600 font-semibold">Englishmeister</p>
-      <h1 class="mt-4 text-center text-3xl md:text-4xl leading-relaxed font-semibold">Sign in or register</h1>
+      <h1 class="mt-1 text-center text-3xl md:text-4xl leading-relaxed font-semibold">Sign in or register</h1>
       <form method="post" class="space-y-8 mt-16">
         {% csrf_token %}
-        {% with help_text="Don't have an account? No problem, provide an email to register. We send you a link to log in." %}
+        {% with help_text="Don't have an account? No problem, use your email to register. We send you a link to log in." %}
           {% include "includes/_field_input.html" with field=form.email|attr:"type=email" placeholder="Email address" autofocus=True help_text=help_text label="Enter your email address" %}
         {% endwith %}
         <button class="hover:bg-indigo-700 bg-indigo-600 rounded px-2 py-2 text-white w-full"

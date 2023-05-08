@@ -4,11 +4,14 @@
   Log in
 {% endblock title %}
 {% block content %}
-  <main class="container">
-    <h1>Check your email</h1>
-    <h5>
-      Or go <a href="{% url 'website:index' %}" class="btn-link">back</a>
-    </h5>
+  <main class="px-4">
+    <article class="bg-white rounded-lg shadow mx-auto max-w-lg p-12 mt-32 md:mt-48">
+      <p class="text-center text-xl text-indigo-600 font-semibold">Englishmeister</p>
+      <h1 class="mt-1 text-center text-3xl md:text-4xl leading-relaxed font-semibold">Check your mail</h1>
+      <p class="mt-12 text-center text-gray-600">
+        Magic link sent to <strong>{{ email }}</strong>. Click it to log in.
+      </p>
+    </article>
   </main>
 {% endblock content %}
 {%- endraw %}

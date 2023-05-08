@@ -39,5 +39,9 @@ class EmailLoginView(FormView):
         self.send_email(user, link)
 
     def form_valid(self, form):
-        self.email_submitted(form.cleaned_data["email"])
-        return render(self.request, "users/email_sent.html")
+        email = form.cleaned_data["email"]
+        self.email_submitted(email)
+        context = self.get_context_data()
+        context["email"] = email
+        return render(self.request, "users/email_sent.html", context)
+
