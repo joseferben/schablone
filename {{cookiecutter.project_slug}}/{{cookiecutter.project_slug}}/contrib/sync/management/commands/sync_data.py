@@ -2,6 +2,8 @@ import os
 import subprocess
 from pathlib import Path
 
+import environ
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -11,6 +13,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if settings.DEBUG:
+            env = environ.Env()
+            env.read_env(os.path.join(settings.BASE_DIR, ".env"))
             print("Remove db.sqlite3")
             media_dir = Path(settings.MEDIA_ROOT)
             for f in ["db.sqlite3", "db.sqlite3-shm", "db.sqlite3-wal"]:
@@ -37,7 +41,7 @@ class Command(BaseCommand):
                     "aws",
                     "s3",
                     "cp",
-                    f"s3://{settings.AWS_STORAGE_BUCKET_NAME}/{settings.AWS_LOCATION}",
+                    f"s3://{env('AWS_STORAGE_BUCKET_NAME')}/{env('AWS_LOCATION')}",
                     media_dir,
                     "--recursive",
                 ],

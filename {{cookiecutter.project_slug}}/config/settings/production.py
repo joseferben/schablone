@@ -58,9 +58,8 @@ AWS_STORAGE_BUCKET_NAME = "{{cookiecutter.project_slug}}"
 AWS_LOCATION = "media"
 AWS_S3_REGION_NAME = "eu-central-1"
 AWS_S3_FILE_OVERWRITE = False
-AWS_S3_OBJECT_PARAMETERS = {
-    "CacheControl": "max-age=1209600",
-}
+AWS_STORAGE_BUCKET_NAME = "{{cookiecutter.project_slug}}"
+AWS_LOCATION = "media"
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # QUEUE
