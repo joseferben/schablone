@@ -55,12 +55,12 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 # ------------------------------------------------------------------------------
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
-# TODO adjust project name
+# TODO customize
 AWS_STORAGE_BUCKET_NAME = "project"
 AWS_LOCATION = "media"
 AWS_S3_REGION_NAME = "eu-central-1"
 AWS_S3_FILE_OVERWRITE = False
-# TODO adjust project name
+# TODO customize
 AWS_STORAGE_BUCKET_NAME = "project"
 AWS_LOCATION = "media"
 STORAGES = {

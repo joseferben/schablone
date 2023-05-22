@@ -204,7 +204,7 @@ EMAIL_TIMEOUT = 5
 # ADMIN
 # ------------------------------------------------------------------------------
 ADMIN_URL = "admin/"
-# TODO rename to project
+# TODO customize
 ADMINS = [("""Admin""", "admin@project.com")]
 MANAGERS = ADMINS
 
@@ -233,10 +233,6 @@ LOGGING = {
 
 # STRIPE
 # ------------------------------------------------------------------------------
-STRIPE_TEST_SECRET_KEY = env("STRIPE_TEST_SECRET_KEY")
-# TODO customize
-STRIPE_TEST_PUBLIC_KEY = "pk_test_51N4QRqHxaE28n4C1woHehEHOlnHxzRshtAd2m0I7HQvswZkDSGUHkU2Ycdu1rYtudACzk1NilQk1TAlxF6PFi0o200rqdo83Vw"  # noqa
-# TODO customize
 DJSTRIPE_WEBHOOK_SECRET = (
     "whsec_6b386610c0387c2638080c15b787cdca8c96515a0789324f2488fe4a6e31a263"
 )
