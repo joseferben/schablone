@@ -64,5 +64,4 @@ jobs:
 
       - name: Test with pytest
         run: |
-          cp .env.sample .env
-          pytest
+          make test
