@@ -1,7 +1,5 @@
 from .base import *  # noqa
 
-DEBUG = True
-
 SECRET_KEY = "Y0HhZ0tDiPKIzwZLFlIhHtzHhbrpfDxb0tFsEp0AiQn0ALdVyiDDOULctHZhCX4d"
 
 HUEY = {
