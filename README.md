@@ -1,63 +1,17 @@
-# Schablone
+# Project
 
-Schablone is a highly opinionated Django starter kit for SaaS apps inspired by [cookiecutter-django](https://github.com/cookiecutter/cookiecutter-django). It aims to be a more minimal and lightweight but less configurable alternative.
+Just a simple schablone project
 
-## Getting started
+## Running locally
 
-All you need to generate a project is Python3 and `pip`.
+Replace all `project.com` references with your own domain, check TODOs in the code for renaming.
 
-    $ pip install cookiecutter
-    $ cookiecutter gh:joseferben/schablone
-
-## Usage
-
-`$ make`
-
-```
-Welcome to website
-=======================================================
-
-Here are some of the most convenient commands:
-
-- dev                 Starts the development web server on localhost:8000
-- check               Lints and fixes codebase
-- work                Run huey worker process
-- migrate             Applies pending migrations
-- test                Runs all tests
-- shell               Starts an interactive shell with all models imported
-- migrations          Creates migrations based on models.py change
-- webp                Compresses static images to webp (requires imagemagick)
-- sync                Downloads DB and media files from production (requires litestream)
-
-Here are some of less used commands:
-
-- coverage            Runs tests and prints coverage in terminal
-- check.lint          Runs linter
-- check.types         Runs type checker
-- watch.server        Runs web server on localhost:8000
-```
-
-## Sync
-
-For `make sync` to work you need to install [litestream](https://litestream.io/).
-Run `cp .env.sample .env` and fill in the environment variables.
-
-## Features
-
-- Styling using TailwindCSS without Node
-- Production data persisted using [SQLite](https://www.sqlite.org/index.html)
-- Database backups using [Litestream](https://litestream.io/)
-- Health checks with [django-health-check](https://django-health-check.readthedocs.io/en/latest/)
-- Magic-link login using [django-sesame](https://github.com/aaugustin/django-sesame)
-- Mail sending using [Anymail](https://anymail.dev/en/stable/)
-- Async and scheduled tasks with [huey](https://github.com/coleifer/huey)
-- Zero-config formatting, linting and auto-fixing with [black](https://black.readthedocs.io/en/stable/) and [flake8](https://flake8.pycqa.org/en/latest/)
-- Static typing with [pyright](https://github.com/microsoft/pyright)
-- Simple test assertions using [pytest](https://github.com/pytest-dev/pytest)
-- Notifications using [django-herald](https://github.com/worthwhile/django-herald)
-- Ready to be deployed to Heroku or [Dokku](https://dokku.com/)
-
-Read about the [design decisions](https://www.joseferben.com/posts/schablone-django-starter-template-for-simplicity/) in my blog at [joseferben.com](http://www.joseferben.com).
+    $ python -m venv .venv
+    $ source .venv/bin/activate
+    $ pip install -r requirements/dev.txt
+    $ ./manage.py tailwind installcli
+    $ ./manage.py tailwind build
+    $ make dev
 
 ## Config
 
@@ -65,7 +19,6 @@ Read about the [design decisions](https://www.joseferben.com/posts/schablone-dja
 AWS_ACCESS_KEY_ID:       <hidden>
 AWS_SECRET_ACCESS_KEY:   <hidden>
 DISABLE_COLLECTSTATIC:   1
-DJANGO_ADMIN_URL:        <hidden>
 DJANGO_SECRET_KEY:       <hidden>
 DJANGO_SETTINGS_MODULE:  config.settings.production
 POSTMARK_SERVER_TOKEN:   <hidden>

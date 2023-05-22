@@ -1,0 +1,5 @@
+Hi there!
+
+Click the following link to sign in or confirm your email address: {{link}}
+
+Sent by project.com

@@ -1,17 +1,48 @@
-exclude: "{{cookiecutter.project_slug}}"
+exclude: "^docs/|/migrations/"
 default_stages: [commit]
 
 repos:
+  - repo: local
+    hooks:
+      - id: pyright
+        name: pyright
+        entry: pyright
+        language: node
+        types: [python]
+        pass_filenames: false
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        name: isort (python)
+
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.27.0
+    hooks:
+      - id: djlint-django
+        name: "djlint format"
+        args: ["--reformat"]
+
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.27.0
+    hooks:
+      - id: djlint-django
+        name: "djlint lint"
+        args: ["--lint"]
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
       - id: trailing-whitespace
+      - id: end-of-file-fixer
       - id: check-yaml
 
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
       - id: black
+        args: ["--experimental-string-processing"]
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
@@ -22,7 +53,26 @@ repos:
     rev: 6.0.0
     hooks:
       - id: flake8
+        args: ["--config=setup.cfg"]
+        additional_dependencies: ["flake8-isort==5.0.0"]
 
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.1.1
+    hooks:
+      - id: autoflake
+        name: autoflake
+        entry: autoflake
+        language: python
+        "types": [python]
+        require_serial: true
+        args:
+          - "--in-place"
+          - "--expand-star-imports"
+          - "--remove-duplicate-keys"
+          - "--remove-unused-variables"
+          - "--remove-all-unused-imports"
+
+# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
 ci:
   autoupdate_schedule: weekly
   skip: []

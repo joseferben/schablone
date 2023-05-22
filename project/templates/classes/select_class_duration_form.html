@@ -1,0 +1,77 @@
+{% extends "classes/base.html" %}
+{% load widget_tweaks %}
+{% block title %}
+  Select class duration
+{% endblock title %}
+{% block content_classes %}
+  <main class="sm:px-4">
+    <article class="bg-white rounded-lg shadow mx-auto max-w-lg p-12 mt-6 md:mt-8">
+      <p class="text-center text-xl text-indigo-600 font-semibold">project</p>
+      <h1 class="mt-1 text-center text-3xl md:text-4xl leading-relaxed font-semibold">Select class duration</h1>
+      <form method="post" class="space-y-8 mt-16">
+        {% csrf_token %}
+        <div>
+          <h2 class="text-base font-semibold text-gray-900">Lesson duration</h2>
+          <p class="mt-1 text-sm text-gray-500">
+            Choose your lesson duration. Don't worry, you can change this every month before scheduling classes.
+          </p>
+          <fieldset class="mt-2">
+            <legend class="sr-only">Lesson duration</legend>
+            <div id="id_class_duration" class="divide-y divide-gray-200">
+              <div class="relative flex items-start pb-4 pt-3.5">
+                <div class="min-w-0 flex-1 text-sm leading-6">
+                  <label for="id_class_duration_0" class="font-medium text-gray-900">30 minutes</label>
+                  <p id="id_class_duration_0-description" class="text-gray-500">Maximum flexiblity</p>
+                </div>
+                <div class="ml-3 flex h-6 items-center">
+                  <input id="id_class_duration_0"
+                         required
+                         name="class_duration"
+                         value="30"
+                         aria-describedby="id_class_duration_0-description"
+                         type="radio"
+                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                </div>
+              </div>
+              <div class="relative flex items-start pb-4 pt-3.5">
+                <div class="min-w-0 flex-1 text-sm leading-6">
+                  <label for="id_class_duration_1" class="font-medium text-gray-900">
+                    45 minutes <span class="text-indigo-600">(most popular)</span>
+                  </label>
+                  <p id="id_class_duration_1-description" class="text-gray-500">Balanced intensity and flexibility</p>
+                </div>
+                <div class="ml-3 flex h-6 items-center">
+                  <input id="id_class_duration_1"
+                         required
+                         aria-describedby="id_class_duration_1-description"
+                         name="class_duration"
+                         value="45"
+                         type="radio"
+                         checked
+                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                </div>
+              </div>
+              <div class="relative flex items-start pb-4 pt-3.5">
+                <div class="min-w-0 flex-1 text-sm leading-6">
+                  <label for="id_class_duration_2" class="font-medium text-gray-900">60 minutes</label>
+                  <p id="id_class_duration_2-description" class="text-gray-500">Intense and immersive lessons</p>
+                </div>
+                <div class="ml-3 flex h-6 items-center">
+                  <input id="id_class_duration_2"
+                         required
+                         aria-describedby="id_class_duration_2-description"
+                         name="class_duration"
+                         value="60"
+                         type="radio"
+                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <button class="hover:bg-indigo-700 bg-indigo-600 rounded px-2 py-2 text-white w-full"
+                type="submit">Select</button>
+      </form>
+    </article>
+  </main>
+{% endblock content_classes %}

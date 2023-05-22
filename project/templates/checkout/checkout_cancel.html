@@ -1,0 +1,19 @@
+{% extends "checkout/base.html" %}
+{% block content_app %}
+  <main class="px-4">
+    <article class="bg-white rounded-lg shadow mx-auto max-w-lg p-12 mt-32 md:mt-48">
+      <p class="text-center text-xl text-indigo-600 font-semibold">project</p>
+      <h1 class="mt-1 text-center text-3xl md:text-4xl leading-normal font-semibold">Something went wrong</h1>
+      <p class="text-gray-600 mt-8">
+        We were not able to process your payment.
+        Please <a class="text-indigo-600 hover:text-indigo-800"
+    {% comment %}
+    TODO
+    rename
+    {% endcomment %}
+    href="https://www.project.com/#pricing">try again</a>, or reach out to <a class="text-indigo-600 hover:text-indigo-800"
+    href="mailto:admin@project.com">admin@project.com</a>.
+      </p>
+    </article>
+  </main>
+{% endblock content_app %}
