@@ -22,5 +22,4 @@ DISABLE_COLLECTSTATIC:   1
 DJANGO_SECRET_KEY:       <hidden>
 DJANGO_SETTINGS_MODULE:  config.settings.production
 POSTMARK_SERVER_TOKEN:   <hidden>
-SENTRY_DSN:              <hidden>
 ```

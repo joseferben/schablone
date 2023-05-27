@@ -1,10 +1,5 @@
 # type: ignore
-import logging
 import socket
-
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-from sentry_sdk.integrations.logging import LoggingIntegration
 
 from .base import *  # noqa F403
 from .base import env
@@ -135,6 +130,7 @@ COMPRESS_FILTERS = {
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
     "formatters": {
         "verbose": {
             "format": (
@@ -144,35 +140,24 @@ LOGGING = {
         },
     },
     "handlers": {
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler",
+        },
         "console": {
             "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        },
-        "django.server": {
-            "level": "INFO",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": "INFO",
-        },
-        "django.server": {
-            "handlers": ["django.server"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        "django.db.backends": {
+        "django.request": {
+            "handlers": ["console", "mail_admins"],
             "level": "ERROR",
-            "handlers": ["console"],
             "propagate": False,
         },
-        # Errors logged by the SDK itself
-        "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
         "django.security.DisallowedHost": {
             "level": "ERROR",
             "handlers": ["console"],
@@ -180,29 +165,6 @@ LOGGING = {
         },
     },
 }
-
-# SENTRY
-# ------------------------------------------------------------------------------
-SENTRY_DSN = env("SENTRY_DSN")
-SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
-
-sentry_logging = LoggingIntegration(
-    level=SENTRY_LOG_LEVEL,
-    event_level=logging.ERROR,
-)
-
-integrations = [
-    sentry_logging,
-    DjangoIntegration(),
-]
-
-sentry_sdk.init(
-    dsn=SENTRY_DSN,
-    integrations=integrations,
-    environment=env("SENTRY_ENVIRONMENT", default="production"),
-    traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.2),
-    send_default_pii=True,
-)
 
 # STRIPE
 # ------------------------------------------------------------------------------

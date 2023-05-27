@@ -153,6 +153,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 SESAME_MAX_AGE = 300  # 300 seconds = 5 minutes
+HERALD_HTML2TEXT_ENABLED = True
 
 # STATIC & MEDIA
 # ------------------------------------------------------------------------------
