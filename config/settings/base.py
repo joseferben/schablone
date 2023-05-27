@@ -54,7 +54,7 @@ THIRD_PARTY_APPS = [
     "djstripe",
 ]
 LOCAL_APPS = [
-    "schablone.contrib.theme",
+    "theme",
     "schablone.contrib.sync",
     "schablone.contrib.litestream",
     "schablone.users",
@@ -134,7 +134,7 @@ AUTHENTICATION_BACKENDS = [
     "sesame.backends.ModelBackend",
 ]
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = "classes:dashboard"
+LOGIN_REDIRECT_URL = "app:dashboard"
 LOGIN_URL = "users:email_login"
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
@@ -240,10 +240,6 @@ STRIPE_LIVE_MODE = False
 DJSTRIPE_USE_NATIVE_JSONFIELD = True
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 DJSTRIPE_SUBSCRIBER_MODEL = "organizations.Organization"
-
-# TAILWIND
-# ------------------------------------------------------------------------------
-TAILWIND_THEME_APP = "schablone/contrib/theme"
 
 # CUSTOM
 # ------------------------------------------------------------------------------
