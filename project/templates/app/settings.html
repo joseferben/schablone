@@ -1,0 +1,14 @@
+{% extends "app/base.html" %}
+{% load widget_tweaks %}
+{% block content_app %}
+  <main class="px-4 sm:px-20 md:px-32 sm:mt-12 max-w-7xl">
+    <div class="flex justify-between">
+      <h1 class="mt-1 text-2xl md:text-3xl leading-relaxed font-semibold text-gray-800">Settings</h1>
+      <button type="button"
+              class="rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        Logout
+      </button>
+    </div>
+    <article class="bg-white rounded-lg shadow-lg px-4 py-3 w-full mt-6">Some user settings</article>
+  </main>
+{% endblock content_app %}

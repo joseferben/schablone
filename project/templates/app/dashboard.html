@@ -1,27 +1,27 @@
 {% extends "app/base.html" %}
 {% load widget_tweaks %}
 {% block content_app %}
-    <main class="px-4 sm:px-20 md:px-32 sm:mt-12 max-w-7xl">
-        <div class="flex justify-between">
-            <h1 class="mt-1 text-2xl md:text-3xl leading-relaxed font-semibold text-gray-800">My things</h1>
-            <button type="button"
-                    class="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     strokeWidth="1.5"
-                     stroke="currentColor"
-                     class="-ml-0.5 h-5 w-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                Add a thing
-            </button>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6">
-            <article class="bg-white rounded shadow-lg px-4 py-3">
-                <h2 class="text-lg font-semibold text-gray-600 mb-4">Thing 1</h2>
-                <p>This is just the first thing among many other things.</p>
-            </article>
-        </div>
-    </main>
+  <main class="px-4 sm:px-20 md:px-32 sm:mt-12 max-w-7xl">
+    <div class="flex justify-between">
+      <h1 class="mt-1 text-2xl md:text-3xl leading-relaxed font-semibold text-gray-800">My things</h1>
+      <button type="button"
+              class="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             fill="none"
+             viewBox="0 0 24 24"
+             strokeWidth="1.5"
+             stroke="currentColor"
+             class="-ml-0.5 h-5 w-5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        Add a thing
+      </button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+      <article class="bg-white rounded shadow-lg px-4 py-3">
+        <h2 class="text-lg font-semibold text-gray-600 mb-4">Thing 1</h2>
+        <p>This is just the first thing among many other things.</p>
+      </article>
+    </div>
+  </main>
 {% endblock content_app %}
