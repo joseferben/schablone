@@ -28,4 +28,4 @@ djlint==1.31.1 # https://djlint.com/
 django-types==0.17.0 # https://github.com/sbdchd/django-types
 django-debug-toolbar==4.1.0  # https://github.com/jazzband/django-debug-toolbar
 django-coverage-plugin==3.0.0  # https://github.com/nedbat/django_coverage_plugin
-pytest-django==4.5.2  # https://github.com/pytest-dev/pytest-django
+pytest-django==4.6.0  # https://github.com/pytest-dev/pytest-django
