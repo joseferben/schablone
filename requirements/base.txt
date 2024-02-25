@@ -4,7 +4,7 @@ argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
 huey==2.4.5  # https://pypi.org/project/huey/
 whitenoise==6.4.0 # https://pypi.org/project/whitenoise/
 dj-stripe==2.8.1 # https://dj-stripe.dev/installation/
-html2text==2020.1.16 # https://pypi.org/project/html2text/
+html2text==2024.2.25 # https://pypi.org/project/html2text/
 
 # Django
 # ------------------------------------------------------------------------------
