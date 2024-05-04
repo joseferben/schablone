@@ -14,7 +14,7 @@ faker==18.11.2  # https://faker.readthedocs.io/en/master/
 # ------------------------------------------------------------------------------
 flake8==6.0.0  # https://github.com/PyCQA/flake8
 flake8-isort==6.0.0  # https://github.com/gforcada/flake8-isort
-coverage==7.2.7  # https://github.com/nedbat/coveragepy
+coverage==7.5.1  # https://github.com/nedbat/coveragepy
 black==23.3.0  # https://github.com/psf/black
 pylint-django==2.5.3  # https://github.com/PyCQA/pylint-django
 djhtml==3.0.6 # https://github.com/rtts/djhtml
