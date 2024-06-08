@@ -19,4 +19,4 @@ django-hijack==3.4.1  # https://github.com/django-hijack/django-hijack
 django-clearcache==1.2.1  # https://pypi.org/project/django-clearcache/
 django-herald==0.3.0  # https://github.com/worthwhile/django-herald
 django-extensions==3.2.1 # https://pypi.org/project/django-extensions/
-django-tailwind-cli==1.4.3 # https://github.com/oliverandrich/django-tailwind-cli
+django-tailwind-cli==2.13.0 # https://github.com/oliverandrich/django-tailwind-cli
