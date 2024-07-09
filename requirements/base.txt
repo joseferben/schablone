@@ -9,7 +9,7 @@ html2text==2020.1.16 # https://pypi.org/project/html2text/
 # Django
 # ------------------------------------------------------------------------------
 django-environ==0.10.0  # https://github.com/joke2k/django-environ
-django==4.2.1  # https://www.djangoproject.com/
+django==5.0.7  # https://www.djangoproject.com/
 django-environ==0.10.0  # https://github.com/joke2k/django-environ
 django-compressor==4.4  # https://github.com/django-compressor/django-compressor
 django-health-check==3.17.0 # https://github.com/KristianOellegaard/django-health-check
