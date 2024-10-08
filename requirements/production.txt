@@ -8,4 +8,4 @@ gunicorn==20.1.0  # https://github.com/benoitc/gunicorn
 # ------------------------------------------------------------------------------
 django-anymail[postmark]==10.0  # https://github.com/anymail/django-anymail
 django-storages==1.13.2  # https://django-storages.readthedocs.io/en/latest/index.html
-boto3==1.26.143  # https://github.com/boto/boto3
+boto3==1.35.36  # https://github.com/boto/boto3
